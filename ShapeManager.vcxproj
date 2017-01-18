@@ -153,14 +153,17 @@
     <ClInclude Include="LayerInterface.h" />
     <ClInclude Include="Rectangle.h" />
     <ClInclude Include="RectangleInterface.h" />
+    <ClInclude Include="SceneView.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="ViewInterface.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Drawable.cpp" />
     <ClCompile Include="Layer.cpp" />
     <ClCompile Include="Rectangle.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="SceneView.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

@@ -4,7 +4,11 @@
 class CSceneView :public IView
 {
 public:
-	CSceneView();
+	CSceneView(sf::RenderWindow * window);
 	~CSceneView();
+	void Draw(CLayer * layer) override;
+private:
+	void DrawLayer(CLayer * layer);
+	sf::RenderWindow * m_window;
 };
 

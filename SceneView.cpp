@@ -11,6 +11,15 @@ CSceneView::~CSceneView()
 {
 }
 
+void CSceneView::Draw(CLayer * layer)
+{
+	DrawLayer(layer);
+	for (auto &child : layer->GetChildren())
+	{
+		Draw(child.get());
+	}
+}
+
 void CSceneView::DrawLayer(CLayer * layer)
 {
 	auto size = layer->GetSize();

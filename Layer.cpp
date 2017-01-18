@@ -18,3 +18,8 @@ void CLayer::AddChild(CLayer * child)
 	child->SecPosition({ localPos.x + origin.x, localPos.y + origin.y });
 	m_children.push_back(std::make_shared<CLayer>(*child));
 }
+
+std::vector<std::shared_ptr<CLayer>> const& CLayer::GetChildren() const
+{
+	return m_children;
+}
