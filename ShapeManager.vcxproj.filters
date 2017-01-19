@@ -57,6 +57,15 @@
     <ClInclude Include="ViewInterface.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Signal.h">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionButton.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ButtonInterface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -75,6 +84,9 @@
       <Filter>Header Files\Model</Filter>
     </ClCompile>
     <ClCompile Include="SceneView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ActionButton.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

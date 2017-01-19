@@ -27,6 +27,6 @@ void CSceneView::DrawLayer(CLayer * layer)
 	auto color = layer->GetColor();
 	layersRect.setFillColor(sf::Color(color.r, color.g, color.b, color.a));
 	auto position = layer->GetPosition();
-	layersRect.setPosition(position.x, position.y);
+	layersRect.setPosition(float(position.x), float(position.y));
 	m_window->draw(layersRect);
 }

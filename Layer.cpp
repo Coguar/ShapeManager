@@ -2,7 +2,7 @@
 #include "Layer.h"
 
 
-CLayer::CLayer(SCoords const & posizion, SSize const & size)
+CLayer::CLayer(SSize const & size, SCoords const & posizion)
 	: CRectangle(posizion, size)
 {
 }
@@ -22,4 +22,27 @@ void CLayer::AddChild(CLayer * child)
 std::vector<std::shared_ptr<CLayer>> const& CLayer::GetChildren() const
 {
 	return m_children;
+}
+
+CLayer * CLayer::GetClickedLayer(SCoords const & mousePos)
+{
+	CLayer * layer = nullptr;
+	if (IsPointIntoRect(mousePos))
+	{
+		layer = this;
+		for (auto &child : m_children)
+		{
+			auto returnedLayer = child->GetClickedLayer(mousePos);
+			if (returnedLayer != nullptr)
+			{
+				layer = returnedLayer;
+				break;
+			}
+		}
+	}
+	return layer;
+}
+
+void CLayer::DoClickAction()
+{
 }

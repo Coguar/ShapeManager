@@ -12,7 +12,8 @@
 #include "Coords.h"
 #include <vector>
 #include <memory>
-
+#include <functional>
+#include <iostream>
 #include <SFML\Window.hpp>
 #include <SFML\Graphics.hpp>
 

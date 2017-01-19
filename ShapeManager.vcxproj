@@ -84,10 +84,11 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalOptions>-D_SCL_SECURE_NO_WARNINGS</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -110,7 +111,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -147,20 +148,24 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ActionButton.h" />
     <ClInclude Include="Coords.h" />
     <ClInclude Include="color.h" />
     <ClInclude Include="Drawable.h" />
     <ClInclude Include="DrawableInterface.h" />
+    <ClInclude Include="ButtonInterface.h" />
     <ClInclude Include="Layer.h" />
     <ClInclude Include="LayerInterface.h" />
     <ClInclude Include="Rectangle.h" />
     <ClInclude Include="RectangleInterface.h" />
     <ClInclude Include="SceneView.h" />
+    <ClInclude Include="Signal.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="ViewInterface.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ActionButton.cpp" />
     <ClCompile Include="Drawable.cpp" />
     <ClCompile Include="Layer.cpp" />
     <ClCompile Include="Rectangle.cpp" />
