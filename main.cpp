@@ -12,25 +12,27 @@ int main()
 	
 	sf::RenderWindow window(sf::VideoMode(800, 600), "Test");
 	CLayer root({ 800, 600 });
-	std::shared_ptr<CToolbar> toolbar = std::make_shared<CToolbar>();
-	std::shared_ptr<CActionButton> btn = std::make_shared<CActionButton>();
-	btn->SetSize({ 80, 80 });
-	btn->SecPosition({ 10, 10 });
 
+	auto toolbar = std::make_shared<CToolbar>();
 	toolbar->SecPosition({ 0, 0 });
 	toolbar->SetSize({ 800, 100 });
 	toolbar->SetColor(SColor(255, 255, 0, 255));
+	root.AddChild(toolbar);
+
+	auto btn = std::make_shared<CActionButton>();
+	btn->SetSize({ 80, 80 });
+	btn->SecPosition({ 10, 10 });
 	btn->SetColor(SColor(255, 0, 0, 255));
 	btn->SetAction([]() {std::cout << "was clicked" << std::endl; });
 	toolbar->AddChild(btn);
-	root.AddChild(toolbar);
-	auto canvas = std::make_shared<CCanvas>();
 
+
+	auto canvas = std::make_shared<CCanvas>();
 	canvas->SecPosition({ 5, 105 });
 	canvas->SetSize({ 790, 490 });
 	canvas->SetColor(SColor(255, 255, 255, 255));
-
 	root.AddChild(canvas);
+
 	CSceneView view(&window);
 	while (window.isOpen())
 	{
