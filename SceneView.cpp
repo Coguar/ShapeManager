@@ -26,6 +26,9 @@ void CSceneView::DrawShapes(CCanvas * canvas)
 	{
 		switch (shape->GetType())
 		{
+		case shape::Type::Circle:
+			DrawCircle(shape);
+			break;
 		default:
 			break;
 		}
@@ -34,7 +37,12 @@ void CSceneView::DrawShapes(CCanvas * canvas)
 
 void CSceneView::DrawCircle(std::shared_ptr<CAbstractShape> const & shape)
 {
-	
+	auto size = shape->GetSize();
+	EllipseShape ellipse({ float(size.x / 2.0), float(size.y / 2.0) });
+	ellipse.setPosition(sf::Vector2f( float(shape->GetPosition().x), float(shape->GetPosition().y)));
+	auto color = shape->GetColor();
+	ellipse.setFillColor(sf::Color(color.r, color.g, color.b, color.a));
+	m_window->draw(ellipse);
 }
 
 void CSceneView::DrawSquare(std::shared_ptr<CAbstractShape> const & shape)

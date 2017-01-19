@@ -53,7 +53,8 @@ bool CCanvas::OnEvent(sf::Event const & event)
 void CCanvas::SetShape(std::shared_ptr<CAbstractShape>& shape)
 {
 	shape->SetColor(SColor(255, 0, 255, 255));
-	SCoords position(GetPosition().x + GetSize().x / 2.0, GetPosition().y + GetSize().x / 2.0);
+	SCoords position(GetPosition().x + GetSize().x / 2.0, GetPosition().y + GetSize().y / 2.0);
+	shape->SecPosition(position);
 	shape->SetSize({ 40, 40 });
 }
 

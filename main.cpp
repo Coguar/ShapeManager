@@ -32,6 +32,7 @@ int main()
 	canvas->SetColor(SColor(255, 255, 255, 255));
 	root.AddChild(canvas);
 
+	canvas->CreateShape(shape::Type::Circle);
 	CSceneView view(&window);
 	while (window.isOpen())
 	{
@@ -51,6 +52,7 @@ int main()
 				window.close();
 		}
 		view.Draw(&root);
+		view.DrawShapes(canvas.get());
 		window.display();
 		window.clear();
 	}
