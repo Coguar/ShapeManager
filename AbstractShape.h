@@ -13,6 +13,7 @@ public:
 	shape::Type GetType()const override;
 	bool IsPointIntoShape(SCoords const& point)const override;
 
+
 private:
 	shape::Type m_type;
 };

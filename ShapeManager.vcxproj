@@ -156,6 +156,8 @@
     <ClInclude Include="Drawable.h" />
     <ClInclude Include="DrawableInterface.h" />
     <ClInclude Include="ButtonInterface.h" />
+    <ClInclude Include="EventListener.h" />
+    <ClInclude Include="EventListenerInterface.h" />
     <ClInclude Include="Layer.h" />
     <ClInclude Include="LayerInterface.h" />
     <ClInclude Include="Rectangle.h" />
@@ -175,6 +177,7 @@
     <ClCompile Include="ActionButton.cpp" />
     <ClCompile Include="Circle.cpp" />
     <ClCompile Include="Drawable.cpp" />
+    <ClCompile Include="EventListener.cpp" />
     <ClCompile Include="Layer.cpp" />
     <ClCompile Include="Rectangle.cpp" />
     <ClCompile Include="main.cpp" />
