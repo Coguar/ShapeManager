@@ -30,10 +30,13 @@ int main()
 		while (window.pollEvent(event))
 		{
 			auto mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
-			if (event.type == sf::Event::MouseButtonPressed && event.key.code == sf::Mouse::Left)
+			auto item = root.GetClickedLayer({ mousePos.x, mousePos.y });
+			if(item)
+				item->OnEvent(event);
+			/*if (event.type == sf::Event::MouseButtonPressed && event.key.code == sf::Mouse::Left)
 			{
 				root.GetClickedLayer({ mousePos.x, mousePos.y });
-			}
+			}*/
 			if (event.type == sf::Event::Closed)
 				window.close();
 		}

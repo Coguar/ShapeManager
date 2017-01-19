@@ -16,7 +16,9 @@ void CActionButton::SetAction(signal::Signal<void()>::slot_type const & action)
 	m_connection = m_onClickAction.connect(action);
 }
 
-void CActionButton::DoClickAction()
+bool CActionButton::OnMousePressed(sf::Event::MouseButtonEvent const & event)
 {
 	m_onClickAction();
+	return true;
 }
+

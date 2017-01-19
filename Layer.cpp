@@ -41,10 +41,5 @@ CLayer * CLayer::GetClickedLayer(SCoords const & mousePos)
 		}
 	}
 	if (layer == this)
-		DoClickAction();
 	return layer;
-}
-
-void CLayer::DoClickAction()
-{
 }

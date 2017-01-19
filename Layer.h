@@ -2,7 +2,11 @@
 #include "LayerInterface.h"
 #include "Rectangle.h"
 #include "Drawable.h"
-class CLayer : public CRectangle, public CDrawable, public ILayer
+#include "EventListener.h"
+class CLayer 
+	: public CRectangle
+	, public CDrawable
+	, public CEventListener
 {
 	typedef std::shared_ptr<CLayer> LayerPtr;
 public:
@@ -12,7 +16,6 @@ public:
 	std::vector<std::shared_ptr<CLayer>> const& GetChildren() const;
 
 	CLayer* GetClickedLayer(SCoords const& mousePos);
-	void DoClickAction() override;
 private:
 	std::vector<std::shared_ptr<CLayer>> m_children;
 	
