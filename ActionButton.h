@@ -2,7 +2,8 @@
 #include "ButtonInterface.h"
 #include "Layer.h"
 
-class CActionButton : public CLayer//, public IButton
+class CActionButton 
+	: public CLayer
 {
 public:
 	CActionButton();

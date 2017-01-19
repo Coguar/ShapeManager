@@ -2,10 +2,12 @@
 #include "Rectangle.h"
 #include "Drawable.h"
 #include "ShapeInterface.h"
+#include "EventListener.h"
 class CAbstractShape 
 	: public CRectangle
 	, public CDrawable
 	, public IShape
+	, public CEventListener
 {
 public:
 	CAbstractShape(shape::Type type);

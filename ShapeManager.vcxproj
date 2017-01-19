@@ -150,6 +150,8 @@
   <ItemGroup>
     <ClInclude Include="AbstractShape.h" />
     <ClInclude Include="ActionButton.h" />
+    <ClInclude Include="Canvas.h" />
+    <ClInclude Include="CanvasInterface.h" />
     <ClInclude Include="Circle.h" />
     <ClInclude Include="Coords.h" />
     <ClInclude Include="color.h" />
@@ -159,7 +161,6 @@
     <ClInclude Include="EventListener.h" />
     <ClInclude Include="EventListenerInterface.h" />
     <ClInclude Include="Layer.h" />
-    <ClInclude Include="LayerInterface.h" />
     <ClInclude Include="Rectangle.h" />
     <ClInclude Include="RectangleInterface.h" />
     <ClInclude Include="SceneView.h" />
@@ -170,11 +171,12 @@
     <ClInclude Include="Toolbar.h" />
     <ClInclude Include="Triangle.h" />
     <ClInclude Include="ViewInterface.h" />
-    <ClInclude Include="СSquare.h" />
+    <ClInclude Include="Square.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AbstractShape.cpp" />
     <ClCompile Include="ActionButton.cpp" />
+    <ClCompile Include="Canvas.cpp" />
     <ClCompile Include="Circle.cpp" />
     <ClCompile Include="Drawable.cpp" />
     <ClCompile Include="EventListener.cpp" />
@@ -190,7 +192,7 @@
     </ClCompile>
     <ClCompile Include="Toolbar.cpp" />
     <ClCompile Include="Triangle.cpp" />
-    <ClCompile Include="СSquare.cpp" />
+    <ClCompile Include="Square.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

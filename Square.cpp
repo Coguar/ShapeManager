@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "ÑSquare.h"
+#include "Square.h"
 
 
 ÑSquare::ÑSquare()

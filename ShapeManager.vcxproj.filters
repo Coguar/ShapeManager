@@ -42,9 +42,6 @@
     <ClInclude Include="Layer.h">
       <Filter>Header Files\LayerModel</Filter>
     </ClInclude>
-    <ClInclude Include="LayerInterface.h">
-      <Filter>Header Files\LayerModel</Filter>
-    </ClInclude>
     <ClInclude Include="Rectangle.h">
       <Filter>Header Files\LayerModel</Filter>
     </ClInclude>
@@ -87,13 +84,19 @@
     <ClInclude Include="Triangle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="СSquare.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="EventListenerInterface.h">
       <Filter>Header Files\LayerModel</Filter>
     </ClInclude>
     <ClInclude Include="EventListener.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CanvasInterface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Canvas.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Square.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -131,10 +134,13 @@
     <ClCompile Include="Triangle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="СSquare.cpp">
+    <ClCompile Include="EventListener.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="EventListener.cpp">
+    <ClCompile Include="Canvas.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Square.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
