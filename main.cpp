@@ -6,7 +6,7 @@
 //#include "Layer.h"
 #include "Toolbar.h"
 #include "ActionButton.h"
-
+#include "Canvas.h"
 int main()
 {
 	
@@ -16,23 +16,32 @@ int main()
 	std::shared_ptr<CActionButton> btn = std::make_shared<CActionButton>();
 	btn->SetSize({ 80, 80 });
 	btn->SecPosition({ 10, 10 });
-	toolbar->SecPosition({ 0, 20 });
+
+	toolbar->SecPosition({ 0, 0 });
 	toolbar->SetSize({ 800, 100 });
 	toolbar->SetColor(SColor(255, 255, 0, 255));
 	btn->SetColor(SColor(255, 0, 0, 255));
 	btn->SetAction([]() {std::cout << "was clicked" << std::endl; });
 	toolbar->AddChild(btn);
 	root.AddChild(toolbar);
+	auto canvas = std::make_shared<CCanvas>();
+
+	canvas->SecPosition({ 5, 105 });
+	canvas->SetSize({ 790, 490 });
+	canvas->SetColor(SColor(255, 255, 255, 255));
+
+	root.AddChild(canvas);
 	CSceneView view(&window);
 	while (window.isOpen())
 	{
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
-			auto mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+			root.DispatchEvent(event);
+			/*auto mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
 			auto item = root.GetClickedLayer({ mousePos.x, mousePos.y });
 			if(item)
-				item->OnEvent(event);
+				item->OnEvent(event);*/
 			/*if (event.type == sf::Event::MouseButtonPressed && event.key.code == sf::Mouse::Left)
 			{
 				root.GetClickedLayer({ mousePos.x, mousePos.y });

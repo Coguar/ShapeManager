@@ -12,10 +12,13 @@ class CAbstractShape
 public:
 	CAbstractShape(shape::Type type);
 	~CAbstractShape() = default;
+
 	shape::Type GetType()const override;
 	bool IsPointIntoShape(SCoords const& point)const override;
 
-
+	bool OnMousePressed(sf::Event::MouseButtonEvent const& event);
+	bool OnMouseReleased(sf::Event::MouseButtonEvent const& event);
+	bool OnMouseMoved(sf::Event::MouseMoveEvent const& event);
 private:
 	shape::Type m_type;
 };

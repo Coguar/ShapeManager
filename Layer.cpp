@@ -2,8 +2,8 @@
 #include "Layer.h"
 
 
-CLayer::CLayer(SSize const & size, SCoords const & posizion)
-	: CRectangle(posizion, size)
+CLayer::CLayer(SSize const & size, SCoords const & position)
+	: CRectangle(position, size)
 {
 }
 
@@ -22,6 +22,15 @@ void CLayer::AddChild(LayerPtr const & child)
 std::vector<std::shared_ptr<CLayer>> const& CLayer::GetChildren() const
 {
 	return m_children;
+}
+
+void CLayer::DispatchEvent(sf::Event const & event)
+{
+	OnEvent(event);
+	for (auto &child : m_children)
+	{
+		child->DispatchEvent(event);
+	}
 }
 
 CLayer * CLayer::GetClickedLayer(SCoords const & mousePos)

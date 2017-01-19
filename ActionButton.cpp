@@ -18,7 +18,11 @@ void CActionButton::SetAction(signal::Signal<void()>::slot_type const & action)
 
 bool CActionButton::OnMousePressed(sf::Event::MouseButtonEvent const & event)
 {
-	m_onClickAction();
-	return true;
+	if (IsPointIntoRect({ double(event.x), double(event.y) }))
+	{
+		m_onClickAction();
+		return true;
+	}
+	return false;
 }
 
