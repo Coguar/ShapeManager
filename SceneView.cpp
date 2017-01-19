@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "SceneView.h"
-
+#include "Ellipse.h"
 
 CSceneView::CSceneView(sf::RenderWindow * window)
 	: m_window(window)
@@ -18,6 +18,31 @@ void CSceneView::Draw(CLayer * layer)
 	{
 		Draw(child.get());
 	}
+}
+
+void CSceneView::DrawShapes(CCanvas * canvas)
+{
+	for (auto &shape : canvas->GetShapes())
+	{
+		switch (shape->GetType())
+		{
+		default:
+			break;
+		}
+	}
+}
+
+void CSceneView::DrawCircle(std::shared_ptr<CAbstractShape> const & shape)
+{
+	
+}
+
+void CSceneView::DrawSquare(std::shared_ptr<CAbstractShape> const & shape)
+{
+}
+
+void CSceneView::DrawTriangle(std::shared_ptr<CAbstractShape> const & shape)
+{
 }
 
 void CSceneView::DrawLayer(CLayer * layer)

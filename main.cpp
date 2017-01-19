@@ -26,7 +26,6 @@ int main()
 	btn->SetAction([]() {std::cout << "was clicked" << std::endl; });
 	toolbar->AddChild(btn);
 
-
 	auto canvas = std::make_shared<CCanvas>();
 	canvas->SecPosition({ 5, 105 });
 	canvas->SetSize({ 790, 490 });
