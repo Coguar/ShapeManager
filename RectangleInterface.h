@@ -3,7 +3,7 @@
 
 struct IRectangle
 {
-	virtual bool IsPointIntoRect(SCoords const& point) = 0;
+	virtual bool IsPointIntoRect(SCoords const& point)const = 0;
 	virtual SSize GetSize()const = 0;
 	virtual SCoords GetPosition()const = 0;
 	virtual void SetSize(SSize const& size) = 0;

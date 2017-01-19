@@ -8,7 +8,7 @@ public:
 	CRectangle(SCoords const& positon, SSize const& size);
 	~CRectangle() = default;
 
-	bool IsPointIntoRect(SCoords const& point) override;
+	bool IsPointIntoRect(SCoords const& point)const override;
 	SSize GetSize() const override;
 	SCoords GetPosition() const override;
 	void SetSize(SSize const& size) override;

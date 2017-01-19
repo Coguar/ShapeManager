@@ -14,6 +14,7 @@
 #include <memory>
 #include <functional>
 #include <iostream>
+#include <algorithm>
 #include <SFML\Window.hpp>
 #include <SFML\Graphics.hpp>
 

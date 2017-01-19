@@ -10,7 +10,7 @@ CRectangle::CRectangle(SCoords const& positon, SSize const& size)
 {
 }
 
-bool CRectangle::IsPointIntoRect(SCoords const & point)
+bool CRectangle::IsPointIntoRect(SCoords const & point) const
 {
 	return (point.x >= m_position.x && point.x <= m_position.x + m_size.x) &&
 					(point.y >= m_position.y && point.y <= m_position.y + m_size.y);

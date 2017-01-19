@@ -13,8 +13,14 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\Model">
+    <Filter Include="Header Files\LayerModel">
       <UniqueIdentifier>{ce08a3b4-5844-4bd0-b367-29192fb7d6f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\LayerModel\HelpersStructs">
+      <UniqueIdentifier>{a076c58b-45ec-43fc-866c-c91a8bca1cb5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ShapeModel">
+      <UniqueIdentifier>{00ba53a9-1fad-444f-ba64-b24f78433e6b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -27,29 +33,23 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Coords.h">
-      <Filter>Header Files\Model</Filter>
-    </ClInclude>
-    <ClInclude Include="color.h">
-      <Filter>Header Files\Model</Filter>
-    </ClInclude>
     <ClInclude Include="Drawable.h">
-      <Filter>Header Files\Model</Filter>
+      <Filter>Header Files\LayerModel</Filter>
     </ClInclude>
     <ClInclude Include="DrawableInterface.h">
-      <Filter>Header Files\Model</Filter>
+      <Filter>Header Files\LayerModel</Filter>
     </ClInclude>
     <ClInclude Include="Layer.h">
-      <Filter>Header Files\Model</Filter>
+      <Filter>Header Files\LayerModel</Filter>
     </ClInclude>
     <ClInclude Include="LayerInterface.h">
-      <Filter>Header Files\Model</Filter>
+      <Filter>Header Files\LayerModel</Filter>
     </ClInclude>
     <ClInclude Include="Rectangle.h">
-      <Filter>Header Files\Model</Filter>
+      <Filter>Header Files\LayerModel</Filter>
     </ClInclude>
     <ClInclude Include="RectangleInterface.h">
-      <Filter>Header Files\Model</Filter>
+      <Filter>Header Files\LayerModel</Filter>
     </ClInclude>
     <ClInclude Include="SceneView.h">
       <Filter>Header Files</Filter>
@@ -57,16 +57,37 @@
     <ClInclude Include="ViewInterface.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="color.h">
+      <Filter>Header Files\LayerModel\HelpersStructs</Filter>
+    </ClInclude>
+    <ClInclude Include="Coords.h">
+      <Filter>Header Files\LayerModel\HelpersStructs</Filter>
+    </ClInclude>
     <ClInclude Include="Signal.h">
-      <Filter>Header Files\Model</Filter>
+      <Filter>Header Files\LayerModel\HelpersStructs</Filter>
     </ClInclude>
     <ClInclude Include="ActionButton.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\LayerModel</Filter>
     </ClInclude>
     <ClInclude Include="ButtonInterface.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\LayerModel</Filter>
     </ClInclude>
     <ClInclude Include="Toolbar.h">
+      <Filter>Header Files\LayerModel</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapeInterface.h">
+      <Filter>Header Files\ShapeModel</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstractShape.h">
+      <Filter>Header Files\ShapeModel</Filter>
+    </ClInclude>
+    <ClInclude Include="Circle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Triangle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="СSquare.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -78,21 +99,33 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Drawable.cpp">
-      <Filter>Header Files\Model</Filter>
+      <Filter>Header Files\LayerModel</Filter>
     </ClCompile>
     <ClCompile Include="Rectangle.cpp">
-      <Filter>Header Files\Model</Filter>
+      <Filter>Header Files\LayerModel</Filter>
     </ClCompile>
     <ClCompile Include="Layer.cpp">
-      <Filter>Header Files\Model</Filter>
+      <Filter>Header Files\LayerModel</Filter>
     </ClCompile>
     <ClCompile Include="SceneView.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ActionButton.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files\LayerModel</Filter>
     </ClCompile>
     <ClCompile Include="Toolbar.cpp">
+      <Filter>Header Files\LayerModel</Filter>
+    </ClCompile>
+    <ClCompile Include="AbstractShape.cpp">
+      <Filter>Header Files\ShapeModel</Filter>
+    </ClCompile>
+    <ClCompile Include="Circle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Triangle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="СSquare.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -148,7 +148,9 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AbstractShape.h" />
     <ClInclude Include="ActionButton.h" />
+    <ClInclude Include="Circle.h" />
     <ClInclude Include="Coords.h" />
     <ClInclude Include="color.h" />
     <ClInclude Include="Drawable.h" />
@@ -159,14 +161,19 @@
     <ClInclude Include="Rectangle.h" />
     <ClInclude Include="RectangleInterface.h" />
     <ClInclude Include="SceneView.h" />
+    <ClInclude Include="ShapeInterface.h" />
     <ClInclude Include="Signal.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Toolbar.h" />
+    <ClInclude Include="Triangle.h" />
     <ClInclude Include="ViewInterface.h" />
+    <ClInclude Include="СSquare.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AbstractShape.cpp" />
     <ClCompile Include="ActionButton.cpp" />
+    <ClCompile Include="Circle.cpp" />
     <ClCompile Include="Drawable.cpp" />
     <ClCompile Include="Layer.cpp" />
     <ClCompile Include="Rectangle.cpp" />
@@ -179,6 +186,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Toolbar.cpp" />
+    <ClCompile Include="Triangle.cpp" />
+    <ClCompile Include="СSquare.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
