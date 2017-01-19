@@ -21,5 +21,6 @@ public:
 	bool OnMouseMoved(sf::Event::MouseMoveEvent const& event);
 private:
 	shape::Type m_type;
+	bool m_isSelected = false;
 };
 
