@@ -11,12 +11,12 @@ CLayer::~CLayer()
 {
 }
 
-void CLayer::AddChild(CLayer * child)
+void CLayer::AddChild(LayerPtr const & child)
 {
 	auto localPos = child->GetPosition();
 	auto origin = GetPosition();
 	child->SecPosition({ localPos.x + origin.x, localPos.y + origin.y });
-	m_children.push_back(std::make_shared<CLayer>(*child));
+	m_children.push_back(child);
 }
 
 std::vector<std::shared_ptr<CLayer>> const& CLayer::GetChildren() const
@@ -40,6 +40,8 @@ CLayer * CLayer::GetClickedLayer(SCoords const & mousePos)
 			}
 		}
 	}
+	if (layer == this)
+		DoClickAction();
 	return layer;
 }
 
