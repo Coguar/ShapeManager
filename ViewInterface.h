@@ -1,9 +1,10 @@
 #pragma once
-#include "Canvas.h"
+#include "SelectFrame.h"
 
 struct IView
 {
 	virtual void Draw(CLayer * layer) = 0;
-	virtual void DrawShapes(CCanvas * canvas) = 0;
+	virtual void DrawShapes(std::vector<std::shared_ptr<CShape>> const& shapes) = 0;
+	virtual void DrawSelectFrame(std::shared_ptr<CSelectFrame> const& frame) = 0;
 	virtual ~IView() = default;
 };

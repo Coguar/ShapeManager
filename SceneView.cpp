@@ -16,9 +16,9 @@ void CSceneView::Draw(CLayer * layer)
 	}
 }
 
-void CSceneView::DrawShapes(CCanvas * canvas)
+void CSceneView::DrawShapes(std::vector<std::shared_ptr<CShape>> const& shapes)
 {
-	for (auto &shape : canvas->GetShapes())
+	for (auto &shape : shapes)
 	{
 		switch (shape->GetType())
 		{
@@ -34,6 +34,14 @@ void CSceneView::DrawShapes(CCanvas * canvas)
 		default:
 			break;
 		}
+	}
+}
+
+void CSceneView::DrawSelectFrame(std::shared_ptr<CSelectFrame> const & frame)
+{
+	if (frame->IsActive())
+	{
+		DrawShapes(frame->GetDragPoints());
 	}
 }
 

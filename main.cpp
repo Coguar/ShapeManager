@@ -55,7 +55,8 @@ int main()
 				window.close();
 		}
 		view.Draw(&root);
-		view.DrawShapes(canvas.get());
+		view.DrawShapes(canvas->GetShapes());
+		view.DrawSelectFrame(canvas->GetFSelectFrame());
 		window.display();
 		window.clear();
 	}

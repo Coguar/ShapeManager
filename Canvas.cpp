@@ -6,6 +6,7 @@
 
 CCanvas::CCanvas()
 {
+	m_frame = std::make_shared<CSelectFrame>();
 }
 
 
@@ -43,25 +44,29 @@ std::vector<std::shared_ptr<CShape>> const& CCanvas::GetShapes() const
 
 bool CCanvas::OnEvent(sf::Event const & event)
 {
+	CLayer::OnEvent(event);
 	for (int i = m_shapes.size() - 1; i >= 0; --i)
 	{
 		if (m_shapes[i]->OnEvent(event))
 		{
-			auto temp = m_shapes[i];
-			m_shapes.push_back(m_shapes[i]);
-			
+			m_shapes.push_back(m_shapes[i]);			
 			m_shapes.erase(m_shapes.begin() + i);
-			break;
+			m_frame->SetTarget(m_shapes.back());
+			return true;
 		}
 	}
-	/*for (auto &shape : m_shapes)
-	{
-		if (shape->OnEvent(event))
-		{
-			break;
-		}
-	}*/
+	return false;
+}
+
+bool CCanvas::OnMousePressed(sf::Event::MouseButtonEvent const & event)
+{
+	m_frame->ResetTargget();
 	return true;
+}
+
+std::shared_ptr<CSelectFrame> const & CCanvas::GetFSelectFrame() const
+{
+	return m_frame;
 }
 
 void CCanvas::SetShape(std::shared_ptr<CShape> const& shape)

@@ -7,7 +7,8 @@ public:
 	CSceneView(sf::RenderTarget * window);
 	~CSceneView() = default;
 	void Draw(CLayer * layer) override;
-	void DrawShapes(CCanvas * canvas) override;
+	void DrawShapes(std::vector<std::shared_ptr<CShape>> const& shapes) override;
+	void DrawSelectFrame(std::shared_ptr<CSelectFrame> const& frame) override;
 
 private:
 	void DrawCircle(std::shared_ptr<CShape> const& shape);

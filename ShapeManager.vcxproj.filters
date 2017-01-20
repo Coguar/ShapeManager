@@ -99,6 +99,9 @@
     <ClInclude Include="SceneView.h">
       <Filter>Header Files\View</Filter>
     </ClInclude>
+    <ClInclude Include="SelectFrame.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -145,6 +148,9 @@
     </ClCompile>
     <ClCompile Include="Canvas.cpp">
       <Filter>Header Files\LayerModel</Filter>
+    </ClCompile>
+    <ClCompile Include="SelectFrame.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
