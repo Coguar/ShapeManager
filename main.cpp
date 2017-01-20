@@ -14,20 +14,20 @@ int main()
 	CLayer root({ 800, 600 });
 
 	auto toolbar = std::make_shared<CToolbar>();
-	toolbar->SecPosition({ 0, 0 });
+	toolbar->SetPosition({ 0, 0 });
 	toolbar->SetSize({ 800, 100 });
 	toolbar->SetColor(SColor(255, 255, 0, 255));
 	root.AddChild(toolbar);
 
 	auto btn = std::make_shared<CActionButton>();
 	btn->SetSize({ 80, 80 });
-	btn->SecPosition({ 10, 10 });
+	btn->SetPosition({ 10, 10 });
 	btn->SetColor(SColor(255, 0, 0, 255));
 	btn->SetAction([]() {std::cout << "was clicked" << std::endl; });
 	toolbar->AddChild(btn);
 
 	auto canvas = std::make_shared<CCanvas>();
-	canvas->SecPosition({ 5, 105 });
+	canvas->SetPosition({ 5, 105 });
 	canvas->SetSize({ 790, 490 });
 	canvas->SetColor(SColor(255, 255, 255, 255));
 	root.AddChild(canvas);

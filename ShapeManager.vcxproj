@@ -163,7 +163,6 @@
     <ClInclude Include="EventListenerInterface.h" />
     <ClInclude Include="Layer.h" />
     <ClInclude Include="Rectangle.h" />
-    <ClInclude Include="RectangleInterface.h" />
     <ClInclude Include="SceneView.h" />
     <ClInclude Include="ShapeInterface.h" />
     <ClInclude Include="Signal.h" />

@@ -31,7 +31,7 @@ void CSceneView::DrawShapes(CCanvas * canvas)
 	}
 }
 
-void CSceneView::DrawCircle(std::shared_ptr<CAbstractShape> const & shape)
+void CSceneView::DrawCircle(std::shared_ptr<CShape> const & shape)
 {
 	auto size = shape->GetSize();
 	EllipseShape ellipse({ float(size.x / 2.0), float(size.y / 2.0) });
@@ -41,11 +41,11 @@ void CSceneView::DrawCircle(std::shared_ptr<CAbstractShape> const & shape)
 	m_target->draw(ellipse);
 }
 
-void CSceneView::DrawSquare(std::shared_ptr<CAbstractShape> const & shape)
+void CSceneView::DrawSquare(std::shared_ptr<CShape> const & shape)
 {
 }
 
-void CSceneView::DrawTriangle(std::shared_ptr<CAbstractShape> const & shape)
+void CSceneView::DrawTriangle(std::shared_ptr<CShape> const & shape)
 {
 }
 

@@ -48,9 +48,6 @@
     <ClInclude Include="Rectangle.h">
       <Filter>Header Files\LayerModel</Filter>
     </ClInclude>
-    <ClInclude Include="RectangleInterface.h">
-      <Filter>Header Files\LayerModel</Filter>
-    </ClInclude>
     <ClInclude Include="ViewInterface.h">
       <Filter>Header Files</Filter>
     </ClInclude>

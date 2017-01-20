@@ -1,12 +1,6 @@
 #pragma once
 #include "Coords.h"
 
-const enum class ShapeType
-{
-	Circle = 0,
-	Triangle,
-	Rectangle,
-};
 
 struct IShape
 {

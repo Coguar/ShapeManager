@@ -7,7 +7,7 @@ namespace
 }
 
 CTriangle::CTriangle()
-	: CAbstractShape(ShapeType::Triangle)
+	: CShape(ShapeType::Triangle)
 {
 }
 

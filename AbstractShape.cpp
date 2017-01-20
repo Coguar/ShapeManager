@@ -1,21 +1,21 @@
 #include "stdafx.h"
 #include "AbstractShape.h"
 
-CAbstractShape::CAbstractShape(ShapeType type)
+CShape::CShape(ShapeType type)
 	: m_type(type)
 {}
 
-ShapeType CAbstractShape::GetType() const
+ShapeType CShape::GetType() const
 {
 	return m_type;
 }
 
-bool CAbstractShape::IsPointIntoShape(Vec2 const & point) const
+bool CShape::IsPointIntoShape(Vec2 const & point) const
 {
 	return false;
 }
 
-bool CAbstractShape::OnMousePressed(sf::Event::MouseButtonEvent const & event)
+bool CShape::OnMousePressed(sf::Event::MouseButtonEvent const & event)
 {
 	if (IsPointIntoShape({ float(event.x), float(event.y) }))
 	{
@@ -24,12 +24,12 @@ bool CAbstractShape::OnMousePressed(sf::Event::MouseButtonEvent const & event)
 	return false;
 }
 
-bool CAbstractShape::OnMouseReleased(sf::Event::MouseButtonEvent const & event)
+bool CShape::OnMouseReleased(sf::Event::MouseButtonEvent const & event)
 {
 	return false;
 }
 
-bool CAbstractShape::OnMouseMoved(sf::Event::MouseMoveEvent const & event)
+bool CShape::OnMouseMoved(sf::Event::MouseMoveEvent const & event)
 {
 	return false;
 }

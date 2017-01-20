@@ -13,9 +13,9 @@ CCanvas::~CCanvas()
 {
 }
 
-std::shared_ptr<CAbstractShape> CCanvas::CreateShape(ShapeType type)
+std::shared_ptr<CShape> CCanvas::CreateShape(ShapeType type)
 {
-	std::shared_ptr<CAbstractShape> shape;
+	std::shared_ptr<CShape> shape;
 	switch (type)
 	{
 	case ShapeType::Circle:
@@ -36,7 +36,7 @@ std::shared_ptr<CAbstractShape> CCanvas::CreateShape(ShapeType type)
 	return shape;
 }
 
-std::vector<std::shared_ptr<CAbstractShape>> const& CCanvas::GetShapes() const
+std::vector<std::shared_ptr<CShape>> const& CCanvas::GetShapes() const
 {
 	return m_shapes;
 }
@@ -50,11 +50,11 @@ bool CCanvas::OnEvent(sf::Event const & event)
 	return true;
 }
 
-void CCanvas::SetShape(std::shared_ptr<CAbstractShape> const& shape)
+void CCanvas::SetShape(std::shared_ptr<CShape> const& shape)
 {
 	shape->SetColor(SColor(255, 0, 255, 255));
 	Vec2 position(GetPosition().x + GetSize().x / 2.0, GetPosition().y + GetSize().y / 2.0);
-	shape->SecPosition(position);
+	shape->SetPosition(position);
 	shape->SetSize({ 40, 40 });
 }
 

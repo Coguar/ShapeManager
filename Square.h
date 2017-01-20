@@ -2,7 +2,7 @@
 #include "AbstractShape.h"
 
 class ÑSquare
-	: public CAbstractShape
+	: public CShape
 {
 public:
 	ÑSquare();

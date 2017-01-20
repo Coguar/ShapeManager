@@ -1,7 +1,7 @@
 #pragma once
 #include "AbstractShape.h"
 class CCircle :
-	public CAbstractShape
+	public CShape
 {
 public:
 	CCircle();

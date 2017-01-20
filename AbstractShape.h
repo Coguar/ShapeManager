@@ -1,21 +1,21 @@
 #pragma once
-#include "Rectangle.h"
-#include "Drawable.h"
-#include "ShapeInterface.h"
-#include "EventListener.h"
+#include "Layer.h"
 
-class CAbstractShape 
-	: public CRectangle
-	, public CDrawable
-	, public IShape
-	, public CEventListener
+const enum class ShapeType
+{
+	Circle = 0,
+	Triangle,
+	Rectangle,
+};
+
+class CShape : public CLayer
 {
 public:
-	CAbstractShape(ShapeType type);
-	~CAbstractShape() = default;
+	CShape(ShapeType type);
+	~CShape() = default;
 
-	ShapeType GetType()const override;
-	bool IsPointIntoShape(Vec2 const& point)const override;
+	ShapeType GetType()const;
+	virtual bool IsPointIntoShape(Vec2 const& point)const;
 
 	bool OnMousePressed(sf::Event::MouseButtonEvent const& event);
 	bool OnMouseReleased(sf::Event::MouseButtonEvent const& event);

@@ -3,7 +3,7 @@
 
 
 CCircle::CCircle()
-	: CAbstractShape(ShapeType::Circle)
+	: CShape(ShapeType::Circle)
 {
 }
 

@@ -10,9 +10,9 @@ public:
 	void DrawShapes(CCanvas * canvas) override;
 
 private:
-	void DrawCircle(std::shared_ptr<CAbstractShape> const& shape);
-	void DrawSquare(std::shared_ptr<CAbstractShape> const& shape);
-	void DrawTriangle(std::shared_ptr<CAbstractShape> const& shape);
+	void DrawCircle(std::shared_ptr<CShape> const& shape);
+	void DrawSquare(std::shared_ptr<CShape> const& shape);
+	void DrawTriangle(std::shared_ptr<CShape> const& shape);
 
 	void DrawLayer(CLayer * layer);
 	sf::RenderTarget * m_target;

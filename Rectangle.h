@@ -1,22 +1,15 @@
 #pragma once
-#include "RectangleInterface.h"
 
-class CRectangle //: public IRectangle
+class CBoundingRect
 {
 public:
-	CRectangle() = default;
-	CRectangle(Vec2 const& positon, Vec2 const& size);
-	~CRectangle() = default;
+	CBoundingRect() = default;
+	CBoundingRect(Vec2 const& positon, Vec2 const& size);
+	~CBoundingRect() = default;
 
-	bool IsPointIntoRect(Vec2 const& point)const;
-	Vec2 GetSize() const;
-	Vec2 GetPosition() const;
-	void SetSize(Vec2 const& size);
-	void SecPosition(Vec2 const& position);
+	bool IsPointInRect(Vec2 const& point)const;
 
-private:
-
-	Vec2 m_position;
-	Vec2 m_size;
+	Vec2 position;
+	Vec2 size;
 };
 

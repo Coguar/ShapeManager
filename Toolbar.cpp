@@ -18,10 +18,10 @@ void CToolbar::AddChild(LayerPtr const & child)
 	{
 		auto lastLayerPos = GetChildren().back()->GetPosition();
 		auto lastLayerSize = GetChildren().back()->GetSize();
-		child->SecPosition({ lastLayerPos.x + lastLayerSize.x + m_defaultOffset, lastLayerPos.y });
+		child->SetPosition({ lastLayerPos.x + lastLayerSize.x + m_defaultOffset, lastLayerPos.y });
 	}
 	else
 	{
-		child->SecPosition({ m_defaultOffset + GetPosition().x,  m_defaultOffset + GetPosition().y });
+		child->SetPosition({ m_defaultOffset + GetPosition().x,  m_defaultOffset + GetPosition().y });
 	}	
 }
