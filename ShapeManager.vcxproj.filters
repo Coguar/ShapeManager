@@ -102,6 +102,9 @@
     <ClInclude Include="SelectFrame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="DragPoint.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -150,6 +153,9 @@
       <Filter>Header Files\LayerModel</Filter>
     </ClCompile>
     <ClCompile Include="SelectFrame.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DragPoint.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

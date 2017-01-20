@@ -14,7 +14,7 @@ private:
 	void DrawCircle(std::shared_ptr<CShape> const& shape);
 	void DrawSquare(std::shared_ptr<CShape> const& shape);
 	void DrawTriangle(std::shared_ptr<CShape> const& shape);
-
+	void DrawFrame(Vec2 const& position, Vec2 const& size);
 	void DrawLayer(CLayer * layer);
 	sf::RenderTarget * m_target;
 };

@@ -44,3 +44,8 @@ bool CShape::OnMouseMoved(sf::Event::MouseMoveEvent const & event)
 	}
 	return false;
 }
+
+bool CShape::IsMooved() const
+{
+	return m_isMoved;
+}

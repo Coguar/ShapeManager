@@ -44,6 +44,10 @@ std::vector<std::shared_ptr<CShape>> const& CCanvas::GetShapes() const
 
 bool CCanvas::OnEvent(sf::Event const & event)
 {
+	if (m_frame->OnEvent(event))
+	{
+		return true;
+	}
 	CLayer::OnEvent(event);
 	for (int i = m_shapes.size() - 1; i >= 0; --i)
 	{

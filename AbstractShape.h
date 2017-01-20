@@ -17,9 +17,11 @@ public:
 	ShapeType GetType()const;
 	virtual bool IsPointIntoShape(Vec2 const& point)const;
 
-	bool OnMousePressed(sf::Event::MouseButtonEvent const& event);
-	bool OnMouseReleased(sf::Event::MouseButtonEvent const& event);
-	bool OnMouseMoved(sf::Event::MouseMoveEvent const& event);
+	bool OnMousePressed(sf::Event::MouseButtonEvent const& event) override;
+	bool OnMouseReleased(sf::Event::MouseButtonEvent const& event) override;
+	bool OnMouseMoved(sf::Event::MouseMoveEvent const& event) override;
+
+	bool IsMooved() const;
 private:
 	ShapeType m_type;
 	bool m_isSelected = false;

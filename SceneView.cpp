@@ -41,7 +41,14 @@ void CSceneView::DrawSelectFrame(std::shared_ptr<CSelectFrame> const & frame)
 {
 	if (frame->IsActive())
 	{
-		DrawShapes(frame->GetDragPoints());
+		auto points = frame->GetDragPoints();
+		for (auto &point : points)
+		{
+			DrawCircle(point);
+		}
+		Vec2 position(points[0]->GetPosition().x + points[0]->GetSize().x / 2, points[0]->GetPosition().y + points[0]->GetSize().y / 2);
+		Vec2 size(std::abs(points[0]->GetPosition().x - points[2]->GetPosition().x), std::abs(points[0]->GetPosition().y - points[2]->GetPosition().y));
+		DrawFrame(position, size);
 	}
 }
 
@@ -82,6 +89,16 @@ void CSceneView::DrawTriangle(std::shared_ptr<CShape> const & shape)
 	convex.setOutlineThickness(1.f);
 	convex.setOutlineColor(sf::Color::Black);
 	m_target->draw(convex);
+}
+
+void CSceneView::DrawFrame(Vec2 const & position, Vec2 const & size)
+{
+	sf::RectangleShape frame({ float(size.x), float(size.y) });
+	frame.setFillColor(sf::Color(0, 0, 0, 0));
+	frame.setOutlineThickness(1.5f);
+	frame.setOutlineColor(sf::Color::Green);
+	frame.setPosition({ float(position.x), float(position.y) });
+	m_target->draw(frame);
 }
 
 void CSceneView::DrawLayer(CLayer * layer)

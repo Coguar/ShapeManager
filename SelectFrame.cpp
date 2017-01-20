@@ -4,18 +4,40 @@
 
 CSelectFrame::CSelectFrame()
 {
-	CShape point(ShapeType::Circle);
+	CDragPoint point;
 	point.SetColor(SColor(255, 0, 0, 255));
 	point.SetSize({ 10.0, 10.0 });
 	for (size_t i = 0; i < 4; ++i)
 	{
-		m_dragPoints.push_back(std::make_shared<CShape>(point));
+		m_dragPoints.push_back(std::make_shared<CDragPoint>(point));
 	}
+
+	m_dragPoints[0]->SetConnectedPoint(m_dragPoints[1], m_dragPoints[3]);
+	m_dragPoints[1]->SetConnectedPoint(m_dragPoints[0], m_dragPoints[2]);
+	m_dragPoints[2]->SetConnectedPoint(m_dragPoints[3], m_dragPoints[1]);
+	m_dragPoints[3]->SetConnectedPoint(m_dragPoints[2], m_dragPoints[0]);
+
 }
 
 
 CSelectFrame::~CSelectFrame()
 {
+}
+
+bool CSelectFrame::OnEvent(sf::Event const & event)
+{
+	for (auto &point : m_dragPoints)
+	{
+		if (point->OnEvent(event))
+		{
+			m_targetShape.lock()->SetSize(m_dragPoints[0]->GetDistantionFromConnections());
+			auto pointPos = m_dragPoints[0]->GetPosition();
+			auto pointSize = m_dragPoints[0]->GetSize();
+			m_targetShape.lock()->SetPosition({ pointPos.x + pointSize.x / 2.0,  pointPos.y + pointSize.y / 2.0 });
+			return true;
+		}
+	}
+	return false;
 }
 
 void CSelectFrame::SetTarget(std::shared_ptr<CShape> const & shape)
@@ -24,7 +46,7 @@ void CSelectFrame::SetTarget(std::shared_ptr<CShape> const & shape)
 		SetPoints();
 }
 
-std::vector<std::shared_ptr<CShape>> CSelectFrame::GetDragPoints() const
+std::vector<std::shared_ptr<CDragPoint>> CSelectFrame::GetDragPoints() const
 {
 	return m_dragPoints;
 }
@@ -34,7 +56,7 @@ void CSelectFrame::ResetTargget()
 	m_targetShape.reset();
 }
 
-bool CSelectFrame::IsActive()
+bool CSelectFrame::IsActive() const
 {
 	return !m_targetShape.expired();
 }
