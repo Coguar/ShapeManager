@@ -45,7 +45,10 @@ bool CCanvas::OnEvent(sf::Event const & event)
 {
 	for (auto &shape : m_shapes)
 	{
-		shape->OnEvent(event);
+		if (shape->OnEvent(event))
+		{
+			break;
+		}
 	}
 	return true;
 }

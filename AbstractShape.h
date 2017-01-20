@@ -23,5 +23,7 @@ public:
 private:
 	ShapeType m_type;
 	bool m_isSelected = false;
+	bool m_isMoved = false;
+	Vec2 m_offset;
 };
 
