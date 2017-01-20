@@ -3,11 +3,11 @@
 
 
 ÑSquare::ÑSquare()
-	:CAbstractShape(shape::Type::Rectangle)
+	:CAbstractShape(ShapeType::Rectangle)
 {
 }
 
-bool ÑSquare::IsPointIntoShape(SCoords const & point) const
+bool ÑSquare::IsPointIntoShape(Vec2 const & point) const
 {
 	return IsPointIntoRect(point);
 }

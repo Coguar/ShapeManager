@@ -7,6 +7,6 @@
 struct ICanvas
 {
 	virtual std::vector<std::shared_ptr<CAbstractShape>> const& GetShapes()const = 0;
-	virtual std::shared_ptr<CAbstractShape> CreateShape(shape::Type type) = 0;
+	virtual std::shared_ptr<CAbstractShape> CreateShape(ShapeType type) = 0;
 	virtual ~ICanvas() = default;
 };

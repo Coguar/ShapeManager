@@ -1,22 +1,22 @@
 #pragma once
 #include "RectangleInterface.h"
 
-class CRectangle : public IRectangle
+class CRectangle //: public IRectangle
 {
 public:
 	CRectangle() = default;
-	CRectangle(SCoords const& positon, SSize const& size);
+	CRectangle(Vec2 const& positon, Vec2 const& size);
 	~CRectangle() = default;
 
-	bool IsPointIntoRect(SCoords const& point)const override;
-	SSize GetSize() const override;
-	SCoords GetPosition() const override;
-	void SetSize(SSize const& size) override;
-	void SecPosition(SCoords const& position) override;
+	bool IsPointIntoRect(Vec2 const& point)const;
+	Vec2 GetSize() const;
+	Vec2 GetPosition() const;
+	void SetSize(Vec2 const& size);
+	void SecPosition(Vec2 const& position);
 
 private:
 
-	SCoords m_position;
-	SSize m_size;
+	Vec2 m_position;
+	Vec2 m_size;
 };
 

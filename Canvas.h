@@ -10,12 +10,12 @@ public:
 	CCanvas();
 	~CCanvas();
 
-	std::shared_ptr<CAbstractShape> CreateShape(shape::Type type) override;
+	std::shared_ptr<CAbstractShape> CreateShape(ShapeType type) override;
 	std::vector<std::shared_ptr<CAbstractShape>> const& GetShapes()const override;
 	bool OnEvent(sf::Event const& event) override;
 
 private:
-	void SetShape(std::shared_ptr<CAbstractShape> & shape);
+	void SetShape(std::shared_ptr<CAbstractShape> const& shape);
 	std::vector<std::shared_ptr<CAbstractShape>> m_shapes;
 };
 

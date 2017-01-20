@@ -3,6 +3,7 @@
 #include "Drawable.h"
 #include "ShapeInterface.h"
 #include "EventListener.h"
+
 class CAbstractShape 
 	: public CRectangle
 	, public CDrawable
@@ -10,17 +11,17 @@ class CAbstractShape
 	, public CEventListener
 {
 public:
-	CAbstractShape(shape::Type type);
+	CAbstractShape(ShapeType type);
 	~CAbstractShape() = default;
 
-	shape::Type GetType()const override;
-	bool IsPointIntoShape(SCoords const& point)const override;
+	ShapeType GetType()const override;
+	bool IsPointIntoShape(Vec2 const& point)const override;
 
 	bool OnMousePressed(sf::Event::MouseButtonEvent const& event);
 	bool OnMouseReleased(sf::Event::MouseButtonEvent const& event);
 	bool OnMouseMoved(sf::Event::MouseMoveEvent const& event);
 private:
-	shape::Type m_type;
+	ShapeType m_type;
 	bool m_isSelected = false;
 };
 

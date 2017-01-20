@@ -2,21 +2,25 @@
 #include "Rectangle.h"
 #include "Drawable.h"
 #include "EventListener.h"
+
+class CLayer;
+using CLayerPtr = std::shared_ptr<CLayer>;
+
 class CLayer 
 	: public CRectangle
 	, public CDrawable
 	, public CEventListener
 {
-	typedef std::shared_ptr<CLayer> LayerPtr;
 public:
-	CLayer(SSize const& size = { 0.0, 0.0 }, SCoords const& position = {0.0, 0.0});
+	CLayer(Vec2 const& size = { 0.0, 0.0 }, Vec2 const& position = {0.0, 0.0});
 	~CLayer();
-	virtual void AddChild(LayerPtr const & child);
-	std::vector<std::shared_ptr<CLayer>> const& GetChildren() const;
+	virtual void AddChild(CLayerPtr const & child);
+	std::vector<CLayerPtr> const& GetChildren() const;
 
 	void DispatchEvent(sf::Event const& event);
-	CLayer* GetClickedLayer(SCoords const& mousePos);
+	CLayer* GetClickedLayer(Vec2 const& mousePos);
+
 private:
-	std::vector<std::shared_ptr<CLayer>> m_children;
+	std::vector<CLayerPtr> m_children;
 };
 

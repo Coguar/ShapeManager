@@ -1,16 +1,16 @@
 #include "stdafx.h"
 #include "AbstractShape.h"
 
-CAbstractShape::CAbstractShape(shape::Type type)
+CAbstractShape::CAbstractShape(ShapeType type)
 	: m_type(type)
 {}
 
-shape::Type CAbstractShape::GetType() const
+ShapeType CAbstractShape::GetType() const
 {
 	return m_type;
 }
 
-bool CAbstractShape::IsPointIntoShape(SCoords const & point) const
+bool CAbstractShape::IsPointIntoShape(Vec2 const & point) const
 {
 	return false;
 }

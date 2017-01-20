@@ -6,9 +6,9 @@ class CTriangle :
 public:
 	CTriangle();
 	~CTriangle() = default;
-	bool IsPointIntoShape(SCoords const& point)const override;
+	bool IsPointIntoShape(Vec2 const& point)const override;
 
 private:
-	bool IsPointInsideTriangle(SCoords const& point1, SCoords const& point2, SCoords const& point3) const;
+	bool IsPointInsideTriangle(Vec2 const& point1, Vec2 const& point2, Vec2 const& point3) const;
 };
 

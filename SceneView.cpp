@@ -2,12 +2,8 @@
 #include "SceneView.h"
 #include "Ellipse.h"
 
-CSceneView::CSceneView(sf::RenderWindow * window)
-	: m_window(window)
-{
-}
-
-CSceneView::~CSceneView()
+CSceneView::CSceneView(sf::RenderTarget * window)
+	: m_target(window)
 {
 }
 
@@ -26,7 +22,7 @@ void CSceneView::DrawShapes(CCanvas * canvas)
 	{
 		switch (shape->GetType())
 		{
-		case shape::Type::Circle:
+		case ShapeType::Circle:
 			DrawCircle(shape);
 			break;
 		default:
@@ -42,7 +38,7 @@ void CSceneView::DrawCircle(std::shared_ptr<CAbstractShape> const & shape)
 	ellipse.setPosition(sf::Vector2f( float(shape->GetPosition().x), float(shape->GetPosition().y)));
 	auto color = shape->GetColor();
 	ellipse.setFillColor(sf::Color(color.r, color.g, color.b, color.a));
-	m_window->draw(ellipse);
+	m_target->draw(ellipse);
 }
 
 void CSceneView::DrawSquare(std::shared_ptr<CAbstractShape> const & shape)
@@ -61,5 +57,5 @@ void CSceneView::DrawLayer(CLayer * layer)
 	layersRect.setFillColor(sf::Color(color.r, color.g, color.b, color.a));
 	auto position = layer->GetPosition();
 	layersRect.setPosition(float(position.x), float(position.y));
-	m_window->draw(layersRect);
+	m_target->draw(layersRect);
 }

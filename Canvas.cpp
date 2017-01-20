@@ -13,18 +13,18 @@ CCanvas::~CCanvas()
 {
 }
 
-std::shared_ptr<CAbstractShape> CCanvas::CreateShape(shape::Type type)
+std::shared_ptr<CAbstractShape> CCanvas::CreateShape(ShapeType type)
 {
 	std::shared_ptr<CAbstractShape> shape;
 	switch (type)
 	{
-	case shape::Type::Circle:
+	case ShapeType::Circle:
 		shape = std::make_shared<CCircle>();
 		break;
-	case shape::Type::Triangle:
+	case ShapeType::Triangle:
 		shape = std::make_shared<CTriangle>();
 		break;
-	case shape::Type::Rectangle:
+	case ShapeType::Rectangle:
 		shape = std::make_shared<ÑSquare>();
 		break;
 	default:
@@ -50,10 +50,10 @@ bool CCanvas::OnEvent(sf::Event const & event)
 	return true;
 }
 
-void CCanvas::SetShape(std::shared_ptr<CAbstractShape>& shape)
+void CCanvas::SetShape(std::shared_ptr<CAbstractShape> const& shape)
 {
 	shape->SetColor(SColor(255, 0, 255, 255));
-	SCoords position(GetPosition().x + GetSize().x / 2.0, GetPosition().y + GetSize().y / 2.0);
+	Vec2 position(GetPosition().x + GetSize().x / 2.0, GetPosition().y + GetSize().y / 2.0);
 	shape->SecPosition(position);
 	shape->SetSize({ 40, 40 });
 }

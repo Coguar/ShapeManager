@@ -22,6 +22,9 @@
     <Filter Include="Header Files\ShapeModel">
       <UniqueIdentifier>{00ba53a9-1fad-444f-ba64-b24f78433e6b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\View">
+      <UniqueIdentifier>{7fe4f419-e354-418c-8952-dd7d42645ba4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -47,9 +50,6 @@
     </ClInclude>
     <ClInclude Include="RectangleInterface.h">
       <Filter>Header Files\LayerModel</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneView.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ViewInterface.h">
       <Filter>Header Files</Filter>
@@ -78,29 +78,32 @@
     <ClInclude Include="AbstractShape.h">
       <Filter>Header Files\ShapeModel</Filter>
     </ClInclude>
-    <ClInclude Include="Circle.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Triangle.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="EventListenerInterface.h">
       <Filter>Header Files\LayerModel</Filter>
     </ClInclude>
-    <ClInclude Include="EventListener.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Canvas.h">
+      <Filter>Header Files\LayerModel</Filter>
     </ClInclude>
     <ClInclude Include="CanvasInterface.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Canvas.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\LayerModel</Filter>
     </ClInclude>
     <ClInclude Include="Square.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\ShapeModel</Filter>
+    </ClInclude>
+    <ClInclude Include="Circle.h">
+      <Filter>Header Files\ShapeModel</Filter>
+    </ClInclude>
+    <ClInclude Include="Triangle.h">
+      <Filter>Header Files\ShapeModel</Filter>
+    </ClInclude>
+    <ClInclude Include="EventListener.h">
+      <Filter>Header Files\LayerModel\HelpersStructs</Filter>
     </ClInclude>
     <ClInclude Include="Ellipse.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\View</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneView.h">
+      <Filter>Header Files\View</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -119,9 +122,6 @@
     <ClCompile Include="Layer.cpp">
       <Filter>Header Files\LayerModel</Filter>
     </ClCompile>
-    <ClCompile Include="SceneView.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ActionButton.cpp">
       <Filter>Header Files\LayerModel</Filter>
     </ClCompile>
@@ -131,23 +131,26 @@
     <ClCompile Include="AbstractShape.cpp">
       <Filter>Header Files\ShapeModel</Filter>
     </ClCompile>
-    <ClCompile Include="Circle.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Square.cpp">
+      <Filter>Header Files\ShapeModel</Filter>
     </ClCompile>
     <ClCompile Include="Triangle.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files\ShapeModel</Filter>
+    </ClCompile>
+    <ClCompile Include="Circle.cpp">
+      <Filter>Header Files\ShapeModel</Filter>
     </ClCompile>
     <ClCompile Include="EventListener.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Canvas.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Square.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files\LayerModel\HelpersStructs</Filter>
     </ClCompile>
     <ClCompile Include="Ellipse.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files\View</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneView.cpp">
+      <Filter>Header Files\View</Filter>
+    </ClCompile>
+    <ClCompile Include="Canvas.cpp">
+      <Filter>Header Files\LayerModel</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

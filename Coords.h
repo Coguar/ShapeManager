@@ -1,14 +1,12 @@
 #pragma once
 
-struct SCoords
+struct Vec2
 {
-	SCoords() = default;
-	SCoords(double xPos, double yPos)
-		: x(xPos)
-		, y(yPos)
+	Vec2() = default;
+	Vec2(double x, double y)
+		: x(x)
+		, y(y)
 	{}
-	double x;
-	double y;
+	double x = 0.0;
+	double y = 0.0;
 };
-
-typedef SCoords SSize;

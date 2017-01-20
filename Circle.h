@@ -6,6 +6,6 @@ class CCircle :
 public:
 	CCircle();
 	~CCircle() = default;
-	bool IsPointIntoShape(SCoords const& point)const override;
+	bool IsPointIntoShape(Vec2 const& point)const override;
 };
 
