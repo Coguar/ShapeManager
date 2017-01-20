@@ -151,7 +151,6 @@
     <ClInclude Include="AbstractShape.h" />
     <ClInclude Include="ActionButton.h" />
     <ClInclude Include="Canvas.h" />
-    <ClInclude Include="CanvasInterface.h" />
     <ClInclude Include="Circle.h" />
     <ClInclude Include="Coords.h" />
     <ClInclude Include="color.h" />

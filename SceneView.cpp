@@ -25,6 +25,12 @@ void CSceneView::DrawShapes(CCanvas * canvas)
 		case ShapeType::Circle:
 			DrawCircle(shape);
 			break;
+		case ShapeType::Triangle:
+			DrawTriangle(shape);
+			break;
+		case ShapeType::Rectangle:
+			DrawSquare(shape);
+			break;
 		default:
 			break;
 		}
@@ -43,10 +49,25 @@ void CSceneView::DrawCircle(std::shared_ptr<CShape> const & shape)
 
 void CSceneView::DrawSquare(std::shared_ptr<CShape> const & shape)
 {
+	auto rect = shape->GetBoundingRect();
+	sf::RectangleShape rectangle({ float(rect.size.x), float(rect.size.y)});
+	rectangle.setPosition({ float(rect.position.x), float(rect.position.y) });
+	auto color = shape->GetColor();
+	rectangle.setFillColor(sf::Color(color.r, color.g, color.b, color.a));
+	m_target->draw(rectangle);
 }
 
 void CSceneView::DrawTriangle(std::shared_ptr<CShape> const & shape)
 {
+	auto rect = shape->GetBoundingRect();
+
+	sf::ConvexShape convex(3);
+	convex.setPoint(0, { float(rect.position.x), float(rect.position.y + rect.size.y) });
+	convex.setPoint(1, { float(rect.position.x + rect.size.x / 2.f), float(rect.position.y) });
+	convex.setPoint(2, { float(rect.position.x + rect.size.x), float(rect.position.y + rect.size.y) });
+	auto color = shape->GetColor();
+	convex.setFillColor(sf::Color(color.r, color.g, color.b, color.a));
+	m_target->draw(convex);
 }
 
 void CSceneView::DrawLayer(CLayer * layer)

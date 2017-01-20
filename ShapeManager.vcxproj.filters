@@ -81,9 +81,6 @@
     <ClInclude Include="Canvas.h">
       <Filter>Header Files\LayerModel</Filter>
     </ClInclude>
-    <ClInclude Include="CanvasInterface.h">
-      <Filter>Header Files\LayerModel</Filter>
-    </ClInclude>
     <ClInclude Include="Square.h">
       <Filter>Header Files\ShapeModel</Filter>
     </ClInclude>
