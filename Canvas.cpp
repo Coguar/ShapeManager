@@ -43,13 +43,24 @@ std::vector<std::shared_ptr<CShape>> const& CCanvas::GetShapes() const
 
 bool CCanvas::OnEvent(sf::Event const & event)
 {
-	for (auto &shape : m_shapes)
+	for (int i = m_shapes.size() - 1; i >= 0; --i)
+	{
+		if (m_shapes[i]->OnEvent(event))
+		{
+			auto temp = m_shapes[i];
+			m_shapes.push_back(m_shapes[i]);
+			
+			m_shapes.erase(m_shapes.begin() + i);
+			break;
+		}
+	}
+	/*for (auto &shape : m_shapes)
 	{
 		if (shape->OnEvent(event))
 		{
 			break;
 		}
-	}
+	}*/
 	return true;
 }
 

@@ -33,7 +33,7 @@ int main()
 	root.AddChild(canvas);
 
 	canvas->CreateShape(ShapeType::Circle);
-	canvas->CreateShape(ShapeType::Circle);
+	canvas->CreateShape(ShapeType::Rectangle);
 	canvas->CreateShape(ShapeType::Triangle);
 
 	CSceneView view(&window);

@@ -44,6 +44,8 @@ void CSceneView::DrawCircle(std::shared_ptr<CShape> const & shape)
 	ellipse.setPosition(sf::Vector2f( float(shape->GetPosition().x), float(shape->GetPosition().y)));
 	auto color = shape->GetColor();
 	ellipse.setFillColor(sf::Color(color.r, color.g, color.b, color.a));
+	ellipse.setOutlineThickness(1.f);
+	ellipse.setOutlineColor(sf::Color::Black);
 	m_target->draw(ellipse);
 }
 
@@ -54,6 +56,8 @@ void CSceneView::DrawSquare(std::shared_ptr<CShape> const & shape)
 	rectangle.setPosition({ float(rect.position.x), float(rect.position.y) });
 	auto color = shape->GetColor();
 	rectangle.setFillColor(sf::Color(color.r, color.g, color.b, color.a));
+	rectangle.setOutlineThickness(1.f);
+	rectangle.setOutlineColor(sf::Color::Black);
 	m_target->draw(rectangle);
 }
 
@@ -67,6 +71,8 @@ void CSceneView::DrawTriangle(std::shared_ptr<CShape> const & shape)
 	convex.setPoint(2, { float(rect.position.x + rect.size.x), float(rect.position.y + rect.size.y) });
 	auto color = shape->GetColor();
 	convex.setFillColor(sf::Color(color.r, color.g, color.b, color.a));
+	convex.setOutlineThickness(1.f);
+	convex.setOutlineColor(sf::Color::Black);
 	m_target->draw(convex);
 }
 

@@ -13,9 +13,8 @@ CTriangle::CTriangle()
 
 bool CTriangle::IsPointIntoShape(Vec2 const & point) const
 {
-	Vec2 topLeftPoint(GetPosition().x, GetPosition().y + GetSize().y);
-	Vec2 bottomRightPoint(GetPosition().x + GetSize().x, GetPosition().y);
-	return IsPointInsideTriangle(topLeftPoint, bottomRightPoint, point);
+	Vec2 bottomRightPoint(GetPosition().x + GetSize().x, GetPosition().y + GetSize().y);
+	return IsPointInsideTriangle(GetPosition(), bottomRightPoint, point);
 }
 
 bool CTriangle::IsPointInsideTriangle(Vec2 const& topLeft, Vec2 const& bottomRight, Vec2 const& point) const
