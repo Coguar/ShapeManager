@@ -5,7 +5,7 @@
 CSelectFrame::CSelectFrame()
 {
 	CDragPoint point;
-	point.SetColor(SColor(255, 0, 0, 255));
+	point.SetColor(SColor(255, 0, 0, 128));
 	point.SetSize({ 10.0, 10.0 });
 	for (size_t i = 0; i < 4; ++i)
 	{
@@ -63,7 +63,7 @@ bool CSelectFrame::IsActive() const
 
 CBoundingRect const & CSelectFrame::GetTargetRect() const
 {
-	return m_targetShape.lock()->GetBoundingRect();
+	return CBoundingRect(m_targetShape.lock()->GetBoundingRect());
 }
 
 void CSelectFrame::SetPoints()

@@ -5,6 +5,7 @@
 CSceneView::CSceneView(sf::RenderTarget * window)
 	: m_target(window)
 {
+	m_cache = std::make_shared<CTextureCache>();
 }
 
 void CSceneView::Draw(CParentLayer * layer)
@@ -107,5 +108,9 @@ void CSceneView::DrawLayer(CParentLayer * layer)
 	layersRect.setFillColor(sf::Color(color.r, color.g, color.b, color.a));
 	auto position = layer->GetPosition();
 	layersRect.setPosition(float(position.x), float(position.y));
+	if (layer->IsTextured())
+	{
+		layersRect.setTexture(m_cache->GetTexture(layer->GetPath()).get());
+	}
 	m_target->draw(layersRect);
 }

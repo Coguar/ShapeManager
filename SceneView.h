@@ -1,6 +1,6 @@
 #pragma once
 #include "ViewInterface.h"
-
+#include "TextureCache.h"
 class CSceneView :	public IView
 {
 public:
@@ -17,5 +17,7 @@ private:
 	void DrawFrame(Vec2 const& position, Vec2 const& size);
 	void DrawLayer(CParentLayer * layer);
 	sf::RenderTarget * m_target;
+
+	std::shared_ptr<CTextureCache> m_cache;
 };
 

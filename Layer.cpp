@@ -51,3 +51,19 @@ Vec2 CLayer::GetSize() const
 {
 	return m_rect.size;
 }
+
+void CLayer::SetTexturePath(std::string const & path)
+{
+	m_isTextured = true;
+	m_texturePath = path;
+}
+
+std::string const & CLayer::GetPath() const
+{
+	return m_texturePath;
+}
+
+bool CLayer::IsTextured() const
+{
+	return m_isTextured;
+}

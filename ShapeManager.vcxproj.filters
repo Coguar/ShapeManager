@@ -102,6 +102,9 @@
     <ClInclude Include="ViewInterface.h">
       <Filter>Header Files\View</Filter>
     </ClInclude>
+    <ClInclude Include="TextureCache.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -154,6 +157,9 @@
     </ClCompile>
     <ClCompile Include="SelectFrame.cpp">
       <Filter>Header Files\LayerModel</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureCache.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

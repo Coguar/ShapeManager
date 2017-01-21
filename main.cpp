@@ -36,7 +36,7 @@ int main()
 	btn1->SetSize({ 80, 80 });
 	btn1->SetPosition({ 10, 10 });
 	btn1->SetColor(SColor(255, 0, 0, 255));
-
+	btn1->SetTexturePath("./res/circle.png");
 	auto foo = [](CCanvas * canvas) {canvas->CreateShape(ShapeType::Circle); };
 	
 	btn1->SetAction(std::bind(foo, canvas.get()));

@@ -63,26 +63,7 @@ void CShape::SetInAllowableArea()
 {
 	auto position = GetPosition();
 	auto size = GetSize();
-
 	position.x = std::min(std::max(position.x, m_allowableArea.position.x), m_allowableArea.position.x + m_allowableArea.size.x - size.x);
 	position.y = std::min(std::max(position.y, m_allowableArea.position.y), m_allowableArea.position.y + m_allowableArea.size.y - size.y);
-
-	/*if (position.x <= m_allowableArea.position.x)
-	{
-		position.x = m_allowableArea.position.x;
-	}
-	else if (position.x + size.x >= m_allowableArea.position.x + m_allowableArea.size.x)
-	{
-		position.x = m_allowableArea.position.x + m_allowableArea.size.x - size.x;
-	}
-
-	if (position.y <= m_allowableArea.position.y)
-	{
-		position.y = m_allowableArea.position.y;
-	}
-	else if (position.y + size.y >= m_allowableArea.position.y + m_allowableArea.size.y)
-	{
-		position.y = m_allowableArea.position.y + m_allowableArea.size.y - size.y;
-	}*/
 	SetPosition(position);
 }

@@ -21,8 +21,15 @@ public:
 	void SetSize(Vec2 const& size);
 	Vec2 GetSize() const;
 
+	void SetTexturePath(std::string const& path);
+	std::string const& GetPath() const;
+	 
+	bool IsTextured() const;
 private:
 	SColor m_color;
 	CBoundingRect m_rect;
+
+	std::string m_texturePath;
+	bool m_isTextured = false;
 };
 
