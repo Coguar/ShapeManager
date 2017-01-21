@@ -79,5 +79,6 @@ void CCanvas::SetShape(std::shared_ptr<CShape> const& shape)
 	Vec2 position(GetPosition().x + GetSize().x / 2.0, GetPosition().y + GetSize().y / 2.0);
 	shape->SetPosition(position);
 	shape->SetSize({ 40, 40 });
+	shape->SetAllowableArea(GetBoundingRect());
 }
 

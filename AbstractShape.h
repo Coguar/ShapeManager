@@ -22,10 +22,13 @@ public:
 	bool OnMouseMoved(sf::Event::MouseMoveEvent const& event) override;
 
 	bool IsMooved() const;
+	void SetAllowableArea(CBoundingRect const& rect);
+	CBoundingRect const& GetAllowableArea() const;
 private:
 	ShapeType m_type;
-	bool m_isSelected = false;
 	bool m_isMoved = false;
 	Vec2 m_offset;
+
+	CBoundingRect m_allowableArea;
 };
 

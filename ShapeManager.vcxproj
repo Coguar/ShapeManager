@@ -155,8 +155,6 @@
     <ClInclude Include="Coords.h" />
     <ClInclude Include="color.h" />
     <ClInclude Include="DragPoint.h" />
-    <ClInclude Include="Drawable.h" />
-    <ClInclude Include="DrawableInterface.h" />
     <ClInclude Include="ButtonInterface.h" />
     <ClInclude Include="Ellipse.h" />
     <ClInclude Include="EventListener.h" />
@@ -181,7 +179,6 @@
     <ClCompile Include="Canvas.cpp" />
     <ClCompile Include="Circle.cpp" />
     <ClCompile Include="DragPoint.cpp" />
-    <ClCompile Include="Drawable.cpp" />
     <ClCompile Include="Ellipse.cpp" />
     <ClCompile Include="EventListener.cpp" />
     <ClCompile Include="Layer.cpp" />

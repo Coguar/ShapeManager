@@ -32,6 +32,16 @@ int main()
 	canvas->SetColor(SColor(255, 255, 255, 255));
 	root.AddChild(canvas);
 
+	auto btn1 = std::make_shared<CActionButton>();
+	btn1->SetSize({ 80, 80 });
+	btn1->SetPosition({ 10, 10 });
+	btn1->SetColor(SColor(255, 0, 0, 255));
+
+	auto foo = [](CCanvas * canvas) {canvas->CreateShape(ShapeType::Circle); };
+	
+	btn1->SetAction(std::bind(foo, canvas.get()));
+	toolbar->AddChild(btn1);
+
 	canvas->CreateShape(ShapeType::Circle);
 	canvas->CreateShape(ShapeType::Rectangle);
 	canvas->CreateShape(ShapeType::Triangle);
@@ -43,14 +53,6 @@ int main()
 		while (window.pollEvent(event))
 		{
 			root.DispatchEvent(event);
-			/*auto mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
-			auto item = root.GetClickedLayer({ mousePos.x, mousePos.y });
-			if(item)
-				item->OnEvent(event);*/
-			/*if (event.type == sf::Event::MouseButtonPressed && event.key.code == sf::Mouse::Left)
-			{
-				root.GetClickedLayer({ mousePos.x, mousePos.y });
-			}*/
 			if (event.type == sf::Event::Closed)
 				window.close();
 		}

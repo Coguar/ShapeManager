@@ -76,5 +76,10 @@ void CSelectFrame::SetPoints()
 		m_dragPoints[1]->SetPosition({ rect.position.x + rect.size.x - pointRadius, rect.position.y - pointRadius });
 		m_dragPoints[2]->SetPosition({ rect.position.x - pointRadius, rect.position.y + rect.size.y - pointRadius });
 		m_dragPoints[3]->SetPosition({ rect.position.x + rect.size.x - pointRadius, rect.position.y + rect.size.y - pointRadius });
+
+		for (auto &point : m_dragPoints)
+		{
+			point->SetAllowableArea(m_targetShape.lock()->GetAllowableArea());
+		}
 	}
 }

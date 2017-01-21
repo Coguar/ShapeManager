@@ -36,17 +36,8 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Drawable.h">
-      <Filter>Header Files\LayerModel</Filter>
-    </ClInclude>
-    <ClInclude Include="DrawableInterface.h">
-      <Filter>Header Files\LayerModel</Filter>
-    </ClInclude>
     <ClInclude Include="Rectangle.h">
       <Filter>Header Files\LayerModel</Filter>
-    </ClInclude>
-    <ClInclude Include="ViewInterface.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="color.h">
       <Filter>Header Files\LayerModel\HelpersStructs</Filter>
@@ -96,17 +87,20 @@
     <ClInclude Include="SceneView.h">
       <Filter>Header Files\View</Filter>
     </ClInclude>
-    <ClInclude Include="SelectFrame.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DragPoint.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ParentLayer.h">
       <Filter>Header Files\LayerModel</Filter>
     </ClInclude>
+    <ClInclude Include="SelectFrame.h">
+      <Filter>Header Files\LayerModel</Filter>
+    </ClInclude>
     <ClInclude Include="Layer.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\LayerModel</Filter>
+    </ClInclude>
+    <ClInclude Include="DragPoint.h">
+      <Filter>Header Files\LayerModel</Filter>
+    </ClInclude>
+    <ClInclude Include="ViewInterface.h">
+      <Filter>Header Files\View</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -115,9 +109,6 @@
     </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Drawable.cpp">
-      <Filter>Header Files\LayerModel</Filter>
     </ClCompile>
     <ClCompile Include="Rectangle.cpp">
       <Filter>Header Files\LayerModel</Filter>
@@ -152,17 +143,17 @@
     <ClCompile Include="Canvas.cpp">
       <Filter>Header Files\LayerModel</Filter>
     </ClCompile>
-    <ClCompile Include="SelectFrame.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DragPoint.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ParentLayer.cpp">
       <Filter>Header Files\LayerModel</Filter>
     </ClCompile>
     <ClCompile Include="Layer.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files\LayerModel</Filter>
+    </ClCompile>
+    <ClCompile Include="DragPoint.cpp">
+      <Filter>Header Files\LayerModel</Filter>
+    </ClCompile>
+    <ClCompile Include="SelectFrame.cpp">
+      <Filter>Header Files\LayerModel</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
