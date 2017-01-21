@@ -53,9 +53,9 @@ bool CCanvas::OnEvent(sf::Event const & event)
 	{
 		if (m_shapes[i]->OnEvent(event))
 		{
-			m_shapes.push_back(m_shapes[i]);			
-			m_shapes.erase(m_shapes.begin() + i);
-			m_frame->SetTarget(m_shapes.back());
+			//m_shapes.push_back(m_shapes[i]);			
+			//m_shapes.erase(m_shapes.begin() + i);
+			m_frame->SetTarget(m_shapes[i]);
 			return true;
 		}
 	}

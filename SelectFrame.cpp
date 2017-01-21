@@ -28,7 +28,7 @@ bool CSelectFrame::OnEvent(sf::Event const & event)
 {
 	for (auto &point : m_dragPoints)
 	{
-		if (point->OnEvent(event))
+		if (point->OnEvent(event) && m_targetShape != nullptr)
 		{
 			m_targetShape->SetSize(m_dragPoints[0]->GetDistantionFromConnections());
 			auto pointPos = m_dragPoints[0]->GetPosition();
