@@ -1,21 +1,13 @@
 #pragma once
-#include "Rectangle.h"
-#include "Drawable.h"
 #include "EventListener.h"
+#include "Rectangle.h"
 
-class CLayer;
-using CLayerPtr = std::shared_ptr<CLayer>;
-
-class CLayer : public CEventListener
+class CLayer :
+	public CEventListener
 {
 public:
-	CLayer(Vec2 const& size = { 0.0, 0.0 }, Vec2 const& position = {0.0, 0.0});
-	virtual ~CLayer();
-	virtual void AddChild(CLayerPtr const & child);
-	std::vector<CLayerPtr> const& GetChildren() const;
-
-	void DispatchEvent(sf::Event const& event);
-	CLayer* GetClickedLayer(Vec2 const& mousePos);
+	CLayer(Vec2 const& size = { 0.0, 0.0 }, Vec2 const& position = { 0.0, 0.0 });
+	~CLayer();
 
 	void SetColor(SColor const& color);
 	SColor GetColor()const;
@@ -28,8 +20,8 @@ public:
 
 	void SetSize(Vec2 const& size);
 	Vec2 GetSize() const;
+
 private:
-	std::vector<CLayerPtr> m_children;
 	SColor m_color;
 	CBoundingRect m_rect;
 };

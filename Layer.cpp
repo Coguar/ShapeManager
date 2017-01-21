@@ -3,53 +3,13 @@
 
 
 CLayer::CLayer(Vec2 const & size, Vec2 const & position)
-	: m_rect(CBoundingRect(position, size))
+	: m_rect(position,size)
 {
 }
+
 
 CLayer::~CLayer()
 {
-}
-
-void CLayer::AddChild(CLayerPtr const & child)
-{
-	auto rect = child->GetBoundingRect();
-	child->SetPosition({ rect.position.x + m_rect.position.x, rect.position.y + m_rect.position.y });
-	m_children.push_back(child);
-}
-
-std::vector<CLayerPtr> const& CLayer::GetChildren() const
-{
-	return m_children;
-}
-
-void CLayer::DispatchEvent(sf::Event const & event)
-{
-	OnEvent(event);
-	for (auto &child : m_children)
-	{
-		child->DispatchEvent(event);
-	}
-}
-
-CLayer * CLayer::GetClickedLayer(Vec2 const & mousePos)
-{
-	CLayer * layer = nullptr;
-	if (m_rect.IsPointInRect(mousePos))
-	{
-		layer = this;
-		for (auto &child : m_children)
-		{
-			auto returnedLayer = child->GetClickedLayer(mousePos);
-			if (returnedLayer != nullptr)
-			{
-				layer = returnedLayer;
-				break;
-			}
-		}
-	}
-	if (layer == this)
-	return layer;
 }
 
 void CLayer::SetColor(SColor const & color)
