@@ -1,4 +1,5 @@
 #pragma once
+#include "Coords.h"
 
 class CBoundingRect
 {

@@ -13,10 +13,9 @@ CToolbar::~CToolbar()
 
 void CToolbar::AddChild(LayerPtr const & child)
 {
-	CParentLayer::AddChild(child);
-	if (GetChildren().size() > 1)
+	if (GetChildren().size() > 0)
 	{
-		auto lastLayerPos = GetChildren().back()->GetPosition();
+		auto lastLayerPos = GetChildren().back() ->GetPosition();
 		auto lastLayerSize = GetChildren().back()->GetSize();
 		child->SetPosition({ lastLayerPos.x + lastLayerSize.x + m_defaultOffset, lastLayerPos.y });
 	}
@@ -24,4 +23,5 @@ void CToolbar::AddChild(LayerPtr const & child)
 	{
 		child->SetPosition({ m_defaultOffset + GetPosition().x,  m_defaultOffset + GetPosition().y });
 	}	
+	CParentLayer::AddChild(child);
 }

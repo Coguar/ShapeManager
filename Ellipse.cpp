@@ -28,9 +28,7 @@ unsigned int CEllipse::getPointCount() const
 
 sf::Vector2f CEllipse::getPoint(unsigned int index) const
 {
-	static const float pi = 3.141592654f;
-
-	float angle = index * 2 * pi / getPointCount() - pi / 2;
+	float angle = index * 2 * M_PI / getPointCount() - M_PI / 2;
 	float x = std::cos(angle) * m_radius.x;
 	float y = std::sin(angle) * m_radius.y;
 

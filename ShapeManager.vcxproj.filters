@@ -57,9 +57,6 @@
     <ClInclude Include="Toolbar.h">
       <Filter>Header Files\LayerModel</Filter>
     </ClInclude>
-    <ClInclude Include="ShapeInterface.h">
-      <Filter>Header Files\ShapeModel</Filter>
-    </ClInclude>
     <ClInclude Include="AbstractShape.h">
       <Filter>Header Files\ShapeModel</Filter>
     </ClInclude>
@@ -102,7 +99,13 @@
     <ClInclude Include="ViewInterface.h">
       <Filter>Header Files\View</Filter>
     </ClInclude>
+    <ClInclude Include="Constants.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="TextureCache.h">
+      <Filter>Header Files\View</Filter>
+    </ClInclude>
+    <ClInclude Include="AppModel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -159,6 +162,9 @@
       <Filter>Header Files\LayerModel</Filter>
     </ClCompile>
     <ClCompile Include="TextureCache.cpp">
+      <Filter>Header Files\View</Filter>
+    </ClCompile>
+    <ClCompile Include="AppModel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

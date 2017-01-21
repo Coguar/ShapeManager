@@ -1,5 +1,6 @@
 #pragma once
 #include "AbstractShape.h"
+
 class CDragPoint :
 	public CShape
 {
@@ -18,11 +19,11 @@ public:
 private:
 	void UpdateConnectedPoints();
 
-	std::weak_ptr<CDragPoint> m_yConnection;
-	std::weak_ptr<CDragPoint> m_xConnection;
+	std::shared_ptr<CDragPoint> m_yConnection;
+	std::shared_ptr<CDragPoint> m_xConnection;
 
-	double m_maxDistance = 120.0;
-	double m_minDistance = 30.0;
+	double m_maxDistance = MAX_SHAPE_SIZE;
+	double m_minDistance = MIN_SHAPE_SIZE;
 
 };
 

@@ -33,8 +33,8 @@ void CDragPoint::SetMinMaxDistanceBetweenPoints(double min, double max)
 
 Vec2 CDragPoint::GetDistantionFromConnections()
 {
-	auto xConnectionPos = m_xConnection.lock()->GetPosition();
-	auto yConnectionPos = m_yConnection.lock()->GetPosition();
+	auto xConnectionPos = m_xConnection->GetPosition();
+	auto yConnectionPos = m_yConnection->GetPosition();
 	return Vec2(abs(GetPosition().x - xConnectionPos.x), abs(GetPosition().y - yConnectionPos.y));
 }
 
@@ -43,12 +43,12 @@ bool CDragPoint::OnMouseMoved(sf::Event::MouseMoveEvent const & event)
 	auto oldPosition = GetPosition();
 	CShape::OnMouseMoved(event);
 	auto position = GetPosition();
-	if (!InRange(std::abs(position.x - m_xConnection.lock()->GetPosition().x), m_minDistance, m_maxDistance) 
+	if (!InRange(std::abs(position.x - m_xConnection->GetPosition().x), m_minDistance, m_maxDistance) 
 		|| std::abs(oldPosition.x - position.x) >= m_minDistance)
 	{
 		position.x = oldPosition.x;
 	}
-	if (!InRange(std::abs(position.y - m_yConnection.lock()->GetPosition().y), m_minDistance, m_maxDistance)
+	if (!InRange(std::abs(position.y - m_yConnection->GetPosition().y), m_minDistance, m_maxDistance)
 		|| std::abs(oldPosition.y - position.y) >= m_minDistance)
 	{
 		position.y = oldPosition.y;
@@ -61,9 +61,9 @@ bool CDragPoint::OnMouseMoved(sf::Event::MouseMoveEvent const & event)
 void CDragPoint::UpdateConnectedPoints()
 {
 	auto position = GetPosition();
-	auto sharedY = m_yConnection.lock();
+	auto sharedY = m_yConnection;
 	sharedY->SetPosition({position.x, sharedY->GetPosition().y});
-	auto sharedX = m_xConnection.lock();
+	auto sharedX = m_xConnection;
 	sharedX->SetPosition({ sharedX->GetPosition().x, position.y });
 }
 

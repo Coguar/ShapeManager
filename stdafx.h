@@ -9,8 +9,11 @@
 
 #include <stdio.h>
 #include <tchar.h>
-#include "Coords.h"
-#include "color.h"
+#include "Constants.h"
+
+#define _USE_MATH_DEFINES
+#include <cmath>
+
 #include <vector>
 #include <map>
 #include <memory>
@@ -20,4 +23,6 @@
 #include <SFML\Window.hpp>
 #include <SFML\Graphics.hpp>
 
+#include <functional>
+#include "Signal.h"
 // TODO: reference additional headers your program requires here

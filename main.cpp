@@ -3,7 +3,6 @@
 
 #include "stdafx.h"
 #include "SceneView.h"
-//#include "Layer.h"
 #include "Toolbar.h"
 #include "ActionButton.h"
 #include "Canvas.h"
@@ -19,12 +18,7 @@ int main()
 	toolbar->SetColor(SColor(255, 255, 0, 255));
 	root.AddChild(toolbar);
 
-	auto btn = std::make_shared<CActionButton>();
-	btn->SetSize({ 80, 80 });
-	btn->SetPosition({ 10, 10 });
-	btn->SetColor(SColor(255, 0, 0, 255));
-	btn->SetAction([]() {std::cout << "was clicked" << std::endl; });
-	toolbar->AddChild(btn);
+	auto foo = [](CCanvas * canvas, ShapeType type) {canvas->CreateShape(type); };
 
 	auto canvas = std::make_shared<CCanvas>();
 	canvas->SetPosition({ 5, 105 });
@@ -32,15 +26,32 @@ int main()
 	canvas->SetColor(SColor(255, 255, 255, 255));
 	root.AddChild(canvas);
 
+
+	auto btn = std::make_shared<CActionButton>();
+	btn->SetSize({ 80, 80 });
+	btn->SetPosition({ 10, 10 });
+	btn->SetColor(SColor(255, 0, 0, 255));
+	btn->SetTexturePath("./res/circle.png");
+	btn->SetAction(std::bind(foo, canvas.get(), ShapeType::Circle));
+	toolbar->AddChild(btn);
+
 	auto btn1 = std::make_shared<CActionButton>();
 	btn1->SetSize({ 80, 80 });
 	btn1->SetPosition({ 10, 10 });
 	btn1->SetColor(SColor(255, 0, 0, 255));
-	btn1->SetTexturePath("./res/circle.png");
-	auto foo = [](CCanvas * canvas) {canvas->CreateShape(ShapeType::Circle); };
+	btn1->SetTexturePath("./res/square.png");
 	
-	btn1->SetAction(std::bind(foo, canvas.get()));
+	btn1->SetAction(std::bind(foo, canvas.get(), ShapeType::Rectangle));
 	toolbar->AddChild(btn1);
+
+	auto btn2 = std::make_shared<CActionButton>();
+	btn2->SetSize({ 80, 80 });
+	btn2->SetPosition({ 10, 10 });
+	btn2->SetColor(SColor(255, 0, 0, 255));
+	btn2->SetTexturePath("./res/triangle.png");
+
+	btn2->SetAction(std::bind(foo, canvas.get(), ShapeType::Triangle));
+	toolbar->AddChild(btn2);
 
 	canvas->CreateShape(ShapeType::Circle);
 	canvas->CreateShape(ShapeType::Rectangle);

@@ -5,8 +5,8 @@
 CSelectFrame::CSelectFrame()
 {
 	CDragPoint point;
-	point.SetColor(SColor(255, 0, 0, 128));
-	point.SetSize({ 10.0, 10.0 });
+	point.SetColor(color::DRAG_POINT_COLOR);
+	point.SetSize(DRAG_POINT_SIZE);
 	for (size_t i = 0; i < 4; ++i)
 	{
 		m_dragPoints.push_back(std::make_shared<CDragPoint>(point));
@@ -30,10 +30,10 @@ bool CSelectFrame::OnEvent(sf::Event const & event)
 	{
 		if (point->OnEvent(event))
 		{
-			m_targetShape.lock()->SetSize(m_dragPoints[0]->GetDistantionFromConnections());
+			m_targetShape->SetSize(m_dragPoints[0]->GetDistantionFromConnections());
 			auto pointPos = m_dragPoints[0]->GetPosition();
 			auto pointSize = m_dragPoints[0]->GetSize();
-			m_targetShape.lock()->SetPosition({ pointPos.x + pointSize.x / 2.0,  pointPos.y + pointSize.y / 2.0 });
+			m_targetShape->SetPosition({ pointPos.x + pointSize.x / 2.0,  pointPos.y + pointSize.y / 2.0 });
 			return true;
 		}
 	}
@@ -58,19 +58,19 @@ void CSelectFrame::ResetTargget()
 
 bool CSelectFrame::IsActive() const
 {
-	return !m_targetShape.expired();
+	return m_targetShape != nullptr;
 }
 
 CBoundingRect const & CSelectFrame::GetTargetRect() const
 {
-	return CBoundingRect(m_targetShape.lock()->GetBoundingRect());
+	return CBoundingRect(m_targetShape->GetBoundingRect());
 }
 
 void CSelectFrame::SetPoints()
 {
-	if (!m_targetShape.expired())
+	if (m_targetShape != nullptr)
 	{
-		auto rect = m_targetShape.lock()->GetBoundingRect();
+		auto rect = m_targetShape->GetBoundingRect();
 		auto pointRadius = m_dragPoints[0]->GetBoundingRect().size.x / 2.0;
 		m_dragPoints[0]->SetPosition({ rect.position.x - pointRadius, rect.position.y - pointRadius });
 		m_dragPoints[1]->SetPosition({ rect.position.x + rect.size.x - pointRadius, rect.position.y - pointRadius });
@@ -79,7 +79,7 @@ void CSelectFrame::SetPoints()
 
 		for (auto &point : m_dragPoints)
 		{
-			point->SetAllowableArea(m_targetShape.lock()->GetAllowableArea());
+			point->SetAllowableArea(m_targetShape->GetAllowableArea());
 		}
 	}
 }

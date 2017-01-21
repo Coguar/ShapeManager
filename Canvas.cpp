@@ -75,10 +75,10 @@ std::shared_ptr<CSelectFrame> const & CCanvas::GetFSelectFrame() const
 
 void CCanvas::SetShape(std::shared_ptr<CShape> const& shape)
 {
-	shape->SetColor(SColor(255, 0, 255, 255));
+	shape->SetColor(color::SHAPE_COLOR);
 	Vec2 position(GetPosition().x + GetSize().x / 2.0, GetPosition().y + GetSize().y / 2.0);
 	shape->SetPosition(position);
-	shape->SetSize({ 40, 40 });
+	shape->SetSize(INITIALIZATION_SHAPE_SIZE);
 	shape->SetAllowableArea(GetBoundingRect());
 }
 

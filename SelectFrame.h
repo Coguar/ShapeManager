@@ -19,7 +19,7 @@ public:
 private:
 	void SetPoints();
 
-	std::weak_ptr<CShape> m_targetShape;
+	std::shared_ptr<CShape> m_targetShape;
 	std::vector<std::shared_ptr<CDragPoint>> m_dragPoints;
 };
 

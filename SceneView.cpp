@@ -54,11 +54,11 @@ void CSceneView::DrawSelectFrame(std::shared_ptr<CSelectFrame> const & frame)
 void CSceneView::DrawCircle(std::shared_ptr<CShape> const & shape)
 {
 	auto size = shape->GetSize();
-	EllipseShape ellipse({ float(size.x / 2.0), float(size.y / 2.0) });
+	CEllipse ellipse({ float(size.x / 2.0), float(size.y / 2.0) });
 	ellipse.setPosition(sf::Vector2f( float(shape->GetPosition().x), float(shape->GetPosition().y)));
 	auto color = shape->GetColor();
 	ellipse.setFillColor(sf::Color(color.r, color.g, color.b, color.a));
-	ellipse.setOutlineThickness(1.f);
+	ellipse.setOutlineThickness(SHAPE_OUTLINE_SIZE);
 	ellipse.setOutlineColor(sf::Color::Black);
 	m_target->draw(ellipse);
 }
@@ -70,7 +70,7 @@ void CSceneView::DrawSquare(std::shared_ptr<CShape> const & shape)
 	rectangle.setPosition({ float(rect.position.x), float(rect.position.y) });
 	auto color = shape->GetColor();
 	rectangle.setFillColor(sf::Color(color.r, color.g, color.b, color.a));
-	rectangle.setOutlineThickness(1.f);
+	rectangle.setOutlineThickness(SHAPE_OUTLINE_SIZE);
 	rectangle.setOutlineColor(sf::Color::Black);
 	m_target->draw(rectangle);
 }
@@ -85,7 +85,7 @@ void CSceneView::DrawTriangle(std::shared_ptr<CShape> const & shape)
 	convex.setPoint(2, { float(rect.position.x + rect.size.x), float(rect.position.y + rect.size.y) });
 	auto color = shape->GetColor();
 	convex.setFillColor(sf::Color(color.r, color.g, color.b, color.a));
-	convex.setOutlineThickness(1.f);
+	convex.setOutlineThickness(SHAPE_OUTLINE_SIZE);
 	convex.setOutlineColor(sf::Color::Black);
 	m_target->draw(convex);
 }
@@ -104,13 +104,16 @@ void CSceneView::DrawLayer(CParentLayer * layer)
 {
 	auto size = layer->GetSize();
 	sf::RectangleShape layersRect({ float(size.x), float(size.y)});
-	auto color = layer->GetColor();
-	layersRect.setFillColor(sf::Color(color.r, color.g, color.b, color.a));
 	auto position = layer->GetPosition();
 	layersRect.setPosition(float(position.x), float(position.y));
 	if (layer->IsTextured())
 	{
 		layersRect.setTexture(m_cache->GetTexture(layer->GetPath()).get());
+	}
+	else
+	{
+		auto color = layer->GetColor();
+		layersRect.setFillColor(sf::Color(color.r, color.g, color.b, color.a));
 	}
 	m_target->draw(layersRect);
 }

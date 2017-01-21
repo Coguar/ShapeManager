@@ -1,5 +1,6 @@
 #pragma once
 #include "ParentLayer.h"
+
 class CToolbar :
 	public CParentLayer
 {
@@ -10,6 +11,6 @@ public:
 	void AddChild(LayerPtr const & child) override;
 
 private:
-	const double m_defaultOffset = 10.0;
+	const double m_defaultOffset = DEFAULT_TOOLBAR_ELEMENT_OFFSET;
 };
 
