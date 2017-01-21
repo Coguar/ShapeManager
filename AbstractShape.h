@@ -25,6 +25,8 @@ public:
 	void SetAllowableArea(CBoundingRect const& rect);
 	CBoundingRect const& GetAllowableArea() const;
 private:
+	void SetInAllowableArea();
+
 	ShapeType m_type;
 	bool m_isMoved = false;
 	Vec2 m_offset;

@@ -37,19 +37,8 @@ bool CShape::OnMouseMoved(sf::Event::MouseMoveEvent const & event)
 {
 	if (m_isMoved)
 	{
-		auto oldPosition = GetPosition();
 		SetPosition({ double(event.x) + m_offset.x, double(event.y) + m_offset.y });
-		auto position = GetPosition();
-		auto size = GetSize();
-		if (!(position.x >= m_allowableArea.position.x && position.x + size.x <= m_allowableArea.position.x + m_allowableArea.size.x))
-		{
-			position.x = oldPosition.x;
-		}
-		if (!(position.y >= m_allowableArea.position.y && position.y + size.y <= m_allowableArea.position.y + m_allowableArea.size.y))
-		{
-			position.y = oldPosition.y;
-		}
-		SetPosition(position);
+		SetInAllowableArea();
 		return true;
 	}
 	return false;
@@ -68,4 +57,32 @@ void CShape::SetAllowableArea(CBoundingRect const & rect)
 CBoundingRect const & CShape::GetAllowableArea() const
 {
 	return m_allowableArea;
+}
+
+void CShape::SetInAllowableArea()
+{
+	auto position = GetPosition();
+	auto size = GetSize();
+
+	position.x = std::min(std::max(position.x, m_allowableArea.position.x), m_allowableArea.position.x + m_allowableArea.size.x - size.x);
+	position.y = std::min(std::max(position.y, m_allowableArea.position.y), m_allowableArea.position.y + m_allowableArea.size.y - size.y);
+
+	/*if (position.x <= m_allowableArea.position.x)
+	{
+		position.x = m_allowableArea.position.x;
+	}
+	else if (position.x + size.x >= m_allowableArea.position.x + m_allowableArea.size.x)
+	{
+		position.x = m_allowableArea.position.x + m_allowableArea.size.x - size.x;
+	}
+
+	if (position.y <= m_allowableArea.position.y)
+	{
+		position.y = m_allowableArea.position.y;
+	}
+	else if (position.y + size.y >= m_allowableArea.position.y + m_allowableArea.size.y)
+	{
+		position.y = m_allowableArea.position.y + m_allowableArea.size.y - size.y;
+	}*/
+	SetPosition(position);
 }
