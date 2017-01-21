@@ -2,15 +2,14 @@
 //
 
 #include "stdafx.h"
-#include "SceneView.h"
-#include "Toolbar.h"
-#include "ActionButton.h"
-#include "Canvas.h"
+#include "Controller.h"
 int main()
 {
 	
 	sf::RenderWindow window(sf::VideoMode(800, 600), "Test");
-	CParentLayer root({ 800, 600 });
+	auto controller = std::make_unique<CController>(&window);
+	controller->Start();
+	/*CParentLayer root({ 800, 600 });
 
 	auto toolbar = std::make_shared<CToolbar>();
 	toolbar->SetPosition({ 0, 0 });
@@ -72,7 +71,7 @@ int main()
 		view.DrawSelectFrame(canvas->GetFSelectFrame());
 		window.display();
 		window.clear();
-	}
+	}*/
     return 0;
 }
 

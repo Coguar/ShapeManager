@@ -4,6 +4,7 @@
 
 CAppModel::CAppModel()
 {
+	RootInit();
 }
 
 

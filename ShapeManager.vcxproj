@@ -154,6 +154,7 @@
     <ClInclude Include="Canvas.h" />
     <ClInclude Include="Circle.h" />
     <ClInclude Include="Constants.h" />
+    <ClInclude Include="Controller.h" />
     <ClInclude Include="Coords.h" />
     <ClInclude Include="color.h" />
     <ClInclude Include="DragPoint.h" />
@@ -181,6 +182,7 @@
     <ClCompile Include="AppModel.cpp" />
     <ClCompile Include="Canvas.cpp" />
     <ClCompile Include="Circle.cpp" />
+    <ClCompile Include="Controller.cpp" />
     <ClCompile Include="DragPoint.cpp" />
     <ClCompile Include="Ellipse.cpp" />
     <ClCompile Include="EventListener.cpp" />
