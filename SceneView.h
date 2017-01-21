@@ -6,7 +6,7 @@ class CSceneView :	public IView
 public:
 	CSceneView(sf::RenderTarget * window);
 	~CSceneView() = default;
-	void Draw(CLayer * layer) override;
+	void Draw(CParentLayer * layer) override;
 	void DrawShapes(std::vector<std::shared_ptr<CShape>> const& shapes) override;
 	void DrawSelectFrame(std::shared_ptr<CSelectFrame> const& frame) override;
 
@@ -15,7 +15,7 @@ private:
 	void DrawSquare(std::shared_ptr<CShape> const& shape);
 	void DrawTriangle(std::shared_ptr<CShape> const& shape);
 	void DrawFrame(Vec2 const& position, Vec2 const& size);
-	void DrawLayer(CLayer * layer);
+	void DrawLayer(CParentLayer * layer);
 	sf::RenderTarget * m_target;
 };
 

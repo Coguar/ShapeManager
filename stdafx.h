@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <tchar.h>
 #include "Coords.h"
+#include "color.h"
 #include <vector>
 #include <memory>
 #include <functional>

@@ -162,6 +162,7 @@
     <ClInclude Include="EventListener.h" />
     <ClInclude Include="EventListenerInterface.h" />
     <ClInclude Include="Layer.h" />
+    <ClInclude Include="ParentLayer.h" />
     <ClInclude Include="Rectangle.h" />
     <ClInclude Include="SceneView.h" />
     <ClInclude Include="SelectFrame.h" />
@@ -184,6 +185,7 @@
     <ClCompile Include="Ellipse.cpp" />
     <ClCompile Include="EventListener.cpp" />
     <ClCompile Include="Layer.cpp" />
+    <ClCompile Include="ParentLayer.cpp" />
     <ClCompile Include="Rectangle.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SceneView.cpp" />

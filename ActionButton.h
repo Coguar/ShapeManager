@@ -1,9 +1,9 @@
 #pragma once
 #include "ButtonInterface.h"
-#include "Layer.h"
+#include "ParentLayer.h"
 
 class CActionButton 
-	: public CLayer
+	: public CParentLayer
 {
 public:
 	CActionButton();

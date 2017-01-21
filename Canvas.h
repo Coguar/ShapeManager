@@ -1,8 +1,7 @@
 #pragma once
 #include "SelectFrame.h"
-//#include "AbstractShape.h"
 
-class CCanvas : public CLayer
+class CCanvas : public CParentLayer
 
 {
 public:

@@ -14,6 +14,8 @@ public:
 	std::vector<std::shared_ptr<CDragPoint>> GetDragPoints() const;
 	void ResetTargget();
 	bool IsActive() const;
+
+	CBoundingRect const& GetTargetRect() const;
 private:
 	void SetPoints();
 

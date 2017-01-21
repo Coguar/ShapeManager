@@ -48,7 +48,7 @@ bool CCanvas::OnEvent(sf::Event const & event)
 	{
 		return true;
 	}
-	CLayer::OnEvent(event);
+	CParentLayer::OnEvent(event);
 	for (int i = m_shapes.size() - 1; i >= 0; --i)
 	{
 		if (m_shapes[i]->OnEvent(event))

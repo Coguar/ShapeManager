@@ -7,7 +7,7 @@ CSceneView::CSceneView(sf::RenderTarget * window)
 {
 }
 
-void CSceneView::Draw(CLayer * layer)
+void CSceneView::Draw(CParentLayer * layer)
 {
 	DrawLayer(layer);
 	for (auto &child : layer->GetChildren())
@@ -41,14 +41,12 @@ void CSceneView::DrawSelectFrame(std::shared_ptr<CSelectFrame> const & frame)
 {
 	if (frame->IsActive())
 	{
-		auto points = frame->GetDragPoints();
-		for (auto &point : points)
+		auto rect = frame->GetTargetRect();
+		DrawFrame(rect.position, rect.size);
+		for (auto &point : frame->GetDragPoints())
 		{
 			DrawCircle(point);
 		}
-		Vec2 position(points[0]->GetPosition().x + points[0]->GetSize().x / 2, points[0]->GetPosition().y + points[0]->GetSize().y / 2);
-		Vec2 size(std::abs(points[0]->GetPosition().x - points[2]->GetPosition().x), std::abs(points[0]->GetPosition().y - points[2]->GetPosition().y));
-		DrawFrame(position, size);
 	}
 }
 
@@ -95,13 +93,13 @@ void CSceneView::DrawFrame(Vec2 const & position, Vec2 const & size)
 {
 	sf::RectangleShape frame({ float(size.x), float(size.y) });
 	frame.setFillColor(sf::Color(0, 0, 0, 0));
-	frame.setOutlineThickness(1.5f);
+	frame.setOutlineThickness(2.f);
 	frame.setOutlineColor(sf::Color::Green);
 	frame.setPosition({ float(position.x), float(position.y) });
 	m_target->draw(frame);
 }
 
-void CSceneView::DrawLayer(CLayer * layer)
+void CSceneView::DrawLayer(CParentLayer * layer)
 {
 	auto size = layer->GetSize();
 	sf::RectangleShape layersRect({ float(size.x), float(size.y)});

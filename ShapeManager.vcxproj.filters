@@ -42,9 +42,6 @@
     <ClInclude Include="DrawableInterface.h">
       <Filter>Header Files\LayerModel</Filter>
     </ClInclude>
-    <ClInclude Include="Layer.h">
-      <Filter>Header Files\LayerModel</Filter>
-    </ClInclude>
     <ClInclude Include="Rectangle.h">
       <Filter>Header Files\LayerModel</Filter>
     </ClInclude>
@@ -105,6 +102,12 @@
     <ClInclude Include="DragPoint.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ParentLayer.h">
+      <Filter>Header Files\LayerModel</Filter>
+    </ClInclude>
+    <ClInclude Include="Layer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -117,9 +120,6 @@
       <Filter>Header Files\LayerModel</Filter>
     </ClCompile>
     <ClCompile Include="Rectangle.cpp">
-      <Filter>Header Files\LayerModel</Filter>
-    </ClCompile>
-    <ClCompile Include="Layer.cpp">
       <Filter>Header Files\LayerModel</Filter>
     </ClCompile>
     <ClCompile Include="ActionButton.cpp">
@@ -156,6 +156,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="DragPoint.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ParentLayer.cpp">
+      <Filter>Header Files\LayerModel</Filter>
+    </ClCompile>
+    <ClCompile Include="Layer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

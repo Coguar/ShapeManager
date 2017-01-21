@@ -11,7 +11,7 @@ int main()
 {
 	
 	sf::RenderWindow window(sf::VideoMode(800, 600), "Test");
-	CLayer root({ 800, 600 });
+	CParentLayer root({ 800, 600 });
 
 	auto toolbar = std::make_shared<CToolbar>();
 	toolbar->SetPosition({ 0, 0 });

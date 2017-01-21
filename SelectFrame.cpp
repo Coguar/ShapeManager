@@ -61,6 +61,11 @@ bool CSelectFrame::IsActive() const
 	return !m_targetShape.expired();
 }
 
+CBoundingRect const & CSelectFrame::GetTargetRect() const
+{
+	return m_targetShape.lock()->GetBoundingRect();
+}
+
 void CSelectFrame::SetPoints()
 {
 	if (!m_targetShape.expired())

@@ -13,7 +13,7 @@ CToolbar::~CToolbar()
 
 void CToolbar::AddChild(LayerPtr const & child)
 {
-	CLayer::AddChild(child);
+	CParentLayer::AddChild(child);
 	if (GetChildren().size() > 1)
 	{
 		auto lastLayerPos = GetChildren().back()->GetPosition();

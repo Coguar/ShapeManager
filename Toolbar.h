@@ -1,9 +1,9 @@
 #pragma once
-#include "Layer.h"
+#include "ParentLayer.h"
 class CToolbar :
-	public CLayer
+	public CParentLayer
 {
-	typedef std::shared_ptr<CLayer> LayerPtr;
+	typedef std::shared_ptr<CParentLayer> LayerPtr;
 public:
 	CToolbar();
 	~CToolbar();
