@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "AppModel.h"
-
+#include "History.h"
 
 CAppModel::CAppModel()
 {
@@ -26,6 +26,9 @@ void CAppModel::RootInit()
 {
 	m_root = std::make_shared<CParentLayer>(Vec2( 800, 600 ));
 	CanvasInit();
+	m_history = std::make_shared<CHistory>(m_canvas);
+	m_canvas->SetReseiver(m_history);
+	
 	auto toolbar = CreateToolbar();
 	m_root->AddChild(toolbar);
 	auto foo = [](CCanvas * canvas, ShapeType type) {canvas->CreateShape(type); };
@@ -34,8 +37,12 @@ void CAppModel::RootInit()
 	toolbar->AddChild(CreateButton({ 80.0, 80.0 }, color::WHITE, std::bind(foo, m_canvas.get(), ShapeType::Rectangle), std::string("./res/square.png")));
 	toolbar->AddChild(CreateButton({ 80.0, 80.0 }, color::WHITE, std::bind(foo, m_canvas.get(), ShapeType::Triangle), std::string("./res/triangle.png")));
 
-	m_root->AddChild(m_canvas);
+	auto redo = [](std::shared_ptr<IReseiver> const& history) {history->Redo(); };
+	auto undo = [](std::shared_ptr<IReseiver> const& history) {history->Undo(); };
 
+	toolbar->AddChild(CreateButton({ 80.0, 80.0 }, color::WHITE, std::bind(undo, m_history), std::string("./res/undo.png")));
+	toolbar->AddChild(CreateButton({ 80.0, 80.0 }, color::WHITE, std::bind(redo, m_history), std::string("./res/redo.png")));
+	m_root->AddChild(m_canvas);
 }
 
 void CAppModel::CanvasInit()

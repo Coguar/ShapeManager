@@ -33,8 +33,24 @@ std::shared_ptr<CShape> CCanvas::CreateShape(ShapeType type)
 		break;
 	}
 	SetShape(shape);
-	m_shapes.push_back(shape);
+	GetReseiver()->AddShape(shape);
+	//m_shapes.push_back(shape);
 	return shape;
+}
+
+void CCanvas::AddShape(std::shared_ptr<CShape> const & shape)
+{
+	m_shapes.push_back(shape);
+}
+
+void CCanvas::AddShape(std::shared_ptr<CShape> const& shape, size_t position)
+{
+	m_shapes.insert(m_shapes.begin() + position, shape);
+}
+
+void CCanvas::DeleteLastShape()
+{
+	m_shapes.pop_back();
 }
 
 std::vector<std::shared_ptr<CShape>> const& CCanvas::GetShapes() const

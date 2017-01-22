@@ -4,6 +4,8 @@
 #include "ActionButton.h"
 #include "Canvas.h"
 
+struct IReseiver;
+
 class CAppModel
 {
 public:
@@ -22,6 +24,6 @@ private:
 	
 	std::shared_ptr<CParentLayer> m_root;
 	std::shared_ptr<CCanvas> m_canvas;
-
+	std::shared_ptr<IReseiver> m_history;
 };
 

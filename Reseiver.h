@@ -10,6 +10,7 @@ struct IReseiver
 	virtual void DeleteShape(ShapePtr const& shape, int num) = 0;
 	virtual void MoveShape(ShapePtr const& shape, Vec2 const& newPos) = 0;
 	virtual void ResizeShape(ShapePtr const& shape, Vec2 const& oldSize) = 0;
+	virtual void ChangeRect(ShapePtr const& shape, CBoundingRect const& rect) = 0;
 
 	virtual void Redo() = 0;
 	virtual void Undo() = 0;
