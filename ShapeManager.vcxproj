@@ -153,6 +153,7 @@
     <ClInclude Include="AppModel.h" />
     <ClInclude Include="Canvas.h" />
     <ClInclude Include="Circle.h" />
+    <ClInclude Include="Command.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="Controller.h" />
     <ClInclude Include="Coords.h" />
@@ -165,6 +166,7 @@
     <ClInclude Include="Layer.h" />
     <ClInclude Include="ParentLayer.h" />
     <ClInclude Include="Rectangle.h" />
+    <ClInclude Include="Reseiver.h" />
     <ClInclude Include="SceneView.h" />
     <ClInclude Include="SelectFrame.h" />
     <ClInclude Include="Signal.h" />

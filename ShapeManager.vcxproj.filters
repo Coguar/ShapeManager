@@ -25,6 +25,9 @@
     <Filter Include="Header Files\View">
       <UniqueIdentifier>{7fe4f419-e354-418c-8952-dd7d42645ba4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\History">
+      <UniqueIdentifier>{20f5b07d-07b7-41d8-9a34-9b8f2da20c4d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -109,6 +112,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Controller.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Reseiver.h">
+      <Filter>Header Files\History</Filter>
+    </ClInclude>
+    <ClInclude Include="Command.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
