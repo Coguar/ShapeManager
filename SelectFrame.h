@@ -17,7 +17,6 @@ public:
 	bool IsActive() const;
 
 	CBoundingRect const& GetTargetRect() const;
-	void SetReseiver(std::shared_ptr<IReseiver> const& reseiver);
 private:
 	void SetPoints();
 	void SendCommandToReseiver(sf::Event const& event);
@@ -25,7 +24,5 @@ private:
 
 	std::shared_ptr<CShape> m_targetShape;
 	std::vector<std::shared_ptr<CDragPoint>> m_dragPoints;
-
-	std::shared_ptr<IReseiver> m_reseiver;
 };
 

@@ -67,13 +67,3 @@ bool CLayer::IsTextured() const
 {
 	return m_isTextured;
 }
-
-void CLayer::SetReseiver(std::shared_ptr<IReseiver> const & reseiver)
-{
-	m_reseiver = reseiver;
-}
-
-std::shared_ptr<IReseiver> const & CLayer::GetReseiver() const
-{
-	return m_reseiver;
-}

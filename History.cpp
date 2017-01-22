@@ -1,7 +1,9 @@
 #include "stdafx.h"
-#include "History.h"
 #include "AddShapeCommand.h"
 #include "ChangeBoundingRectCommand.h"
+#include "Canvas.h"
+#include "History.h"
+
 CHistory::CHistory(std::shared_ptr<CCanvas> const& canvas)
 	: m_canvas(canvas)
 {
@@ -23,14 +25,6 @@ void CHistory::AddShape(ShapePtr const & shape)
 }
 
 void CHistory::DeleteShape(ShapePtr const & shape, int num)
-{
-}
-
-void CHistory::MoveShape(ShapePtr const & shape, Vec2 const & newPos)
-{
-}
-
-void CHistory::ResizeShape(ShapePtr const & shape, Vec2 const & oldSize)
 {
 }
 

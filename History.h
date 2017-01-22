@@ -1,7 +1,8 @@
 #pragma once
 #include "Reseiver.h"
-#include "Canvas.h"
 #include "CommandInterface.h"
+
+class CCanvas;
 
 class CHistory :
 	public IReseiver
@@ -11,8 +12,6 @@ public:
 	~CHistory();
 	void AddShape(ShapePtr const& shape) override;
 	void DeleteShape(ShapePtr const& shape, int num) override;
-	void MoveShape(ShapePtr const& shape, Vec2 const& newPos) override;
-	void ResizeShape(ShapePtr const& shape, Vec2 const& oldSize) override;
 	void ChangeRect(ShapePtr const& shape, CBoundingRect const& rect) override;
 
 	void Redo() override;

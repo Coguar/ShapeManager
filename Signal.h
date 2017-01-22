@@ -1,8 +1,5 @@
 #pragma once
-//#pragma warning(push, 3)
 #include <boost/signals2.hpp>
-//#pragma warning(pop)
-//#pragma warning(disable:4669)
 
 namespace signal
 {

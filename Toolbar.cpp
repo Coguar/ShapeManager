@@ -1,7 +1,5 @@
 #include "stdafx.h"
 #include "Toolbar.h"
-
-
 CToolbar::CToolbar()
 {
 }

@@ -1,9 +1,7 @@
 #pragma once
 #include "SelectFrame.h"
-#include "Reseiver.h"
 
 class CCanvas : public CParentLayer
-
 {
 public:
 	CCanvas();
@@ -21,6 +19,8 @@ public:
 
 	std::shared_ptr<CSelectFrame> const& GetFSelectFrame() const;
 private:
+	void ShapeChangeRectEvent(std::shared_ptr<CShape> const& shape, sf::Event const& event);
+
 	void SetShape(std::shared_ptr<CShape> const& shape);
 	std::vector<std::shared_ptr<CShape>> m_shapes;
 	std::shared_ptr<CSelectFrame> m_frame;

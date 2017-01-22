@@ -1,8 +1,10 @@
 #include "stdafx.h"
-#include "Canvas.h"
 #include "Circle.h"
 #include "Triangle.h"
 #include "Square.h"
+#include "Reseiver.h"
+#include "Canvas.h"
+
 
 CCanvas::CCanvas()
 {
@@ -70,18 +72,7 @@ bool CCanvas::OnEvent(sf::Event const & event)
 		if (m_shapes[i]->OnEvent(event))
 		{
 			m_frame->SetTarget(m_shapes[i]);
-			switch (event.type)
-			{
-			case sf::Event::MouseButtonPressed:
-				m_oldSelectShapeRect = m_shapes[i]->GetBoundingRect();
-				break;
-			case sf::Event::MouseButtonReleased:
-				if(m_shapes[i]->GetPosition().x != m_oldSelectShapeRect.position.x || m_shapes[i]->GetPosition().y != m_oldSelectShapeRect.position.y)
-					GetReseiver()->ChangeRect(m_shapes[i], m_oldSelectShapeRect);
-				break;
-			default:
-				break;
-			}
+			ShapeChangeRectEvent(m_shapes[i], event);
 			return true;
 		}
 	}
@@ -97,6 +88,22 @@ bool CCanvas::OnMousePressed(sf::Event::MouseButtonEvent const & event)
 std::shared_ptr<CSelectFrame> const & CCanvas::GetFSelectFrame() const
 {
 	return m_frame;
+}
+
+void CCanvas::ShapeChangeRectEvent(std::shared_ptr<CShape> const & shape, sf::Event const& event)
+{
+	switch (event.type)
+	{
+	case sf::Event::MouseButtonPressed:
+		m_oldSelectShapeRect = shape->GetBoundingRect();
+		break;
+	case sf::Event::MouseButtonReleased:
+		if (!(shape->GetPosition() == m_oldSelectShapeRect.position))
+			GetReseiver()->ChangeRect(shape, m_oldSelectShapeRect);
+		break;
+	default:
+		break;
+	}
 }
 
 void CCanvas::SetShape(std::shared_ptr<CShape> const& shape)

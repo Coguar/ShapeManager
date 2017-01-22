@@ -1,5 +1,6 @@
 #pragma once
 #include "MyCommand.h"
+
 class CChangeBoundingRectCommand :
 	public CMyCommand
 {

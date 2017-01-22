@@ -166,7 +166,6 @@
     <ClInclude Include="EventListenerInterface.h" />
     <ClInclude Include="History.h" />
     <ClInclude Include="Layer.h" />
-    <ClInclude Include="MoveShapeCommand.h" />
     <ClInclude Include="MyCommand.h" />
     <ClInclude Include="ParentLayer.h" />
     <ClInclude Include="Rectangle.h" />
@@ -191,12 +190,12 @@
     <ClCompile Include="Canvas.cpp" />
     <ClCompile Include="Circle.cpp" />
     <ClCompile Include="Controller.cpp" />
+    <ClCompile Include="Coords.cpp" />
     <ClCompile Include="DragPoint.cpp" />
     <ClCompile Include="Ellipse.cpp" />
     <ClCompile Include="EventListener.cpp" />
     <ClCompile Include="History.cpp" />
     <ClCompile Include="Layer.cpp" />
-    <ClCompile Include="MoveShapeCommand.cpp" />
     <ClCompile Include="MyCommand.cpp" />
     <ClCompile Include="ParentLayer.cpp" />
     <ClCompile Include="Rectangle.cpp" />

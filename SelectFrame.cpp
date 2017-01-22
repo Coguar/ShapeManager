@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "SelectFrame.h"
 
-
 CSelectFrame::CSelectFrame()
 {
 	CDragPoint point;
@@ -11,14 +10,12 @@ CSelectFrame::CSelectFrame()
 	{
 		m_dragPoints.push_back(std::make_shared<CDragPoint>(point));
 	}
-
 	m_dragPoints[0]->SetConnectedPoint(m_dragPoints[1], m_dragPoints[3]);
 	m_dragPoints[1]->SetConnectedPoint(m_dragPoints[0], m_dragPoints[2]);
 	m_dragPoints[2]->SetConnectedPoint(m_dragPoints[3], m_dragPoints[1]);
 	m_dragPoints[3]->SetConnectedPoint(m_dragPoints[2], m_dragPoints[0]);
 
 }
-
 
 CSelectFrame::~CSelectFrame()
 {
@@ -67,11 +64,6 @@ CBoundingRect const & CSelectFrame::GetTargetRect() const
 	return CBoundingRect(m_targetShape->GetBoundingRect());
 }
 
-void CSelectFrame::SetReseiver(std::shared_ptr<IReseiver> const & reseiver)
-{
-	m_reseiver = reseiver;
-}
-
 void CSelectFrame::SetPoints()
 {
 	if (m_targetShape != nullptr)
@@ -93,7 +85,7 @@ void CSelectFrame::SetPoints()
 
 void CSelectFrame::SendCommandToReseiver(sf::Event const & event)
 {
-	if (m_reseiver == nullptr || m_targetShape == nullptr)
+	if (GetReseiver() == nullptr || m_targetShape == nullptr)
 		return;
 	switch (event.type)
 	{
@@ -101,7 +93,7 @@ void CSelectFrame::SendCommandToReseiver(sf::Event const & event)
 		m_oldFrameSize = m_targetShape->GetBoundingRect();
 		break;
 	case sf::Event::MouseButtonReleased:
-		m_reseiver->ChangeRect(m_targetShape, m_oldFrameSize);
+		GetReseiver()->ChangeRect(m_targetShape, m_oldFrameSize);
 		break;
 	default: 
 		break;

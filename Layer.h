@@ -2,8 +2,6 @@
 #include "EventListener.h"
 #include "Rectangle.h"
 
-struct IReseiver;
-
 class CLayer :
 	public CEventListener
 {
@@ -27,16 +25,11 @@ public:
 	std::string const& GetPath() const;
 	 
 	bool IsTextured() const;
-
-	void SetReseiver(std::shared_ptr<IReseiver> const& reseiver);
-	std::shared_ptr<IReseiver> const& GetReseiver() const;
 private:
 	SColor m_color;
 	CBoundingRect m_rect;
 
 	std::string m_texturePath;
 	bool m_isTextured = false;
-
-	std::shared_ptr<IReseiver> m_reseiver;
 };
 
