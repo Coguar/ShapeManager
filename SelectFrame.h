@@ -12,6 +12,8 @@ public:
 
 
 	void SetTarget(std::shared_ptr<CShape> const& shape);
+	std::shared_ptr<CShape> const& GetTarget() const;
+
 	std::vector<std::shared_ptr<CDragPoint>> GetDragPoints() const;
 	void ResetTargget();
 	bool IsActive() const;

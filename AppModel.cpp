@@ -22,6 +22,16 @@ std::shared_ptr<CCanvas> const & CAppModel::GetCanvas() const
 	return m_canvas;
 }
 
+std::shared_ptr<IReseiver> const & CAppModel::GetReseiver() const
+{
+	return m_history;
+}
+
+void CAppModel::DeleteSelectedShape()
+{
+	m_canvas->DeleteSelectedShape();
+}
+
 void CAppModel::RootInit()
 {
 	m_root = std::make_shared<CParentLayer>(Vec2( 800, 600 ));

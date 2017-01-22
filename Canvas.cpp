@@ -55,6 +55,22 @@ void CCanvas::DeleteLastShape()
 	m_shapes.pop_back();
 }
 
+void CCanvas::DeleteShapeByPosition(size_t position)
+{
+	m_shapes.erase(m_shapes.begin() + position);
+}
+
+bool CCanvas::DeleteSelectedShape()
+{
+	if (m_frame->GetTarget() != nullptr)
+	{
+		GetReseiver()->DeleteShape(m_frame->GetTarget(), m_targetShapePosition);
+		m_frame->ResetTargget();
+		return true;
+	}
+	return false;
+}
+
 std::vector<std::shared_ptr<CShape>> const& CCanvas::GetShapes() const
 {
 	return m_shapes;
@@ -73,6 +89,7 @@ bool CCanvas::OnEvent(sf::Event const & event)
 		{
 			m_frame->SetTarget(m_shapes[i]);
 			ShapeChangeRectEvent(m_shapes[i], event);
+			m_targetShapePosition = i;
 			return true;
 		}
 	}
@@ -82,7 +99,7 @@ bool CCanvas::OnEvent(sf::Event const & event)
 bool CCanvas::OnMousePressed(sf::Event::MouseButtonEvent const & event)
 {
 	m_frame->ResetTargget();
-	return true;
+	return false;
 }
 
 std::shared_ptr<CSelectFrame> const & CCanvas::GetFSelectFrame() const

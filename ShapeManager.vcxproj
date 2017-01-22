@@ -159,6 +159,7 @@
     <ClInclude Include="Controller.h" />
     <ClInclude Include="Coords.h" />
     <ClInclude Include="color.h" />
+    <ClInclude Include="DeleteShapeCommand.h" />
     <ClInclude Include="DragPoint.h" />
     <ClInclude Include="ButtonInterface.h" />
     <ClInclude Include="Ellipse.h" />
@@ -191,6 +192,7 @@
     <ClCompile Include="Circle.cpp" />
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="Coords.cpp" />
+    <ClCompile Include="DeleteShapeCommand.cpp" />
     <ClCompile Include="DragPoint.cpp" />
     <ClCompile Include="Ellipse.cpp" />
     <ClCompile Include="EventListener.cpp" />

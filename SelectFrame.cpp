@@ -44,6 +44,11 @@ void CSelectFrame::SetTarget(std::shared_ptr<CShape> const & shape)
 		SetPoints();
 }
 
+std::shared_ptr<CShape> const & CSelectFrame::GetTarget() const
+{
+	return m_targetShape;
+}
+
 std::vector<std::shared_ptr<CDragPoint>> CSelectFrame::GetDragPoints() const
 {
 	return m_dragPoints;

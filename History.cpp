@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "AddShapeCommand.h"
 #include "ChangeBoundingRectCommand.h"
+#include "DeleteShapeCommand.h"
 #include "Canvas.h"
 #include "History.h"
 
@@ -26,6 +27,12 @@ void CHistory::AddShape(ShapePtr const & shape)
 
 void CHistory::DeleteShape(ShapePtr const & shape, int num)
 {
+	auto command = std::make_shared<CDeleteShapeCommand>(shape, num);
+	command->SetCanvas(m_canvas);
+	command->Execute();
+	ClearOutdatedBranch();
+	m_doneCommands.push_back(command);
+	++m_currentCommandNumber;
 }
 
 void CHistory::ChangeRect(ShapePtr const & shape, CBoundingRect const & rect)

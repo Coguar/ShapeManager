@@ -12,6 +12,8 @@ public:
 	void AddShape(std::shared_ptr<CShape> const& shape);
 	void AddShape(std::shared_ptr<CShape> const& shape, size_t position);
 	void DeleteLastShape();
+	void DeleteShapeByPosition(size_t position);
+	bool DeleteSelectedShape();
 
 	std::vector<std::shared_ptr<CShape>> const& GetShapes()const;
 	bool OnEvent(sf::Event const& event) override;
@@ -26,5 +28,7 @@ private:
 	std::shared_ptr<CSelectFrame> m_frame;
 
 	CBoundingRect m_oldSelectShapeRect;
+
+	size_t m_targetShapePosition = 0;
 };
 
