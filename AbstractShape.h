@@ -8,7 +8,8 @@ const enum class ShapeType
 	Rectangle,
 };
 
-class CShape : public CLayer
+class CShape 
+	: public CLayer
 {
 public:
 	CShape(ShapeType type);

@@ -24,5 +24,7 @@ private:
 	void SetShape(std::shared_ptr<CShape> const& shape);
 	std::vector<std::shared_ptr<CShape>> m_shapes;
 	std::shared_ptr<CSelectFrame> m_frame;
+
+	CBoundingRect m_oldSelectShapeRect;
 };
 

@@ -33,8 +33,8 @@ std::shared_ptr<CShape> CCanvas::CreateShape(ShapeType type)
 		break;
 	}
 	SetShape(shape);
+	shape->SetReseiver(GetReseiver());
 	GetReseiver()->AddShape(shape);
-	//m_shapes.push_back(shape);
 	return shape;
 }
 
@@ -69,9 +69,19 @@ bool CCanvas::OnEvent(sf::Event const & event)
 	{
 		if (m_shapes[i]->OnEvent(event))
 		{
-			//m_shapes.push_back(m_shapes[i]);			
-			//m_shapes.erase(m_shapes.begin() + i);
 			m_frame->SetTarget(m_shapes[i]);
+			switch (event.type)
+			{
+			case sf::Event::MouseButtonPressed:
+				m_oldSelectShapeRect = m_shapes[i]->GetBoundingRect();
+				break;
+			case sf::Event::MouseButtonReleased:
+				if(m_shapes[i]->GetPosition().x != m_oldSelectShapeRect.position.x || m_shapes[i]->GetPosition().y != m_oldSelectShapeRect.position.y)
+					GetReseiver()->ChangeRect(m_shapes[i], m_oldSelectShapeRect);
+				break;
+			default:
+				break;
+			}
 			return true;
 		}
 	}

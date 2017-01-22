@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "AbstractShape.h"
+#include "Reseiver.h"
 
 CShape::CShape(ShapeType type)
 	: m_type(type)
@@ -29,7 +30,11 @@ bool CShape::OnMousePressed(sf::Event::MouseButtonEvent const & event)
 
 bool CShape::OnMouseReleased(sf::Event::MouseButtonEvent const & event)
 {
-	m_isMoved = false;
+	if (m_isMoved)
+	{
+		m_isMoved = false;
+		return true;
+	}
 	return false;
 }
 

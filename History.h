@@ -19,6 +19,7 @@ public:
 	void Undo() override;
 
 private:
+	void ClearOutdatedBranch();
 
 	std::shared_ptr<CCanvas> m_canvas;
 	std::vector<std::shared_ptr<ICommand>> m_doneCommands;

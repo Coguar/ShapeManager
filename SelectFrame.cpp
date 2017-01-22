@@ -34,6 +34,7 @@ bool CSelectFrame::OnEvent(sf::Event const & event)
 			auto pointPos = m_dragPoints[0]->GetPosition();
 			auto pointSize = m_dragPoints[0]->GetSize();
 			m_targetShape->SetPosition({ pointPos.x + pointSize.x / 2.0,  pointPos.y + pointSize.y / 2.0 });
+			SendCommandToReseiver(event);
 			return true;
 		}
 	}
@@ -66,6 +67,11 @@ CBoundingRect const & CSelectFrame::GetTargetRect() const
 	return CBoundingRect(m_targetShape->GetBoundingRect());
 }
 
+void CSelectFrame::SetReseiver(std::shared_ptr<IReseiver> const & reseiver)
+{
+	m_reseiver = reseiver;
+}
+
 void CSelectFrame::SetPoints()
 {
 	if (m_targetShape != nullptr)
@@ -81,5 +87,23 @@ void CSelectFrame::SetPoints()
 		{
 			point->SetAllowableArea(m_targetShape->GetAllowableArea());
 		}
+	}
+}
+
+
+void CSelectFrame::SendCommandToReseiver(sf::Event const & event)
+{
+	if (m_reseiver == nullptr || m_targetShape == nullptr)
+		return;
+	switch (event.type)
+	{
+	case sf::Event::MouseButtonPressed:
+		m_oldFrameSize = m_targetShape->GetBoundingRect();
+		break;
+	case sf::Event::MouseButtonReleased:
+		m_reseiver->ChangeRect(m_targetShape, m_oldFrameSize);
+		break;
+	default: 
+		break;
 	}
 }

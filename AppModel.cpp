@@ -28,7 +28,7 @@ void CAppModel::RootInit()
 	CanvasInit();
 	m_history = std::make_shared<CHistory>(m_canvas);
 	m_canvas->SetReseiver(m_history);
-	
+	m_canvas->GetFSelectFrame()->SetReseiver(m_history);
 	auto toolbar = CreateToolbar();
 	m_root->AddChild(toolbar);
 	auto foo = [](CCanvas * canvas, ShapeType type) {canvas->CreateShape(type); };

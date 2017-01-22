@@ -17,6 +17,7 @@ void CHistory::AddShape(ShapePtr const & shape)
 	auto command = std::make_shared<CAddShapeCommand>(shape);
 	command->SetCanvas(m_canvas);
 	command->Execute();
+	ClearOutdatedBranch();
 	m_doneCommands.push_back(command);
 	++m_currentCommandNumber;
 }
@@ -37,6 +38,7 @@ void CHistory::ChangeRect(ShapePtr const & shape, CBoundingRect const & rect)
 {
 	auto command = std::make_shared<CChangeBoundingRectCommand>(shape, rect);
 	command->Execute();
+	ClearOutdatedBranch();
 	m_doneCommands.push_back(command);
 	++m_currentCommandNumber;
 }
@@ -46,10 +48,6 @@ void CHistory::Redo()
 	if (m_doneCommands.size() != 0 && m_currentCommandNumber < m_doneCommands.size())
 	{
 		m_doneCommands[m_currentCommandNumber++]->Execute();
-		//if (m_currentCommandNumber < m_doneCommands.size() - 1)
-		//{
-		//	++m_currentCommandNumber;
-		//}
 	}
 }
 
@@ -57,6 +55,11 @@ void CHistory::Undo()
 {
 	if (m_currentCommandNumber > 0)
 	{
-		m_doneCommands[m_currentCommandNumber-- - 1]->Unexecute();
+		m_doneCommands[--m_currentCommandNumber]->Unexecute();
 	}
+}
+
+void CHistory::ClearOutdatedBranch()
+{
+	m_doneCommands.erase(m_doneCommands.begin() + m_currentCommandNumber, m_doneCommands.end());
 }
