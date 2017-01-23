@@ -142,6 +142,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>sfml-graphics.lib;sfml-window.lib;sfml-system.lib;sfml-audio.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -166,6 +167,7 @@
     <ClInclude Include="EventListener.h" />
     <ClInclude Include="EventListenerInterface.h" />
     <ClInclude Include="FileManager.h" />
+    <ClInclude Include="FileManagerInterface.h" />
     <ClInclude Include="History.h" />
     <ClInclude Include="Layer.h" />
     <ClInclude Include="MyCommand.h" />
@@ -197,6 +199,7 @@
     <ClCompile Include="DragPoint.cpp" />
     <ClCompile Include="Ellipse.cpp" />
     <ClCompile Include="EventListener.cpp" />
+    <ClCompile Include="FileManager.cpp" />
     <ClCompile Include="History.cpp" />
     <ClCompile Include="Layer.cpp" />
     <ClCompile Include="MyCommand.cpp" />
