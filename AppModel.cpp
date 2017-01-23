@@ -34,7 +34,7 @@ void CAppModel::DeleteSelectedShape()
 
 void CAppModel::RootInit()
 {
-	m_root = std::make_shared<CParentLayer>(Vec2( 800, 600 ));
+	m_root = std::make_shared<CParentLayer>(MAIN_WINDOW_SIZE);
 	CanvasInit();
 	m_history = std::make_shared<CHistory>(m_canvas);
 	m_canvas->SetReseiver(m_history);
@@ -43,32 +43,32 @@ void CAppModel::RootInit()
 	m_root->AddChild(toolbar);
 	auto foo = [](CCanvas * canvas, ShapeType type) {canvas->CreateShape(type); };
 
-	toolbar->AddChild(CreateButton({ 80.0, 80.0 }, color::WHITE, std::bind(foo, m_canvas.get(), ShapeType::Circle), std::string("./res/circle.png")));
-	toolbar->AddChild(CreateButton({ 80.0, 80.0 }, color::WHITE, std::bind(foo, m_canvas.get(), ShapeType::Rectangle), std::string("./res/square.png")));
-	toolbar->AddChild(CreateButton({ 80.0, 80.0 }, color::WHITE, std::bind(foo, m_canvas.get(), ShapeType::Triangle), std::string("./res/triangle.png")));
+	toolbar->AddChild(CreateButton(DEFAULT_BUTTONN_SIZE, color::WHITE, std::bind(foo, m_canvas.get(), ShapeType::Circle), CIRCLE_PATH));
+	toolbar->AddChild(CreateButton(DEFAULT_BUTTONN_SIZE, color::WHITE, std::bind(foo, m_canvas.get(), ShapeType::Rectangle), RECTANGLE_PATH));
+	toolbar->AddChild(CreateButton(DEFAULT_BUTTONN_SIZE, color::WHITE, std::bind(foo, m_canvas.get(), ShapeType::Triangle), TRIANGLE_PATH));
 
 	auto redo = [](std::shared_ptr<IReseiver> const& history) {history->Redo(); };
 	auto undo = [](std::shared_ptr<IReseiver> const& history) {history->Undo(); };
 
-	toolbar->AddChild(CreateButton({ 80.0, 80.0 }, color::WHITE, std::bind(undo, m_history), std::string("./res/undo.png")));
-	toolbar->AddChild(CreateButton({ 80.0, 80.0 }, color::WHITE, std::bind(redo, m_history), std::string("./res/redo.png")));
+	toolbar->AddChild(CreateButton(DEFAULT_BUTTONN_SIZE, color::WHITE, std::bind(undo, m_history), UNDO_PATH));
+	toolbar->AddChild(CreateButton(DEFAULT_BUTTONN_SIZE, color::WHITE, std::bind(redo, m_history), REDO_PATH));
 	m_root->AddChild(m_canvas);
 }
 
 void CAppModel::CanvasInit()
 {
 	m_canvas = std::make_shared<CCanvas>();
-	m_canvas->SetPosition({ 5, 105 });
-	m_canvas->SetSize({ 790, 490 });
-	m_canvas->SetColor(SColor(255, 255, 255, 255));
+	m_canvas->SetPosition(CANVAS_POSITION);
+	m_canvas->SetSize(CANVAS_SIZE);
+	m_canvas->SetColor(color::WHITE);
 }
 
 std::shared_ptr<CToolbar> CAppModel::CreateToolbar()
 {
 	auto toolbar = std::make_shared<CToolbar>();
-	toolbar->SetPosition({ 0, 0 });
-	toolbar->SetSize({ 800, 100 });
-	toolbar->SetColor(SColor(255, 255, 0, 255));
+	toolbar->SetPosition(TOOLBAR_POSITION);
+	toolbar->SetSize(TOOLBAR_SIZE);
+	toolbar->SetColor(color::YELLOW);
 	return toolbar;
 }
 

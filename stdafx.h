@@ -9,7 +9,6 @@
 
 #include <stdio.h>
 #include <tchar.h>
-#include "Constants.h"
 
 #define _USE_MATH_DEFINES
 #include <cmath>
@@ -24,5 +23,6 @@
 #include <SFML\Graphics.hpp>
 
 #include <functional>
+#include "Constants.h"
 #include "Signal.h"
 // TODO: reference additional headers your program requires here
