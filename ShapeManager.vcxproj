@@ -165,6 +165,7 @@
     <ClInclude Include="Ellipse.h" />
     <ClInclude Include="EventListener.h" />
     <ClInclude Include="EventListenerInterface.h" />
+    <ClInclude Include="FileManager.h" />
     <ClInclude Include="History.h" />
     <ClInclude Include="Layer.h" />
     <ClInclude Include="MyCommand.h" />
