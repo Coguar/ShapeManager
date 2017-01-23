@@ -167,7 +167,7 @@
     <ClInclude Include="EventListener.h" />
     <ClInclude Include="EventListenerInterface.h" />
     <ClInclude Include="FileManager.h" />
-    <ClInclude Include="FileManagerInterface.h" />
+    <ClInclude Include="FileReader.h" />
     <ClInclude Include="History.h" />
     <ClInclude Include="Layer.h" />
     <ClInclude Include="MyCommand.h" />
@@ -200,6 +200,7 @@
     <ClCompile Include="Ellipse.cpp" />
     <ClCompile Include="EventListener.cpp" />
     <ClCompile Include="FileManager.cpp" />
+    <ClCompile Include="FileReader.cpp" />
     <ClCompile Include="History.cpp" />
     <ClCompile Include="Layer.cpp" />
     <ClCompile Include="MyCommand.cpp" />

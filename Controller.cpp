@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Controller.h"
+#include "FileReader.h"
 
 CController::CController(sf::RenderWindow * target)
 	: m_target(target)
@@ -14,6 +15,10 @@ CController::~CController()
 
 void CController::Start()
 {
+	if (m_target == nullptr)
+	{
+		return;
+	}
 	while (m_target->isOpen())
 	{
 		sf::Event event;
@@ -25,7 +30,7 @@ void CController::Start()
 				m_target->close();
 				break;
 			case sf::Event::KeyPressed:
-				OnKeyPressed(event);
+				OnKeyPressed(event.key);
 				break;
 			default:
 				m_model->GetRoot()->DispatchEvent(event);
@@ -34,20 +39,21 @@ void CController::Start()
 		}
 		Draw();
 	}
+	CFileReader::Save(m_model->GetCanvas()->GetShapes());
 }
 
 void CController::Draw()
 {
+	m_target->clear();
 	m_view->Draw(m_model->GetRoot().get());
 	m_view->DrawShapes(m_model->GetCanvas()->GetShapes());
 	m_view->DrawSelectFrame(m_model->GetCanvas()->GetFSelectFrame());
 	m_target->display();
-	m_target->clear();
 }
 
-void CController::OnKeyPressed(sf::Event const & event)
+void CController::OnKeyPressed(sf::Event::KeyEvent const & event)
 {
-	switch (event.key.code)
+	switch (event.code)
 	{
 	case sf::Keyboard::Delete:
 		m_model->DeleteSelectedShape();

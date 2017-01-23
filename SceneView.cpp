@@ -103,17 +103,15 @@ void CSceneView::DrawFrame(Vec2 const & position, Vec2 const & size)
 void CSceneView::DrawLayer(CParentLayer * layer)
 {
 	auto size = layer->GetSize();
-	sf::RectangleShape layersRect({ float(size.x), float(size.y)});
+	sf::RectangleShape layersRect({ float(size.x), float(size.y) });
 	auto position = layer->GetPosition();
 	layersRect.setPosition(float(position.x), float(position.y));
 	if (layer->IsTextured())
 	{
 		layersRect.setTexture(m_cache->GetTexture(layer->GetPath()).get());
 	}
-	else
-	{
-		auto color = layer->GetColor();
-		layersRect.setFillColor(sf::Color(color.r, color.g, color.b, color.a));
-	}
+	auto color = layer->GetColor();
+	layersRect.setFillColor(sf::Color(color.r, color.g, color.b, color.a));
+
 	m_target->draw(layersRect);
 }

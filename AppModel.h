@@ -17,9 +17,10 @@ public:
 
 	std::shared_ptr<IReseiver> const& GetReseiver() const;
 	void DeleteSelectedShape();
+
 private:
-	void RootInit();
-	void CanvasInit();
+	void InitRootLayer();
+	void InitCanvas();
 	std::shared_ptr<CToolbar> CreateToolbar();
 	std::shared_ptr<CActionButton> CreateButton(Vec2 const& size, SColor const& color, std::function<void()> const& function, std::string const& texturePath = std::string());
 	

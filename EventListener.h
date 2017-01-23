@@ -1,5 +1,6 @@
 #pragma once
 #include "EventListenerInterface.h"
+
 class CEventListener :
 	public IEventListener
 {

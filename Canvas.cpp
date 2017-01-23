@@ -83,7 +83,7 @@ bool CCanvas::OnEvent(sf::Event const & event)
 		return true;
 	}
 	CParentLayer::OnEvent(event);
-	for (int i = m_shapes.size() - 1; i >= 0; --i)
+	for (int i = int(m_shapes.size()) - 1; i >= 0; --i)
 	{
 		if (m_shapes[i]->OnEvent(event))
 		{
@@ -98,7 +98,10 @@ bool CCanvas::OnEvent(sf::Event const & event)
 
 bool CCanvas::OnMousePressed(sf::Event::MouseButtonEvent const & event)
 {
+	/*if (GetBoundingRect().IsPointInRect({ double(event.x), double(event.y) }))
+	{*/
 	m_frame->ResetTargget();
+	//}
 	return false;
 }
 

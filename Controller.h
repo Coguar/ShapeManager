@@ -9,9 +9,10 @@ public:
 	~CController();
 
 	void Start();
-	void Draw();
+
 private:
-	void OnKeyPressed(sf::Event const&  event);
+	void Draw();
+	void OnKeyPressed(sf::Event::KeyEvent const&  event);
 
 	std::unique_ptr<CAppModel> m_model;
 	std::unique_ptr<CSceneView> m_view;

@@ -25,6 +25,7 @@ public:
 	std::string const& GetPath() const;
 	 
 	bool IsTextured() const;
+
 private:
 	SColor m_color;
 	CBoundingRect m_rect;

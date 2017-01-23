@@ -1,21 +1,19 @@
 #include "stdafx.h"
-#include "AbstractShape.h"
 #include "FileManager.h"
 #define _AFXDLL
 #include <afxdlgs.h>
-#include <fstream>
 
-void CFileManager::SaveToFile(std::vector<std::shared_ptr<CShape>> const & shapes)
+std::string CFileManager::GetFileToSave()
 {
-	auto file = GetFilePath(false);
-	std::ofstream fout(file);
-	for (auto &shape : shapes)
-	{
-		//TODO write data into file;
-	}
+	return GetFilePath(false);
 }
 
-std::string const & CFileManager::GetFilePath(bool isOpened)
+std::string CFileManager::GetFileToOpen()
+{
+	return GetFilePath(true);
+}
+
+std::string CFileManager::GetFilePath(bool isOpened)
 {
 	CFileDialog dlgFile(isOpened, NULL, NULL, OFN_EXPLORER, _T("Shape files (*.sm)|*.sm|"));
 	CString fileName;

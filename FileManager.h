@@ -1,14 +1,13 @@
 #pragma once
 
-class CShape;
-
 class CFileManager
 {
 public:
 
-	static void SaveToFile(std::vector<std::shared_ptr<CShape>> const& shapes);
+	static std::string GetFileToSave();
+	static std::string GetFileToOpen();
 
 private:
-	static std::string const& GetFilePath(bool isOpened);
+	static std::string GetFilePath(bool isOpened);
 };
 
