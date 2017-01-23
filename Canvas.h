@@ -20,9 +20,11 @@ public:
 	bool OnMousePressed(sf::Event::MouseButtonEvent const & event) override;
 
 	std::shared_ptr<CSelectFrame> const& GetFSelectFrame() const;
+
+	void SetNewShapesList(std::vector<std::shared_ptr<CShape>> const& shapes);
+	void Clear();
 private:
 	void ShapeChangeRectEvent(std::shared_ptr<CShape> const& shape, sf::Event const& event);
-
 	void SetShape(std::shared_ptr<CShape> const& shape);
 	std::vector<std::shared_ptr<CShape>> m_shapes;
 	std::shared_ptr<CSelectFrame> m_frame;

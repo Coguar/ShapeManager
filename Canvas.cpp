@@ -107,6 +107,21 @@ std::shared_ptr<CSelectFrame> const & CCanvas::GetFSelectFrame() const
 	return m_frame;
 }
 
+void CCanvas::SetNewShapesList(std::vector<std::shared_ptr<CShape>> const & shapes)
+{
+	m_shapes.clear();
+	for (auto &shape : shapes)
+	{
+		m_shapes.push_back(shape);
+	}
+}
+
+void CCanvas::Clear()
+{
+	m_frame->ResetTargget();
+	m_shapes.clear();
+}
+
 void CCanvas::ShapeChangeRectEvent(std::shared_ptr<CShape> const & shape, sf::Event const& event)
 {
 	switch (event.type)
