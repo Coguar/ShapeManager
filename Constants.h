@@ -41,3 +41,8 @@ static const std::string RECTANGLE_PATH = "./res/square.png";
 static const std::string TRIANGLE_PATH = "./res/triangle.png";
 static const std::string REDO_PATH = "./res/redo.png";
 static const std::string UNDO_PATH = "./res/undo.png";
+static const std::string OPEN_PATH = "./res/open.png";
+static const std::string SAVE_PATH = "./res/save.png";
+static const std::string NEW_PATH = "./res/new.png";
+
+static const std::string SAVE_MSG = "Current data will be lost! Would you like to save them?";

@@ -7,7 +7,7 @@ int main()
 {
 	sf::ContextSettings settings;
 	settings.antialiasingLevel = 8;
-	sf::RenderWindow window(sf::VideoMode(MAIN_WINDOW_SIZE.x, MAIN_WINDOW_SIZE.y), "ShapeManager", sf::Style::Close, settings);
+	sf::RenderWindow window(sf::VideoMode(unsigned int (MAIN_WINDOW_SIZE.x), unsigned int(MAIN_WINDOW_SIZE.y)), "ShapeManager", sf::Style::Close, settings);
 	auto controller = std::make_unique<CController>(&window);
 	controller->Start();
     return 0;

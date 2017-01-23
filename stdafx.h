@@ -23,6 +23,8 @@
 #include <SFML\Graphics.hpp>
 
 #include <functional>
+
 #include "Constants.h"
 #include "Signal.h"
+
 // TODO: reference additional headers your program requires here

@@ -17,6 +17,8 @@ public:
 	void Redo() override;
 	void Undo() override;
 
+	void Clear() override;
+
 private:
 	void ClearOutdatedBranch();
 

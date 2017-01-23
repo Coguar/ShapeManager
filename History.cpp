@@ -60,6 +60,12 @@ void CHistory::Undo()
 	}
 }
 
+void CHistory::Clear()
+{
+	m_currentCommandNumber = 0;
+	m_doneCommands.clear();
+}
+
 void CHistory::ClearOutdatedBranch()
 {
 	m_doneCommands.erase(m_doneCommands.begin() + m_currentCommandNumber, m_doneCommands.end());

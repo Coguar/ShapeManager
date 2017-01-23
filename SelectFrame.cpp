@@ -66,7 +66,7 @@ bool CSelectFrame::IsActive() const
 
 CBoundingRect const & CSelectFrame::GetTargetRect() const
 {
-	return CBoundingRect(m_targetShape->GetBoundingRect());
+	return m_targetShape->GetBoundingRect();
 }
 
 void CSelectFrame::SetPoints()

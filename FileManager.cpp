@@ -1,7 +1,8 @@
 #include "stdafx.h"
-#include "FileManager.h"
 #define _AFXDLL
+#include <afxwin.h>
 #include <afxdlgs.h>
+#include "FileManager.h"
 
 std::string CFileManager::GetFileToSave()
 {
@@ -11,6 +12,24 @@ std::string CFileManager::GetFileToSave()
 std::string CFileManager::GetFileToOpen()
 {
 	return GetFilePath(true);
+}
+
+DialogAnswer CFileManager::StartDialog(std::string const & message)
+{
+	std::wstring wmsg(message.begin(), message.end());
+	auto answer = AfxMessageBox(wmsg.data(), MB_YESNOCANCEL);
+
+	switch (answer)
+	{
+	case IDYES:
+		return DialogAnswer::Yes;
+	case IDNO:
+		return DialogAnswer::No;
+	case IDCANCEL:
+		return DialogAnswer::Cancel;
+	default:
+		return DialogAnswer::Cancel;
+	}
 }
 
 std::string CFileManager::GetFilePath(bool isOpened)

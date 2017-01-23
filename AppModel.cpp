@@ -1,6 +1,9 @@
 #include "stdafx.h"
 #include "AppModel.h"
 #include "History.h"
+#include "FileReader.h"
+#include "FileManager.h"
+
 
 CAppModel::CAppModel()
 {
@@ -10,6 +13,7 @@ CAppModel::CAppModel()
 
 CAppModel::~CAppModel()
 {
+	SaveChangesDialog();
 }
 
 std::shared_ptr<CParentLayer> const & CAppModel::GetRoot() const
@@ -32,6 +36,51 @@ void CAppModel::DeleteSelectedShape()
 	m_canvas->DeleteSelectedShape();
 }
 
+void CAppModel::OpenNewFile()
+{
+	if (SaveChangesDialog())
+	{
+		auto oldShapes = m_canvas->GetShapes();
+		m_canvas->Clear();
+		if (!CFileReader::Open(m_canvas))
+		{
+			m_canvas->Clear();
+			m_canvas->SetNewShapesList(oldShapes);
+			return;
+		}
+		m_history->Clear();
+	}
+}
+
+void CAppModel::SaveCurrentState()
+{
+	CFileReader::Save(m_canvas->GetShapes());
+}
+
+void CAppModel::CreateNewFile()
+{
+	if (SaveChangesDialog())
+	{
+		m_canvas->Clear();
+		m_history->Clear();
+	}
+}
+
+bool CAppModel::SaveChangesDialog()
+{
+	switch (CFileManager::StartDialog(SAVE_MSG))
+	{
+	case DialogAnswer::Yes:
+		SaveCurrentState();
+		return true;
+	case DialogAnswer::No:
+		return true;
+	case DialogAnswer::Cancel:
+		return false;
+	}
+	return false;
+}
+
 void CAppModel::InitRootLayer()
 {
 	m_root = std::make_shared<CParentLayer>(MAIN_WINDOW_SIZE);
@@ -49,6 +98,11 @@ void CAppModel::InitRootLayer()
 
 	toolbar->AddChild(CreateButton(DEFAULT_BUTTONN_SIZE, color::WHITE, std::bind(&IReseiver::Undo, m_history), UNDO_PATH));
 	toolbar->AddChild(CreateButton(DEFAULT_BUTTONN_SIZE, color::WHITE, std::bind(&IReseiver::Redo, m_history), REDO_PATH));
+
+	toolbar->AddChild(CreateButton(DEFAULT_BUTTONN_SIZE, color::WHITE, std::bind(&CAppModel::OpenNewFile, this), OPEN_PATH));
+	toolbar->AddChild(CreateButton(DEFAULT_BUTTONN_SIZE, color::WHITE, std::bind(&CAppModel::SaveCurrentState, this), SAVE_PATH));
+	toolbar->AddChild(CreateButton(DEFAULT_BUTTONN_SIZE, color::WHITE, std::bind(&CAppModel::CreateNewFile, this), NEW_PATH));
+	
 	m_root->AddChild(m_canvas);
 }
 

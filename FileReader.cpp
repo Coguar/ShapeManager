@@ -1,11 +1,11 @@
 #include "stdafx.h"
-#include "FileReader.h"
-#include "AbstractShape.h"
+#include "Canvas.h"
 #include "FileManager.h"
 #include <sstream>
 #include <fstream>
 #include <boost\property_tree\ptree.hpp>
 #include <boost\property_tree\xml_parser.hpp>
+#include "FileReader.h"
 
 namespace
 {
@@ -41,19 +41,25 @@ namespace
 	}
 }
 
-void CFileReader::Save(std::vector<std::shared_ptr<CShape>> const & shapes)
+bool CFileReader::Save(std::vector<std::shared_ptr<CShape>> const & shapes)
 {
 	auto file = CFileManager::GetFileToSave();
+	if (file.empty())
+	{
+		return false;
+	}
 	try
 	{
 		boost::property_tree::ptree propertyTree;
 		for (auto &shape : shapes)
 		{
-			propertyTree.put("Shapes.Shape.Type", GetShapeName(shape->GetType()));
-			propertyTree.put("Shapes.Shape.X", std::to_string(shape->GetPosition().x));
-			propertyTree.put("Shapes.Shape.Y", std::to_string(shape->GetPosition().y));
-			propertyTree.put("Shapes.Shape.Height", std::to_string(shape->GetSize().y));
-			propertyTree.put("Shapes.Shape.Width", std::to_string(shape->GetSize().x));
+			boost::property_tree::ptree child;
+			child.add("Type", GetShapeName(shape->GetType()));
+			child.add("X", std::to_string(shape->GetPosition().x));
+			child.add("Y", std::to_string(shape->GetPosition().y));
+			child.add("Height", std::to_string(shape->GetSize().y));
+			child.add("Width", std::to_string(shape->GetSize().x));
+			propertyTree.add_child("Shapes.Shape", child);
 		}
 		std::stringstream stream;
 		boost::property_tree::write_xml(stream, propertyTree);
@@ -66,20 +72,25 @@ void CFileReader::Save(std::vector<std::shared_ptr<CShape>> const & shapes)
 			out << str;
 		}
 		out.close();
+		return true;
 	}
 	catch(boost::property_tree::xml_parser_error)
 	{
 		std::cout << "XML parser error!" << std::endl;
 		throw;
 	}
+	return false;
 }
 
-void CFileReader::Open(std::vector<std::shared_ptr<CShape>>& shapesVec)
+bool CFileReader::Open(std::shared_ptr<CCanvas> & canvas)
 {
 	auto file = CFileManager::GetFileToOpen();
+	if (file.empty())
+	{
+		return false;
+	}
 	try
 	{
-		shapesVec.clear();
 		std::ifstream stream(file);
 		boost::property_tree::ptree propertyTree;
 		boost::property_tree::read_xml(stream, propertyTree);
@@ -93,17 +104,17 @@ void CFileReader::Open(std::vector<std::shared_ptr<CShape>>& shapesVec)
 				double height = shape.second.get<double>("Height");
 				double width = shape.second.get<double>("Width");
 
-				auto shape = std::make_shared<CShape>(GetShapeType(type));
-				shape->SetBoundingRect(CBoundingRect({x, y}, {width, height}));
-				shapesVec.push_back(shape);
+				auto s = canvas->CreateShape(GetShapeType(type));
+				s->SetBoundingRect(CBoundingRect({x, y}, {width, height}));
 			}
 		}
 		stream.close();
+		return true;
 	}
 	catch (boost::property_tree::xml_parser_error)
 	{
-		shapesVec.clear();
 		std::cout << "XML parser error!" << std::endl;
 		throw;
 	}
+	return false;
 }

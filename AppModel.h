@@ -19,6 +19,11 @@ public:
 	void DeleteSelectedShape();
 
 private:
+	void OpenNewFile();
+	void SaveCurrentState();
+	void CreateNewFile();
+	bool SaveChangesDialog();
+
 	void InitRootLayer();
 	void InitCanvas();
 	std::shared_ptr<CToolbar> CreateToolbar();

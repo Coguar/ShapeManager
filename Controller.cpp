@@ -39,7 +39,6 @@ void CController::Start()
 		}
 		Draw();
 	}
-	CFileReader::Save(m_model->GetCanvas()->GetShapes());
 }
 
 void CController::Draw()
