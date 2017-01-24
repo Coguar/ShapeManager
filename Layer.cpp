@@ -12,6 +12,10 @@ CLayer::~CLayer()
 {
 }
 
+void CLayer::Update()
+{
+}
+
 void CLayer::SetColor(SColor const & color)
 {
 	m_color = color;

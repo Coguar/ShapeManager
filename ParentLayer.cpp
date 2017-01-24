@@ -31,3 +31,11 @@ void CParentLayer::DispatchEvent(sf::Event const & event)
 		child->DispatchEvent(event);
 	}
 }
+
+void CParentLayer::Update()
+{
+	for (auto &child : m_children)
+	{
+		child->Update();
+	}
+}

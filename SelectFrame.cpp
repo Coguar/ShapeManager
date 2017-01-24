@@ -69,6 +69,11 @@ CBoundingRect const & CSelectFrame::GetTargetRect() const
 	return m_targetShape->GetBoundingRect();
 }
 
+void CSelectFrame::UpdateFrame()
+{
+	SetPoints();
+}
+
 void CSelectFrame::SetPoints()
 {
 	if (m_targetShape != nullptr)
@@ -77,8 +82,8 @@ void CSelectFrame::SetPoints()
 		auto pointRadius = m_dragPoints[0]->GetBoundingRect().size.x / 2.0;
 		m_dragPoints[0]->SetPosition({ rect.position.x - pointRadius, rect.position.y - pointRadius });
 		m_dragPoints[1]->SetPosition({ rect.position.x + rect.size.x - pointRadius, rect.position.y - pointRadius });
-		m_dragPoints[2]->SetPosition({ rect.position.x - pointRadius, rect.position.y + rect.size.y - pointRadius });
-		m_dragPoints[3]->SetPosition({ rect.position.x + rect.size.x - pointRadius, rect.position.y + rect.size.y - pointRadius });
+		m_dragPoints[3]->SetPosition({ rect.position.x - pointRadius, rect.position.y + rect.size.y - pointRadius });
+		m_dragPoints[2]->SetPosition({ rect.position.x + rect.size.x - pointRadius, rect.position.y + rect.size.y - pointRadius });
 
 		for (auto &point : m_dragPoints)
 		{

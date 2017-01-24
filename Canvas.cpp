@@ -52,6 +52,10 @@ void CCanvas::AddShape(std::shared_ptr<CShape> const& shape, size_t position)
 
 void CCanvas::DeleteLastShape()
 {
+	if (m_shapes.back() == m_frame->GetTarget())
+	{
+		m_frame->ResetTargget();
+	}
 	m_shapes.pop_back();
 }
 
@@ -98,10 +102,11 @@ bool CCanvas::OnEvent(sf::Event const & event)
 
 bool CCanvas::OnMousePressed(sf::Event::MouseButtonEvent const & event)
 {
-	/*if (GetBoundingRect().IsPointInRect({ double(event.x), double(event.y) }))
-	{*/
-	m_frame->ResetTargget();
-	//}
+	if (GetBoundingRect().IsPointInRect({ double(event.x), double(event.y) }))
+	{
+		m_frame->ResetTargget();
+		return true;
+	}
 	return false;
 }
 
@@ -123,6 +128,11 @@ void CCanvas::Clear()
 {
 	m_frame->ResetTargget();
 	m_shapes.clear();
+}
+
+void CCanvas::Update()
+{
+	m_frame->UpdateFrame();
 }
 
 void CCanvas::ShapeChangeRectEvent(std::shared_ptr<CShape> const & shape, sf::Event const& event)

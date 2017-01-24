@@ -68,6 +68,10 @@ void CAppModel::CreateNewFile()
 
 bool CAppModel::SaveChangesDialog()
 {
+	if (m_canvas->GetShapes().empty())
+	{
+		return true;
+	}
 	switch (CFileManager::StartDialog(SAVE_MSG))
 	{
 	case DialogAnswer::Yes:

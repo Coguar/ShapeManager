@@ -23,6 +23,8 @@ public:
 
 	void SetNewShapesList(std::vector<std::shared_ptr<CShape>> const& shapes);
 	void Clear();
+
+	void Update() override;
 private:
 	void ShapeChangeRectEvent(std::shared_ptr<CShape> const& shape, sf::Event const& event);
 	void SetShape(std::shared_ptr<CShape> const& shape);

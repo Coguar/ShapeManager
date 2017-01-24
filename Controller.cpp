@@ -37,6 +37,7 @@ void CController::Start()
 				break;
 			}
 		}
+		m_model->GetRoot()->Update();
 		Draw();
 	}
 }

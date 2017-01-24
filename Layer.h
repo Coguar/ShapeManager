@@ -7,7 +7,9 @@ class CLayer :
 {
 public:
 	CLayer(Vec2 const& size = { 0.0, 0.0 }, Vec2 const& position = { 0.0, 0.0 });
-	~CLayer();
+	virtual ~CLayer();
+
+	virtual void Update();
 
 	void SetColor(SColor const& color);
 	SColor GetColor()const;

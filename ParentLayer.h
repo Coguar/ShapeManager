@@ -12,7 +12,8 @@ public:
 	virtual void AddChild(CLayerPtr const & child);
 	std::vector<CLayerPtr> const& GetChildren() const;
 
-	void DispatchEvent(sf::Event const& event);
+	virtual void DispatchEvent(sf::Event const& event);
+	void Update() override;
 private:
 	std::vector<CLayerPtr> m_children;
 

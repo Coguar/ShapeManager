@@ -19,6 +19,8 @@ public:
 	bool IsActive() const;
 
 	CBoundingRect const& GetTargetRect() const;
+
+	void UpdateFrame();
 private:
 	void SetPoints();
 	void SendCommandToReseiver(sf::Event const& event);

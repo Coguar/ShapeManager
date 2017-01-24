@@ -135,14 +135,14 @@
     <ClInclude Include="CommandInterface.h">
       <Filter>Header Files\History</Filter>
     </ClInclude>
-    <ClInclude Include="DeleteShapeCommand.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="FileManager.h">
       <Filter>Header Files\WorkWithFiles</Filter>
     </ClInclude>
     <ClInclude Include="FileReader.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\WorkWithFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="DeleteShapeCommand.h">
+      <Filter>Header Files\History</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -221,14 +221,14 @@
     <ClCompile Include="Coords.cpp">
       <Filter>Header Files\LayerModel\HelpersStructs</Filter>
     </ClCompile>
-    <ClCompile Include="DeleteShapeCommand.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="FileManager.cpp">
       <Filter>Header Files\WorkWithFiles</Filter>
     </ClCompile>
     <ClCompile Include="FileReader.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files\WorkWithFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="DeleteShapeCommand.cpp">
+      <Filter>Header Files\History</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
