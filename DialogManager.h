@@ -7,7 +7,7 @@ enum class DialogAnswer
 	Cancel,
 };
 
-class CFileManager
+class CDialogManager
 {
 public:
 

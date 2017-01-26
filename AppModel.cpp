@@ -2,7 +2,7 @@
 #include "AppModel.h"
 #include "History.h"
 #include "FileReader.h"
-#include "FileManager.h"
+#include "DialogManager.h"
 
 
 CAppModel::CAppModel()
@@ -72,7 +72,7 @@ bool CAppModel::SaveChangesDialog()
 	{
 		return true;
 	}
-	switch (CFileManager::StartDialog(SAVE_MSG))
+	switch (CDialogManager::StartDialog(SAVE_MSG))
 	{
 	case DialogAnswer::Yes:
 		SaveCurrentState();

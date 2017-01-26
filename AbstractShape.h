@@ -1,12 +1,12 @@
 #pragma once
 #include "ParentLayer.h"
-
-const enum class ShapeType
-{
-	Circle = 0,
-	Triangle,
-	Rectangle,
-};
+#include "ShapesTypes.h"
+//const enum class ShapeType
+//{
+//	Circle = 0,
+//	Triangle,
+//	Rectangle,
+//};
 
 class CShape 
 	: public CLayer

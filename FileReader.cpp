@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Canvas.h"
-#include "FileManager.h"
+#include "DialogManager.h"
 #include <sstream>
 #include <fstream>
 #include <boost\property_tree\ptree.hpp>
@@ -43,7 +43,7 @@ namespace
 
 bool CFileReader::Save(std::vector<std::shared_ptr<CShape>> const & shapes)
 {
-	auto file = CFileManager::GetFileToSave();
+	auto file = CDialogManager::GetFileToSave();
 	if (file.empty())
 	{
 		return false;
@@ -84,7 +84,7 @@ bool CFileReader::Save(std::vector<std::shared_ptr<CShape>> const & shapes)
 
 bool CFileReader::Open(std::shared_ptr<CCanvas> & canvas)
 {
-	auto file = CFileManager::GetFileToOpen();
+	auto file = CDialogManager::GetFileToOpen();
 	if (file.empty())
 	{
 		return false;

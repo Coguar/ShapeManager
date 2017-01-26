@@ -2,19 +2,19 @@
 #define _AFXDLL
 #include <afxwin.h>
 #include <afxdlgs.h>
-#include "FileManager.h"
+#include "DialogManager.h"
 
-std::string CFileManager::GetFileToSave()
+std::string CDialogManager::GetFileToSave()
 {
 	return GetFilePath(false);
 }
 
-std::string CFileManager::GetFileToOpen()
+std::string CDialogManager::GetFileToOpen()
 {
 	return GetFilePath(true);
 }
 
-DialogAnswer CFileManager::StartDialog(std::string const & message)
+DialogAnswer CDialogManager::StartDialog(std::string const & message)
 {
 	std::wstring wmsg(message.begin(), message.end());
 	auto answer = AfxMessageBox(wmsg.data(), MB_YESNOCANCEL);
@@ -32,7 +32,7 @@ DialogAnswer CFileManager::StartDialog(std::string const & message)
 	}
 }
 
-std::string CFileManager::GetFilePath(bool isOpened)
+std::string CDialogManager::GetFilePath(bool isOpened)
 {
 	CFileDialog dlgFile(isOpened, NULL, NULL, OFN_EXPLORER, _T("Shape files (*.sm)|*.sm|"));
 	CString fileName;

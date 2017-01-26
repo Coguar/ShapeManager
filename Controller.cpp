@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "Controller.h"
-#include "FileReader.h"
 
 CController::CController(sf::RenderWindow * target)
 	: m_target(target)
