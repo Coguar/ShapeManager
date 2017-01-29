@@ -13,15 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\LayerModel">
-      <UniqueIdentifier>{ce08a3b4-5844-4bd0-b367-29192fb7d6f8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\LayerModel\HelpersStructs">
-      <UniqueIdentifier>{a076c58b-45ec-43fc-866c-c91a8bca1cb5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\ShapeModel">
-      <UniqueIdentifier>{00ba53a9-1fad-444f-ba64-b24f78433e6b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\View">
       <UniqueIdentifier>{7fe4f419-e354-418c-8952-dd7d42645ba4}</UniqueIdentifier>
     </Filter>
@@ -30,6 +21,21 @@
     </Filter>
     <Filter Include="Header Files\WorkWithFiles">
       <UniqueIdentifier>{97d9a123-d802-43bc-ab13-9a8dcfcdb20d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\View\ViewObjects">
+      <UniqueIdentifier>{ce08a3b4-5844-4bd0-b367-29192fb7d6f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\View\ViewObjects\HelpersStructs">
+      <UniqueIdentifier>{a076c58b-45ec-43fc-866c-c91a8bca1cb5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\View\ViewObjects\ShapeView">
+      <UniqueIdentifier>{00ba53a9-1fad-444f-ba64-b24f78433e6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Model">
+      <UniqueIdentifier>{2120f8b6-1ce1-4df1-b267-c7c4f7e3ce4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Controller">
+      <UniqueIdentifier>{38bb455e-7325-4a90-b661-b0277078bab3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -43,64 +49,58 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Rectangle.h">
-      <Filter>Header Files\LayerModel</Filter>
+      <Filter>Header Files\View\ViewObjects</Filter>
     </ClInclude>
     <ClInclude Include="color.h">
-      <Filter>Header Files\LayerModel\HelpersStructs</Filter>
+      <Filter>Header Files\View\ViewObjects\HelpersStructs</Filter>
     </ClInclude>
     <ClInclude Include="Coords.h">
-      <Filter>Header Files\LayerModel\HelpersStructs</Filter>
+      <Filter>Header Files\View\ViewObjects\HelpersStructs</Filter>
     </ClInclude>
     <ClInclude Include="Signal.h">
-      <Filter>Header Files\LayerModel\HelpersStructs</Filter>
+      <Filter>Header Files\View\ViewObjects\HelpersStructs</Filter>
     </ClInclude>
     <ClInclude Include="ActionButton.h">
-      <Filter>Header Files\LayerModel</Filter>
+      <Filter>Header Files\View\ViewObjects</Filter>
     </ClInclude>
     <ClInclude Include="ButtonInterface.h">
-      <Filter>Header Files\LayerModel</Filter>
+      <Filter>Header Files\View\ViewObjects</Filter>
     </ClInclude>
     <ClInclude Include="Toolbar.h">
-      <Filter>Header Files\LayerModel</Filter>
+      <Filter>Header Files\View\ViewObjects</Filter>
     </ClInclude>
     <ClInclude Include="AbstractShape.h">
-      <Filter>Header Files\ShapeModel</Filter>
+      <Filter>Header Files\View\ViewObjects\ShapeView</Filter>
     </ClInclude>
     <ClInclude Include="Canvas.h">
-      <Filter>Header Files\LayerModel</Filter>
+      <Filter>Header Files\View\ViewObjects</Filter>
     </ClInclude>
     <ClInclude Include="Square.h">
-      <Filter>Header Files\ShapeModel</Filter>
+      <Filter>Header Files\View\ViewObjects\ShapeView</Filter>
     </ClInclude>
     <ClInclude Include="Circle.h">
-      <Filter>Header Files\ShapeModel</Filter>
+      <Filter>Header Files\View\ViewObjects\ShapeView</Filter>
     </ClInclude>
     <ClInclude Include="Triangle.h">
-      <Filter>Header Files\ShapeModel</Filter>
+      <Filter>Header Files\View\ViewObjects\ShapeView</Filter>
     </ClInclude>
     <ClInclude Include="EventListener.h">
-      <Filter>Header Files\LayerModel\HelpersStructs</Filter>
+      <Filter>Header Files\View\ViewObjects\HelpersStructs</Filter>
     </ClInclude>
     <ClInclude Include="Ellipse.h">
       <Filter>Header Files\View</Filter>
     </ClInclude>
-    <ClInclude Include="SceneView.h">
-      <Filter>Header Files\View</Filter>
-    </ClInclude>
     <ClInclude Include="ParentLayer.h">
-      <Filter>Header Files\LayerModel</Filter>
+      <Filter>Header Files\View\ViewObjects</Filter>
     </ClInclude>
     <ClInclude Include="SelectFrame.h">
-      <Filter>Header Files\LayerModel</Filter>
+      <Filter>Header Files\View\ViewObjects</Filter>
     </ClInclude>
     <ClInclude Include="Layer.h">
-      <Filter>Header Files\LayerModel</Filter>
+      <Filter>Header Files\View\ViewObjects</Filter>
     </ClInclude>
     <ClInclude Include="DragPoint.h">
-      <Filter>Header Files\LayerModel</Filter>
-    </ClInclude>
-    <ClInclude Include="ViewInterface.h">
-      <Filter>Header Files\View</Filter>
+      <Filter>Header Files\View\ViewObjects</Filter>
     </ClInclude>
     <ClInclude Include="Constants.h">
       <Filter>Header Files</Filter>
@@ -108,17 +108,11 @@
     <ClInclude Include="TextureCache.h">
       <Filter>Header Files\View</Filter>
     </ClInclude>
-    <ClInclude Include="AppModel.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Controller.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Reseiver.h">
       <Filter>Header Files\History</Filter>
     </ClInclude>
     <ClInclude Include="EventListenerInterface.h">
-      <Filter>Header Files\LayerModel\HelpersStructs</Filter>
+      <Filter>Header Files\View\ViewObjects\HelpersStructs</Filter>
     </ClInclude>
     <ClInclude Include="History.h">
       <Filter>Header Files\History</Filter>
@@ -144,14 +138,35 @@
     <ClInclude Include="DialogManager.h">
       <Filter>Header Files\WorkWithFiles</Filter>
     </ClInclude>
-    <ClInclude Include="ShapeModel.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="MainView.h">
+      <Filter>Header Files\View</Filter>
     </ClInclude>
-    <ClInclude Include="ShapesTypes.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="ApplicationModel.h">
+      <Filter>Header Files\Model</Filter>
     </ClInclude>
     <ClInclude Include="DomainModel.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapeModel.h">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapesTypes.h">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelObserver.h">
+      <Filter>Header Files\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="Controller.h">
+      <Filter>Header Files\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="ViewObserver.h">
+      <Filter>Header Files\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="ViewEvent.h">
+      <Filter>Header Files\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="Observer.h">
+      <Filter>Header Files\Controller</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -162,58 +177,49 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Rectangle.cpp">
-      <Filter>Header Files\LayerModel</Filter>
+      <Filter>Header Files\View\ViewObjects</Filter>
     </ClCompile>
     <ClCompile Include="ActionButton.cpp">
-      <Filter>Header Files\LayerModel</Filter>
+      <Filter>Header Files\View\ViewObjects</Filter>
     </ClCompile>
     <ClCompile Include="Toolbar.cpp">
-      <Filter>Header Files\LayerModel</Filter>
+      <Filter>Header Files\View\ViewObjects</Filter>
     </ClCompile>
     <ClCompile Include="AbstractShape.cpp">
-      <Filter>Header Files\ShapeModel</Filter>
+      <Filter>Header Files\View\ViewObjects\ShapeView</Filter>
     </ClCompile>
     <ClCompile Include="Square.cpp">
-      <Filter>Header Files\ShapeModel</Filter>
+      <Filter>Header Files\View\ViewObjects\ShapeView</Filter>
     </ClCompile>
     <ClCompile Include="Triangle.cpp">
-      <Filter>Header Files\ShapeModel</Filter>
+      <Filter>Header Files\View\ViewObjects\ShapeView</Filter>
     </ClCompile>
     <ClCompile Include="Circle.cpp">
-      <Filter>Header Files\ShapeModel</Filter>
+      <Filter>Header Files\View\ViewObjects\ShapeView</Filter>
     </ClCompile>
     <ClCompile Include="EventListener.cpp">
-      <Filter>Header Files\LayerModel\HelpersStructs</Filter>
+      <Filter>Header Files\View\ViewObjects\HelpersStructs</Filter>
     </ClCompile>
     <ClCompile Include="Ellipse.cpp">
       <Filter>Header Files\View</Filter>
     </ClCompile>
-    <ClCompile Include="SceneView.cpp">
-      <Filter>Header Files\View</Filter>
-    </ClCompile>
     <ClCompile Include="Canvas.cpp">
-      <Filter>Header Files\LayerModel</Filter>
+      <Filter>Header Files\View\ViewObjects</Filter>
     </ClCompile>
     <ClCompile Include="ParentLayer.cpp">
-      <Filter>Header Files\LayerModel</Filter>
+      <Filter>Header Files\View\ViewObjects</Filter>
     </ClCompile>
     <ClCompile Include="Layer.cpp">
-      <Filter>Header Files\LayerModel</Filter>
+      <Filter>Header Files\View\ViewObjects</Filter>
     </ClCompile>
     <ClCompile Include="DragPoint.cpp">
-      <Filter>Header Files\LayerModel</Filter>
+      <Filter>Header Files\View\ViewObjects</Filter>
     </ClCompile>
     <ClCompile Include="SelectFrame.cpp">
-      <Filter>Header Files\LayerModel</Filter>
+      <Filter>Header Files\View\ViewObjects</Filter>
     </ClCompile>
     <ClCompile Include="TextureCache.cpp">
       <Filter>Header Files\View</Filter>
-    </ClCompile>
-    <ClCompile Include="AppModel.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Controller.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="History.cpp">
       <Filter>Header Files\History</Filter>
@@ -228,7 +234,7 @@
       <Filter>Header Files\History</Filter>
     </ClCompile>
     <ClCompile Include="Coords.cpp">
-      <Filter>Header Files\LayerModel\HelpersStructs</Filter>
+      <Filter>Header Files\View\ViewObjects\HelpersStructs</Filter>
     </ClCompile>
     <ClCompile Include="FileReader.cpp">
       <Filter>Header Files\WorkWithFiles</Filter>
@@ -239,8 +245,23 @@
     <ClCompile Include="DialogManager.cpp">
       <Filter>Header Files\WorkWithFiles</Filter>
     </ClCompile>
+    <ClCompile Include="MainView.cpp">
+      <Filter>Header Files\View</Filter>
+    </ClCompile>
+    <ClCompile Include="ApplicationModel.cpp">
+      <Filter>Header Files\Model</Filter>
+    </ClCompile>
     <ClCompile Include="DomainModel.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="ViewObserver.cpp">
+      <Filter>Header Files\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelObserver.cpp">
+      <Filter>Header Files\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="Controller.cpp">
+      <Filter>Header Files\Controller</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

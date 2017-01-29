@@ -2,6 +2,8 @@
 #include "EventListener.h"
 #include "Rectangle.h"
 
+class CTextureCache;
+
 class CLayer :
 	public CEventListener
 {
@@ -9,6 +11,7 @@ public:
 	CLayer(Vec2 const& size = { 0.0, 0.0 }, Vec2 const& position = { 0.0, 0.0 });
 	virtual ~CLayer();
 
+	virtual void Draw(sf::RenderTarget * window, CTextureCache * cache);
 	virtual void Update();
 
 	void SetColor(SColor const& color);

@@ -34,7 +34,7 @@ DialogAnswer CDialogManager::StartDialog(std::string const & message)
 
 std::string CDialogManager::GetFilePath(bool isOpened)
 {
-	CFileDialog dlgFile(isOpened, NULL, NULL, OFN_EXPLORER, _T("Shape files (*.sm)|*.sm|"));
+	CFileDialog dlgFile(isOpened, _T(".sm"), NULL, OFN_EXPLORER | OFN_OVERWRITEPROMPT, _T("Shape files (*.sm)|*.sm|"));
 	CString fileName;
 	const int c_cMaxFiles = 100;
 	const int c_cbBuffSize = (c_cMaxFiles * (MAX_PATH + 1)) + 1;

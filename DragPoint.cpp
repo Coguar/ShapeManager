@@ -10,7 +10,6 @@ namespace
 }
 
 CDragPoint::CDragPoint()
-	: CShape(ShapeType::Circle)
 {
 }
 

@@ -31,14 +31,14 @@ bool CSelectFrame::OnEvent(sf::Event const & event)
 			auto pointPos = m_dragPoints[0]->GetPosition();
 			auto pointSize = m_dragPoints[0]->GetSize();
 			m_targetShape->SetPosition({ pointPos.x + pointSize.x / 2.0,  pointPos.y + pointSize.y / 2.0 });
-			SendCommandToReseiver(event);
+			OnResizeFrame(event);
 			return true;
 		}
 	}
 	return false;
 }
 
-void CSelectFrame::SetTarget(std::shared_ptr<CShape> const & shape)
+void CSelectFrame::SetTarget(std::shared_ptr<CShape> const & shape, size_t num)
 {
 		m_targetShape = shape;
 		SetPoints();
@@ -74,6 +74,33 @@ void CSelectFrame::UpdateFrame()
 	SetPoints();
 }
 
+void CSelectFrame::DrawFrame(sf::RenderTarget * window)
+{
+	if (window != nullptr && m_targetShape != nullptr)
+	{
+		auto size = m_targetShape->GetSize();
+		auto position = m_targetShape->GetPosition();
+		sf::RectangleShape frame({ float(size.x), float(size.y) });
+		frame.setFillColor(sf::Color(0, 0, 0, 0));
+		frame.setOutlineThickness(2.f);
+		frame.setOutlineColor(sf::Color::Green);
+		frame.setPosition({ float(position.x), float(position.y) });
+		window->draw(frame);
+
+		for (auto &point : m_dragPoints)
+		{
+			point->Draw(window, nullptr);
+		}
+	}
+}
+
+SEvent CSelectFrame::GetLastEvent()
+{
+	auto lastEvent = m_event;
+	m_event = SEvent();
+	return lastEvent;
+}
+
 void CSelectFrame::SetPoints()
 {
 	if (m_targetShape != nullptr)
@@ -92,20 +119,20 @@ void CSelectFrame::SetPoints()
 	}
 }
 
-
-void CSelectFrame::SendCommandToReseiver(sf::Event const & event)
+void CSelectFrame::OnResizeFrame(sf::Event const & event)
 {
-	if (GetReseiver() == nullptr || m_targetShape == nullptr)
-		return;
-	switch (event.type)
+	if (m_targetShape != nullptr)
 	{
-	case sf::Event::MouseButtonPressed:
-		m_oldFrameSize = m_targetShape->GetBoundingRect();
-		break;
-	case sf::Event::MouseButtonReleased:
-		GetReseiver()->ChangeRect(m_targetShape, m_oldFrameSize);
-		break;
-	default: 
-		break;
+		switch (event.type)
+		{
+		case sf::Event::MouseButtonPressed:
+			m_oldFrameSize = m_targetShape->GetBoundingRect();
+			break;
+		case sf::Event::MouseButtonReleased:
+			m_event = SEvent(EventType::ChangeShapeRect, 0, m_oldFrameSize, m_targetShape->GetBoundingRect());
+			break;
+		default:
+			break;
+		}
 	}
 }

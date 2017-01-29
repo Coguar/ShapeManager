@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Layer.h"
 #include "Reseiver.h"
+#include "TextureCache.h"
 
 CLayer::CLayer(Vec2 const & size, Vec2 const & position)
 	: m_rect(position,size)
@@ -10,6 +11,24 @@ CLayer::CLayer(Vec2 const & size, Vec2 const & position)
 
 CLayer::~CLayer()
 {
+}
+
+void CLayer::Draw(sf::RenderTarget * window, CTextureCache * cache)
+{
+	if (window != nullptr)
+	{
+		auto size = m_rect.size;
+		sf::RectangleShape layersRect({ float(size.x), float(size.y) });
+		auto position = m_rect.position;
+		layersRect.setPosition(float(position.x), float(position.y));
+		if (IsTextured() && cache != nullptr)
+		{
+			layersRect.setTexture(cache->GetTexture(m_texturePath).get());
+		}
+		layersRect.setFillColor(sf::Color(sf::Uint8(m_color.r), sf::Uint8(m_color.g), sf::Uint8(m_color.b), sf::Uint8(m_color.a)));
+
+		window->draw(layersRect);
+	}
 }
 
 void CLayer::Update()

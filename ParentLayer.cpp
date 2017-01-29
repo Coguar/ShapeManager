@@ -39,3 +39,12 @@ void CParentLayer::Update()
 		child->Update();
 	}
 }
+
+void CParentLayer::Draw(sf::RenderTarget * window, CTextureCache * cache)
+{
+	CLayer::Draw(window, cache);
+	for (auto &child : m_children)
+	{
+		child->Draw(window, cache);
+	}
+}

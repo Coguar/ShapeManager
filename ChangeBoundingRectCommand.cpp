@@ -1,10 +1,11 @@
 #include "stdafx.h"
 #include "ChangeBoundingRectCommand.h"
 
-CChangeBoundingRectCommand::CChangeBoundingRectCommand(std::shared_ptr<CShape> const & shape, CBoundingRect const & oldRect)
-	: m_shape(shape)
+CChangeBoundingRectCommand::CChangeBoundingRectCommand(size_t position, CBoundingRect const& newRect, CBoundingRect const& oldRect, CDomainModel* model)
+	: CMyCommand(model)
 	, m_oldRect(oldRect)
-	, m_newRect(shape->GetBoundingRect())
+	, m_newRect(newRect)
+	, m_shapePosition(position)
 {
 }
 
@@ -14,10 +15,16 @@ CChangeBoundingRectCommand::~CChangeBoundingRectCommand()
 
 void CChangeBoundingRectCommand::Execute()
 {
-	m_shape->SetBoundingRect(m_newRect);
+	if (m_model != nullptr)
+	{
+		m_model->ChangeShapeSettings(m_shapePosition, m_newRect.position, m_newRect.size);
+	}
 }
 
 void CChangeBoundingRectCommand::Unexecute()
 {
-	m_shape->SetBoundingRect(m_oldRect);
+	if (m_model != nullptr)
+	{
+		m_model->ChangeShapeSettings(m_shapePosition, m_oldRect.position, m_oldRect.size);
+	}
 }

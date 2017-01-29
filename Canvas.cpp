@@ -3,6 +3,7 @@
 #include "Triangle.h"
 #include "Square.h"
 #include "Reseiver.h"
+#include "ShapeModel.h"
 #include "Canvas.h"
 
 
@@ -16,74 +17,12 @@ CCanvas::~CCanvas()
 {
 }
 
-std::shared_ptr<CShape> CCanvas::CreateShape(ShapeType type)
-{
-	std::shared_ptr<CShape> shape;
-	switch (type)
-	{
-	case ShapeType::Circle:
-		shape = std::make_shared<CCircle>();
-		break;
-	case ShapeType::Triangle:
-		shape = std::make_shared<CTriangle>();
-		break;
-	case ShapeType::Rectangle:
-		shape = std::make_shared<ÑSquare>();
-		break;
-	default:
-		shape = std::make_shared<CCircle>();
-		break;
-	}
-	SetShape(shape);
-	shape->SetReseiver(GetReseiver());
-	GetReseiver()->AddShape(shape);
-	return shape;
-}
-
-void CCanvas::AddShape(std::shared_ptr<CShape> const & shape)
-{
-	m_shapes.push_back(shape);
-}
-
-void CCanvas::AddShape(std::shared_ptr<CShape> const& shape, size_t position)
-{
-	m_shapes.insert(m_shapes.begin() + position, shape);
-}
-
-void CCanvas::DeleteLastShape()
-{
-	if (m_shapes.back() == m_frame->GetTarget())
-	{
-		m_frame->ResetTargget();
-	}
-	m_shapes.pop_back();
-}
-
-void CCanvas::DeleteShapeByPosition(size_t position)
-{
-	m_shapes.erase(m_shapes.begin() + position);
-}
-
-bool CCanvas::DeleteSelectedShape()
-{
-	if (m_frame->GetTarget() != nullptr)
-	{
-		GetReseiver()->DeleteShape(m_frame->GetTarget(), m_targetShapePosition);
-		m_frame->ResetTargget();
-		return true;
-	}
-	return false;
-}
-
-std::vector<std::shared_ptr<CShape>> const& CCanvas::GetShapes() const
-{
-	return m_shapes;
-}
-
 bool CCanvas::OnEvent(sf::Event const & event)
 {
 	if (m_frame->OnEvent(event))
 	{
+		m_event = m_frame->GetLastEvent();
+		m_event.m_shapeNumber = m_targetShapePosition;
 		return true;
 	}
 	CParentLayer::OnEvent(event);
@@ -91,9 +30,9 @@ bool CCanvas::OnEvent(sf::Event const & event)
 	{
 		if (m_shapes[i]->OnEvent(event))
 		{
-			m_frame->SetTarget(m_shapes[i]);
-			ShapeChangeRectEvent(m_shapes[i], event);
+			m_frame->SetTarget(m_shapes[i], i);
 			m_targetShapePosition = i;
+			ShapeChangeRectEvent(m_shapes[i], event);
 			return true;
 		}
 	}
@@ -115,12 +54,63 @@ std::shared_ptr<CSelectFrame> const & CCanvas::GetFSelectFrame() const
 	return m_frame;
 }
 
-void CCanvas::SetNewShapesList(std::vector<std::shared_ptr<CShape>> const & shapes)
+size_t CCanvas::GetSelectedShapeNum() const
 {
+	if (m_frame->IsActive())
+	{
+		return m_targetShapePosition;
+	}
+	else
+	{
+		return UINT_MAX;
+	}
+}
+
+void CCanvas::AddShape(std::shared_ptr<SModelShape> const & shape, size_t pos)
+{
+	if (shape != nullptr)
+	{
+		if (pos >= m_shapes.size())
+		{
+			m_shapes.push_back(CreateShape(*shape.get()));
+		}
+		else
+		{
+			m_shapes.insert(m_shapes.begin() + pos, CreateShape(*shape.get()));
+		}
+	}
+}
+
+void CCanvas::DeleteShape(size_t pos)
+{
+	if (m_shapes.size() > pos)
+	{
+		m_shapes.erase(m_shapes.begin() + pos);
+	}
+	if (pos == m_targetShapePosition)
+	{
+		m_frame->ResetTargget();
+	}
+}
+
+void CCanvas::UpdateShape(size_t pos, CBoundingRect const & rect)
+{
+	if (pos < m_shapes.size())
+	{
+		m_shapes[pos]->SetBoundingRect(rect);
+	}
+}
+
+void CCanvas::SetNewShapesList(std::vector<std::shared_ptr<SModelShape>> const & shapes)
+{
+	if (shapes.size() < m_shapes.size())
+	{
+		m_frame->ResetTargget();
+	}
 	m_shapes.clear();
 	for (auto &shape : shapes)
 	{
-		m_shapes.push_back(shape);
+		m_shapes.push_back(CreateShape(*shape.get()));
 	}
 }
 
@@ -135,6 +125,48 @@ void CCanvas::Update()
 	m_frame->UpdateFrame();
 }
 
+void CCanvas::Draw(sf::RenderTarget * window, CTextureCache * cache)
+{
+	CLayer::Draw(window, cache);
+	for (auto &shape : m_shapes)
+	{
+		shape->Draw(window, cache);
+	}
+	m_frame->DrawFrame(window);
+}
+
+SEvent CCanvas::GetLastEvent()
+{
+	auto event = m_event;
+	m_event = SEvent();
+	return event;
+}
+
+std::shared_ptr<CShape> CCanvas::CreateShape(SModelShape const & data)
+{
+	std::shared_ptr<CShape> shape;
+	switch (data.m_type)
+	{
+	case ShapeType::Circle:
+		shape = std::make_shared<CCircle>();
+		break;
+	case ShapeType::Triangle:
+		shape = std::make_shared<CTriangle>();
+		break;
+	case ShapeType::Rectangle:
+		shape = std::make_shared<ÑSquare>();
+		break;
+	default:
+		shape = std::make_shared<CCircle>();
+		break;
+	}
+	shape->SetColor(color::SHAPE_COLOR);
+	shape->SetPosition(data.m_position);
+	shape->SetSize(data.m_size);
+	shape->SetAllowableArea(GetBoundingRect());
+	return shape;
+}
+
 void CCanvas::ShapeChangeRectEvent(std::shared_ptr<CShape> const & shape, sf::Event const& event)
 {
 	switch (event.type)
@@ -144,19 +176,12 @@ void CCanvas::ShapeChangeRectEvent(std::shared_ptr<CShape> const & shape, sf::Ev
 		break;
 	case sf::Event::MouseButtonReleased:
 		if (!(shape->GetPosition() == m_oldSelectShapeRect.position))
-			GetReseiver()->ChangeRect(shape, m_oldSelectShapeRect);
+		{
+			m_event = SEvent(EventType::ChangeShapeRect, m_targetShapePosition, m_oldSelectShapeRect, shape->GetBoundingRect());
+		}
 		break;
 	default:
 		break;
 	}
-}
-
-void CCanvas::SetShape(std::shared_ptr<CShape> const& shape)
-{
-	shape->SetColor(color::SHAPE_COLOR);
-	Vec2 position(GetPosition().x + GetSize().x / 2.0, GetPosition().y + GetSize().y / 2.0);
-	shape->SetPosition(position);
-	shape->SetSize(INITIALIZATION_SHAPE_SIZE);
-	shape->SetAllowableArea(GetBoundingRect());
 }
 

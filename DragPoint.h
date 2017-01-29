@@ -1,8 +1,8 @@
 #pragma once
-#include "AbstractShape.h"
+#include "Circle.h"
 
 class CDragPoint :
-	public CShape
+	public CCircle
 {
 public:
 	CDragPoint();

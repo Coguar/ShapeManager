@@ -2,17 +2,12 @@
 #include "MyCommand.h"
 
 
-CMyCommand::CMyCommand()
+CMyCommand::CMyCommand(CDomainModel* model)
+	: m_model(model)
 {
 }
 
 
 CMyCommand::~CMyCommand()
 {
-}
-
-
-void CMyCommand::SetCanvas(std::shared_ptr<CCanvas> const & canvas)
-{
-	m_canvas = canvas;
 }

@@ -1,12 +1,22 @@
 #include "stdafx.h"
 #include "Controller.h"
 
-CController::CController(sf::RenderWindow * target)
-	: m_target(target)
+
+CController::CController()
 {
-	m_model = std::make_unique<CAppModel>();
-	m_view = std::make_unique<CSceneView>(m_target);
+	m_appModel = std::make_unique<CApplicationModel>();
+	m_view = std::make_unique<CMainView>();
+
+	m_viewObserver = std::make_unique<CViewObserver>();
+	m_modelObserver = std::make_unique<CModelObserver>();
+
+	m_viewObserver->SetModel(m_appModel.get());
+	m_modelObserver->SetView(m_view.get());
+
+	m_appModel->RegisterObserver(*m_modelObserver.get());
+	m_view->RegisterObserver(*m_viewObserver.get());
 }
+
 
 CController::~CController()
 {
@@ -14,50 +24,5 @@ CController::~CController()
 
 void CController::Start()
 {
-	if (m_target == nullptr)
-	{
-		return;
-	}
-	while (m_target->isOpen())
-	{
-		sf::Event event;
-		while (m_target->pollEvent(event))
-		{
-			switch (event.type)
-			{
-			case sf::Event::Closed:
-				m_target->close();
-				break;
-			case sf::Event::KeyPressed:
-				OnKeyPressed(event.key);
-				break;
-			default:
-				m_model->GetRoot()->DispatchEvent(event);
-				break;
-			}
-		}
-		m_model->GetRoot()->Update();
-		Draw();
-	}
-}
-
-void CController::Draw()
-{
-	m_target->clear();
-	m_view->Draw(m_model->GetRoot().get());
-	m_view->DrawShapes(m_model->GetCanvas()->GetShapes());
-	m_view->DrawSelectFrame(m_model->GetCanvas()->GetFSelectFrame());
-	m_target->display();
-}
-
-void CController::OnKeyPressed(sf::Event::KeyEvent const & event)
-{
-	switch (event.code)
-	{
-	case sf::Keyboard::Delete:
-		m_model->DeleteSelectedShape();
-		break;
-	default:
-		break;
-	}
+	m_view->StartShow();
 }

@@ -1,21 +1,19 @@
 #pragma once
-#include "AppModel.h"
-#include "SceneView.h"
+#include "MainView.h"
+#include "ModelObserver.h"
+#include "ViewObserver.h"
 
 class CController
 {
 public:
-	CController(sf::RenderWindow * target);
+	CController();
 	~CController();
-
 	void Start();
-
 private:
-	void Draw();
-	void OnKeyPressed(sf::Event::KeyEvent const&  event);
+	std::unique_ptr<CApplicationModel> m_appModel;
+	std::unique_ptr<CMainView> m_view;
 
-	std::unique_ptr<CAppModel> m_model;
-	std::unique_ptr<CSceneView> m_view;
-	sf::RenderWindow * m_target = nullptr;
+	std::unique_ptr<CViewObserver> m_viewObserver;
+	std::unique_ptr<CModelObserver> m_modelObserver;
 };
 

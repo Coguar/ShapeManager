@@ -1,15 +1,13 @@
 #pragma once
 #include "CommandInterface.h"
-#include "Canvas.h"
-
+#include "DomainModel.h"
 class CMyCommand :
 	public ICommand
 {
 public:
-	CMyCommand();
+	CMyCommand(CDomainModel* model);
 	~CMyCommand();
-	void SetCanvas(std::shared_ptr<CCanvas> const& canvas);
 protected:
-	std::shared_ptr<CCanvas> m_canvas;
+	CDomainModel * m_model = nullptr;
 };
 

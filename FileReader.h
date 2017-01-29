@@ -1,12 +1,11 @@
 #pragma once
 
-class CShape;
-class CCanvas;
+struct SModelShape;
 
 class CFileReader
 {
 public:
-	static bool Save(std::vector<std::shared_ptr<CShape>> const& shapes);
-	static bool Open(std::shared_ptr<CCanvas> & canvas);
+	static void Save(std::string  const& path, std::vector<std::shared_ptr<SModelShape>> const& shapes);
+	static std::vector<std::shared_ptr<SModelShape>> Open(std::string  const& path);
 };
 

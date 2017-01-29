@@ -5,7 +5,7 @@ class CChangeBoundingRectCommand :
 	public CMyCommand
 {
 public:
-	CChangeBoundingRectCommand(std::shared_ptr<CShape> const& shape, CBoundingRect const& oldRect);
+	CChangeBoundingRectCommand(size_t position, CBoundingRect const& newRect, CBoundingRect const& oldRect, CDomainModel* model);
 	~CChangeBoundingRectCommand();
 
 	void Execute() override;
@@ -13,6 +13,6 @@ public:
 private:
 	CBoundingRect m_oldRect;
 	CBoundingRect m_newRect;
-	std::shared_ptr<CShape> m_shape;
+	size_t m_shapePosition = 0;
 };
 

@@ -1,12 +1,7 @@
 #include "stdafx.h"
-#include "AddShapeCommand.h"
-#include "ChangeBoundingRectCommand.h"
-#include "DeleteShapeCommand.h"
-#include "Canvas.h"
 #include "History.h"
 
-CHistory::CHistory(std::shared_ptr<CCanvas> const& canvas)
-	: m_canvas(canvas)
+CHistory::CHistory()
 {
 }
 
@@ -15,29 +10,8 @@ CHistory::~CHistory()
 {
 }
 
-void CHistory::AddShape(ShapePtr const & shape)
+void CHistory::PushCommand(std::shared_ptr<ICommand> const & command)
 {
-	auto command = std::make_shared<CAddShapeCommand>(shape);
-	command->SetCanvas(m_canvas);
-	command->Execute();
-	ClearOutdatedBranch();
-	m_doneCommands.push_back(command);
-	++m_currentCommandNumber;
-}
-
-void CHistory::DeleteShape(ShapePtr const & shape, int num)
-{
-	auto command = std::make_shared<CDeleteShapeCommand>(shape, num);
-	command->SetCanvas(m_canvas);
-	command->Execute();
-	ClearOutdatedBranch();
-	m_doneCommands.push_back(command);
-	++m_currentCommandNumber;
-}
-
-void CHistory::ChangeRect(ShapePtr const & shape, CBoundingRect const & rect)
-{
-	auto command = std::make_shared<CChangeBoundingRectCommand>(shape, rect);
 	command->Execute();
 	ClearOutdatedBranch();
 	m_doneCommands.push_back(command);

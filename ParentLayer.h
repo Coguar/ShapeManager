@@ -14,6 +14,7 @@ public:
 
 	virtual void DispatchEvent(sf::Event const& event);
 	void Update() override;
+	void Draw(sf::RenderTarget * window, CTextureCache * cache) override;
 private:
 	std::vector<CLayerPtr> m_children;
 

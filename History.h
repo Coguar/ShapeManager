@@ -2,17 +2,15 @@
 #include "Reseiver.h"
 #include "CommandInterface.h"
 
-class CCanvas;
 
 class CHistory :
 	public IReseiver
 {
 public:
-	CHistory(std::shared_ptr<CCanvas> const& canvas);
+	CHistory();
 	~CHistory();
-	void AddShape(ShapePtr const& shape) override;
-	void DeleteShape(ShapePtr const& shape, int num) override;
-	void ChangeRect(ShapePtr const& shape, CBoundingRect const& rect) override;
+
+	void PushCommand(std::shared_ptr<ICommand> const& command);
 
 	void Redo() override;
 	void Undo() override;
@@ -22,7 +20,6 @@ public:
 private:
 	void ClearOutdatedBranch();
 
-	std::shared_ptr<CCanvas> m_canvas;
 	std::vector<std::shared_ptr<ICommand>> m_doneCommands;
 	size_t m_currentCommandNumber = 0;
 };

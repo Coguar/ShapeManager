@@ -28,8 +28,8 @@ static const Vec2 CANVAS_SIZE = { 790, 490 };
 static const Vec2 TOOLBAR_POSITION = { 0, 0 };
 static const Vec2 TOOLBAR_SIZE = { 800, 100 };
 
-static const double MAX_SHAPE_SIZE = 140.0;
-static const double MIN_SHAPE_SIZE = 30.0;
+static const double MAX_SHAPE_SIZE = 200.0;
+static const double MIN_SHAPE_SIZE = 20.0;
 static const double DEFAULT_TOOLBAR_ELEMENT_OFFSET = 10.0;
 
 static const float SHAPE_OUTLINE_SIZE = 2.f;

@@ -30,13 +30,3 @@ bool CEventListener::OnMouseMoved(sf::Event::MouseMoveEvent const & event)
 {
 	return false;
 }
-
-void CEventListener::SetReseiver(std::shared_ptr<IReseiver> const & reseiver)
-{
-	m_reseiver = reseiver;
-}
-
-std::shared_ptr<IReseiver> const & CEventListener::GetReseiver() const
-{
-	return m_reseiver;
-}

@@ -8,10 +8,13 @@ public:
 	CActionButton(SColor const& color);
 	~CActionButton();
 	void SetAction(signal::Signal<void()>::slot_type const& action);
+
+	void SetActiveColor(SColor const& color);
+
+protected:
 	bool OnMousePressed(sf::Event::MouseButtonEvent const& event) override;
 	bool OnMouseReleased(sf::Event::MouseButtonEvent const& event) override;
 
-	void SetActiveColor(SColor const& color);
 private:
 	boost::signals2::scoped_connection m_connection;
 	signal::Signal<void()> m_onClickAction;

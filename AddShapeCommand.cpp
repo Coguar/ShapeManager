@@ -1,9 +1,9 @@
 #include "stdafx.h"
 #include "AddShapeCommand.h"
 
-
-CAddShapeCommand::CAddShapeCommand(std::shared_ptr<CShape> const& shape)
-	: m_shape(shape)
+CAddShapeCommand::CAddShapeCommand(std::shared_ptr<SModelShape> const& shape, CDomainModel* model)
+	: CMyCommand(model)
+	, m_shape(shape)
 {
 }
 
@@ -14,16 +14,16 @@ CAddShapeCommand::~CAddShapeCommand()
 
 void CAddShapeCommand::Execute()
 {
-	if (m_canvas != nullptr && m_shape != nullptr)
+	if (m_model != nullptr && m_shape != nullptr)
 	{
-		m_canvas->AddShape(m_shape);
+		m_model->AddShape(m_shape);
 	}
 }
 
 void CAddShapeCommand::Unexecute()
 {
-	if (m_canvas != nullptr && m_shape != nullptr)
+	if (m_model != nullptr && m_shape != nullptr)
 	{
-		m_canvas->DeleteLastShape();
+		m_model->DeleteLastShape();
 	}
 }
