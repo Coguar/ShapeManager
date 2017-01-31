@@ -263,5 +263,8 @@
     <ClCompile Include="Controller.cpp">
       <Filter>Header Files\Controller</Filter>
     </ClCompile>
+    <ClCompile Include="ShapeModel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

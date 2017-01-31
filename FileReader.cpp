@@ -20,7 +20,7 @@ namespace
 		case ShapeType::Rectangle:
 			return "Rectangle";
 		default:
-			break;
+			return "Circle";
 		}
 	}
 
@@ -57,7 +57,11 @@ void CFileReader::Save(std::string const & path, std::vector<std::shared_ptr<SMo
 			propertyTree.add_child("Shapes.Shape", child);
 		}
 		std::stringstream stream;
-		boost::property_tree::write_xml(stream, propertyTree);
+		boost::property_tree::xml_writer_settings<std::string> settings;
+		settings.indent_char = '\t';
+		settings.indent_count = 1;
+
+		boost::property_tree::write_xml(stream, propertyTree, settings);
 
 		std::ofstream out(path);
 		std::string str;
