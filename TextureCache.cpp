@@ -22,6 +22,6 @@ std::shared_ptr<sf::Texture> const & CTextureCache::GetTexture(std::string const
 		auto texture = std::make_shared<sf::Texture>();
 		texture->loadFromFile(path);
 		m_cache.insert({ path, texture });
-		return texture;
+		return m_cache.find(path)->second;
 	}
 }
