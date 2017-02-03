@@ -4,7 +4,7 @@
 
 
 class CHistory :
-	public IReseiver
+	public IHistory
 {
 public:
 	CHistory();

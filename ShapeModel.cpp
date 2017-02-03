@@ -11,7 +11,7 @@ void SModelShape::SetRect(Vec2 const & pos, Vec2 const & size)
 {
 	m_position = pos;
 	m_size = size;
-	m_OnRectChange(m_position, m_size);
+	m_OnRectChange({ m_position, m_size });
 }
 
 ShapeType SModelShape::GetType() const
@@ -29,8 +29,9 @@ Vec2 SModelShape::GetSize() const
 	return m_size;
 }
 
-void SModelShape::DoOnRectChanged(std::function<void(Vec2, Vec2)> const & action)
+void SModelShape::DoOnRectChanged(std::function<void(const CBoundingRect&)> const & action)
 {
+	m_OnRectChange.disconnect_all_slots();
 	m_OnRectChange.connect(action);
 }
 

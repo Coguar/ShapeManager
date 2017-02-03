@@ -1,6 +1,6 @@
 #pragma once
 
-struct SModelShape;
+class SModelShape;
 
 class CFileReader
 {

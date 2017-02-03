@@ -16,6 +16,7 @@ public:
 	bool OnMouseMoved(sf::Event::MouseMoveEvent const& event) override;
 
 	bool IsPointIntoShape(Vec2 const & point) const override;
+
 private:
 	void UpdateConnectedPoints();
 

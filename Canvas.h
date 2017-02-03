@@ -1,8 +1,7 @@
 #pragma once
 #include "SelectFrame.h"
-#include "ViewEvent.h"
 
-struct SModelShape;
+class SModelShape;
 
 class CCanvas : public CParentLayer
 {
@@ -17,27 +16,28 @@ public:
 
 	void AddShape(std::shared_ptr<SModelShape> const& shape, size_t pos);
 	void DeleteShape(size_t pos);
-	void UpdateShape(size_t pos, CBoundingRect const& rect);
 	void SetNewShapesList(std::vector<std::shared_ptr<SModelShape>> const& shapes);
 	void Clear();
 
-	void Update() override;
 	void Draw(sf::RenderTarget * window, CTextureCache * cache) override;
 
-	SEvent GetLastEvent();
+	void DoOnShapeRectChanged(std::function<void(size_t, const CBoundingRect&)> const& action);
+
 protected:
 	bool OnMousePressed(sf::Event::MouseButtonEvent const & event) override;
 
 private:
-	std::shared_ptr<CShape> CreateShape(SModelShape const& data);
+	std::shared_ptr<CShape> CreateShape(std::shared_ptr<SModelShape> const& data);
 
 	void ShapeChangeRectEvent(std::shared_ptr<CShape> const& shape, sf::Event const& event);
+	void ChangeShapeRect();
 
 	std::vector<std::shared_ptr<CShape>> m_shapes;
 	std::shared_ptr<CSelectFrame> m_frame;
 
 	CBoundingRect m_oldSelectShapeRect;
 	size_t m_targetShapePosition = 0;
-	SEvent m_event;
+
+	boost::signals2::signal<void(size_t, const CBoundingRect&)> m_onShapesRectChange;
 };
 

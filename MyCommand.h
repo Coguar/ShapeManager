@@ -1,6 +1,7 @@
 #pragma once
 #include "CommandInterface.h"
 #include "DomainModel.h"
+
 class CMyCommand :
 	public ICommand
 {

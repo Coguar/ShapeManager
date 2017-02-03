@@ -10,6 +10,7 @@
 CCanvas::CCanvas()
 {
 	m_frame = std::make_shared<CSelectFrame>();
+	m_frame->DoOnResize(boost::bind(&CCanvas::ChangeShapeRect, this));
 }
 
 
@@ -21,8 +22,6 @@ bool CCanvas::OnEvent(sf::Event const & event)
 {
 	if (m_frame->OnEvent(event))
 	{
-		m_event = m_frame->GetLastEvent();
-		m_event.m_shapeNumber = m_targetShapePosition;
 		return true;
 	}
 	CParentLayer::OnEvent(event);
@@ -72,11 +71,11 @@ void CCanvas::AddShape(std::shared_ptr<SModelShape> const & shape, size_t pos)
 	{
 		if (pos >= m_shapes.size())
 		{
-			m_shapes.push_back(CreateShape(*shape.get()));
+			m_shapes.push_back(CreateShape(shape));
 		}
 		else
 		{
-			m_shapes.insert(m_shapes.begin() + pos, CreateShape(*shape.get()));
+			m_shapes.insert(m_shapes.begin() + pos, CreateShape(shape));
 		}
 	}
 }
@@ -93,15 +92,7 @@ void CCanvas::DeleteShape(size_t pos)
 	}
 }
 
-void CCanvas::UpdateShape(size_t pos, CBoundingRect const & rect)
-{
-	if (pos < m_shapes.size())
-	{
-		m_shapes[pos]->SetBoundingRect(rect);
-	}
-}
-
-void CCanvas::SetNewShapesList(std::vector<std::shared_ptr<SModelShape>> const & shapes)
+void CCanvas::SetNewShapesList(std::vector<std::shared_ptr<SModelShape>> const& shapes)
 {
 	if (shapes.size() < m_shapes.size())
 	{
@@ -110,7 +101,7 @@ void CCanvas::SetNewShapesList(std::vector<std::shared_ptr<SModelShape>> const &
 	m_shapes.clear();
 	for (auto &shape : shapes)
 	{
-		m_shapes.push_back(CreateShape(*shape.get()));
+		m_shapes.push_back(CreateShape(shape));
 	}
 }
 
@@ -120,14 +111,9 @@ void CCanvas::Clear()
 	m_shapes.clear();
 }
 
-void CCanvas::Update()
-{
-	m_frame->UpdateFrame();
-}
-
 void CCanvas::Draw(sf::RenderTarget * window, CTextureCache * cache)
 {
-	CLayer::Draw(window, cache);
+	CSolidLayer::Draw(window, cache);
 	for (auto &shape : m_shapes)
 	{
 		shape->Draw(window, cache);
@@ -135,17 +121,15 @@ void CCanvas::Draw(sf::RenderTarget * window, CTextureCache * cache)
 	m_frame->DrawFrame(window);
 }
 
-SEvent CCanvas::GetLastEvent()
+void CCanvas::DoOnShapeRectChanged(std::function<void(size_t, const CBoundingRect&)> const & action)
 {
-	auto event = m_event;
-	m_event = SEvent();
-	return event;
+	m_onShapesRectChange.connect(action);
 }
 
-std::shared_ptr<CShape> CCanvas::CreateShape(SModelShape const & data)
+std::shared_ptr<CShape> CCanvas::CreateShape(std::shared_ptr<SModelShape> const& data)
 {
 	std::shared_ptr<CShape> shape;
-	switch (data.m_type)
+	switch (data->GetType())
 	{
 	case ShapeType::Circle:
 		shape = std::make_shared<CCircle>();
@@ -161,9 +145,11 @@ std::shared_ptr<CShape> CCanvas::CreateShape(SModelShape const & data)
 		break;
 	}
 	shape->SetColor(color::SHAPE_COLOR);
-	shape->SetPosition(data.m_position);
-	shape->SetSize(data.m_size);
+	shape->SetPosition(data->GetPosition());
+	shape->SetSize(data->GetSize());
 	shape->SetAllowableArea(GetBoundingRect());
+
+	data->DoOnRectChanged(boost::bind(&CShape::SetBoundingRect, shape.get(), _1));
 	return shape;
 }
 
@@ -177,11 +163,16 @@ void CCanvas::ShapeChangeRectEvent(std::shared_ptr<CShape> const & shape, sf::Ev
 	case sf::Event::MouseButtonReleased:
 		if (!(shape->GetPosition() == m_oldSelectShapeRect.position))
 		{
-			m_event = SEvent(EventType::ChangeShapeRect, m_targetShapePosition, m_oldSelectShapeRect, shape->GetBoundingRect());
+			ChangeShapeRect();
 		}
 		break;
 	default:
 		break;
 	}
+}
+
+void CCanvas::ChangeShapeRect()
+{
+	m_onShapesRectChange(m_targetShapePosition, m_shapes[m_targetShapePosition]->GetBoundingRect());
 }
 

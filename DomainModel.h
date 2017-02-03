@@ -1,33 +1,8 @@
 #pragma once
 #include "ShapeModel.h"
-#include "Observer.h"
 
-const enum class DomEventType
-{
-	Add = 0,
-	Del,
-	Change,
-	Clear,
-	Saved,
-};
-
-struct DomEvent
-{
-	DomEvent(DomEventType type, size_t pos, std::shared_ptr<SModelShape> const& element)
-		: m_type(type)
-		, m_pos(pos)
-		, m_element(element)
-	{}
-
-	DomEventType m_type;
-	size_t m_pos;
-	std::shared_ptr<SModelShape> m_element;
-};
-
-using DataType = std::vector<DomEvent>;
 
 class CDomainModel
-	: public CObservable<DataType>
 {
 public:
 	CDomainModel();
@@ -43,16 +18,23 @@ public:
 	void SetNewShapeList(std::vector<std::shared_ptr<SModelShape>> const& shapes);
 
 	void DataSaved();
-	void DataChanged();
 
 	std::vector<std::shared_ptr<SModelShape>> const& GetData() const;
 
-protected:
-	DataType GetChangedData()const override;
+	void DoOnShapeAdd(std::function<void(std::shared_ptr<SModelShape> const& shape, size_t number)> const& action);
+	void DoOnShapeDelete(std::function<void(size_t number)> const& action);
+	void DoOnShapesClear(std::function<void()> const& action);
+	void DoOnDataSaved(std::function<void()> const& action);
+	void DoOndataChanged(std::function<void()> const& action);
 
 private:
-	std::vector<std::shared_ptr<SModelShape>> m_shapes;
 
-	DataType m_events;
+	boost::signals2::signal<void(std::shared_ptr<SModelShape> const& shape, size_t number)> m_onShapeAdded;
+	boost::signals2::signal<void(size_t number)> m_onShapeDelete;
+	boost::signals2::signal<void()> m_onShapeListClear;
+	boost::signals2::signal<void()> m_onDataSaved;
+	boost::signals2::signal<void()> m_onDataChange;
+
+	std::vector<std::shared_ptr<SModelShape>> m_shapes;
 };
 

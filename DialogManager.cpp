@@ -32,6 +32,12 @@ DialogAnswer CDialogManager::StartDialog(std::string const & message)
 	}
 }
 
+void CDialogManager::ErrorDialog(std::string const & message)
+{
+	std::wstring wmsg(message.begin(), message.end());
+	AfxMessageBox(wmsg.data(), MB_ICONERROR);
+}
+
 std::string CDialogManager::GetFilePath(bool isOpened)
 {
 	CFileDialog dlgFile(isOpened, _T(".sm"), NULL, OFN_EXPLORER | OFN_OVERWRITEPROMPT, _T("Shape files (*.sm)|*.sm|"));

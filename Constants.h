@@ -46,3 +46,9 @@ static const std::string SAVE_PATH = "./res/save.png";
 static const std::string NEW_PATH = "./res/new.png";
 
 static const std::string SAVE_MSG = "Current data will be lost! Would you like to save them?";
+static const std::string XML_ERROR_MSG = "XML parser error!";
+
+static const std::string ICON_PATH = "./res/icon.png";
+static const std::string TITLE = "ShapeManager";
+static const unsigned int ANTI_ALIASING_LVL = 8;
+static const unsigned int FPS = 60;

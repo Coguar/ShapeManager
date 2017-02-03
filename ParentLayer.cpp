@@ -3,7 +3,7 @@
 
 
 CParentLayer::CParentLayer(Vec2 const & size, Vec2 const & position)
-	: CLayer(size, position)
+	: CSolidLayer(size, position)
 {
 }
 
@@ -32,17 +32,10 @@ void CParentLayer::DispatchEvent(sf::Event const & event)
 	}
 }
 
-void CParentLayer::Update()
-{
-	for (auto &child : m_children)
-	{
-		child->Update();
-	}
-}
 
 void CParentLayer::Draw(sf::RenderTarget * window, CTextureCache * cache)
 {
-	CLayer::Draw(window, cache);
+	CSolidLayer::Draw(window, cache);
 	for (auto &child : m_children)
 	{
 		child->Draw(window, cache);

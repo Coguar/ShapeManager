@@ -64,6 +64,17 @@ CBoundingRect const & CShape::GetAllowableArea() const
 	return m_allowableArea;
 }
 
+void CShape::SetBoundingRect(CBoundingRect const& rect)
+{
+	CLayer::SetBoundingRect(rect);
+	m_onChangeRect();
+}
+
+boost::signals2::scoped_connection CShape::DoOnChangeRect(std::function<void()> const & action)
+{
+	return m_onChangeRect.connect(action);
+}
+
 void CShape::SetInAllowableArea()
 {
 	auto position = GetPosition();

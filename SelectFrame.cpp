@@ -3,12 +3,12 @@
 
 CSelectFrame::CSelectFrame()
 {
-	CDragPoint point;
-	point.SetColor(color::DRAG_POINT_COLOR);
-	point.SetSize(DRAG_POINT_SIZE);
 	for (size_t i = 0; i < 4; ++i)
 	{
-		m_dragPoints.push_back(std::make_shared<CDragPoint>(point));
+		auto point = std::make_shared<CDragPoint>();
+		point->SetColor(color::DRAG_POINT_COLOR);
+		point->SetSize(DRAG_POINT_SIZE);
+		m_dragPoints.push_back(point);
 	}
 	m_dragPoints[0]->SetConnectedPoint(m_dragPoints[1], m_dragPoints[3]);
 	m_dragPoints[1]->SetConnectedPoint(m_dragPoints[0], m_dragPoints[2]);
@@ -40,8 +40,10 @@ bool CSelectFrame::OnEvent(sf::Event const & event)
 
 void CSelectFrame::SetTarget(std::shared_ptr<CShape> const & shape, size_t num)
 {
-		m_targetShape = shape;
-		SetPoints();
+	m_connection.disconnect();
+	m_targetShape = shape;
+	m_connection = m_targetShape->DoOnChangeRect(boost::bind(&CSelectFrame::SetPoints, this));
+	SetPoints();
 }
 
 std::shared_ptr<CShape> const & CSelectFrame::GetTarget() const
@@ -69,11 +71,6 @@ CBoundingRect const & CSelectFrame::GetTargetRect() const
 	return m_targetShape->GetBoundingRect();
 }
 
-void CSelectFrame::UpdateFrame()
-{
-	SetPoints();
-}
-
 void CSelectFrame::DrawFrame(sf::RenderTarget * window)
 {
 	if (window != nullptr && m_targetShape != nullptr)
@@ -94,11 +91,9 @@ void CSelectFrame::DrawFrame(sf::RenderTarget * window)
 	}
 }
 
-SEvent CSelectFrame::GetLastEvent()
+void CSelectFrame::DoOnResize(std::function<void()> const& action)
 {
-	auto lastEvent = m_event;
-	m_event = SEvent();
-	return lastEvent;
+	m_onResizeShape.connect(action);
 }
 
 void CSelectFrame::SetPoints()
@@ -129,7 +124,7 @@ void CSelectFrame::OnResizeFrame(sf::Event const & event)
 			m_oldFrameSize = m_targetShape->GetBoundingRect();
 			break;
 		case sf::Event::MouseButtonReleased:
-			m_event = SEvent(EventType::ChangeShapeRect, 0, m_oldFrameSize, m_targetShape->GetBoundingRect());
+			m_onResizeShape();
 			break;
 		default:
 			break;

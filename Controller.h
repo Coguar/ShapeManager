@@ -1,7 +1,6 @@
 #pragma once
 #include "MainView.h"
-#include "ModelObserver.h"
-#include "ViewObserver.h"
+#include "ApplicationModel.h"
 
 class CController
 {
@@ -10,10 +9,10 @@ public:
 	~CController();
 	void Start();
 private:
-	std::unique_ptr<CApplicationModel> m_appModel;
-	std::unique_ptr<CMainView> m_view;
+	void ConnectSignalsFromView();
+	void ConnectSignalsFromModel();
 
-	std::unique_ptr<CViewObserver> m_viewObserver;
-	std::unique_ptr<CModelObserver> m_modelObserver;
+	std::shared_ptr<CApplicationModel> m_appModel;
+	std::shared_ptr<CMainView> m_view;
 };
 

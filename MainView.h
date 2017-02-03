@@ -2,10 +2,8 @@
 #include "Toolbar.h"
 #include "ActionButton.h"
 #include "Canvas.h"
-#include "Observer.h"
 
 class CMainView 
-	: public CObservable<SEvent>
 {
 public:
 	CMainView();
@@ -14,15 +12,20 @@ public:
 	std::shared_ptr<CParentLayer> const& GetRoot() const;
 	std::shared_ptr<CCanvas> const& GetCanvas() const;
 
-	void SetNewShapeList(std::vector<std::shared_ptr<SModelShape>> const& shapes);
+	void SetNewShapeList(std::vector<std::shared_ptr<SModelShape>> & shapes);
 
-	void SetEvent(EventType type);
 	void SetDocDataState(bool isSaved);
 
 	void StartShow();
 
-protected:
-	SEvent GetChangedData()const override;
+	void DoOnShapeAdded(std::function<void(ShapeType, Vec2)> const& action);
+	void DoOnDeleteShape(std::function<void(size_t)> const& action);
+	void DoOnRedo(std::function<void()> const& action);
+	void DoOnUndo(std::function<void()> const& action);
+	void DoOnSave(std::function<void(const std::string&)> const& action);
+	void DoOnOpen(std::function<void(const std::string&)> const& action);
+	void DoOnCreate(std::function<void()> const& action);
+	void DoOnChangeShapeRect(std::function<void(size_t, Vec2, Vec2)> const& action);
 
 private:
 	void OpenNewFile();
@@ -30,12 +33,17 @@ private:
 	void CreateNewFile();
 	bool SaveChangesDialog();
 
+	void ChangeShapeRect(size_t number, CBoundingRect const& rect);
+
+	void Redo();
+	void Undo();
+
+	void PrepareAddShapeSignal(ShapeType type);
+
 	void CMainView::OnKeyPressed(sf::Event::KeyEvent const & event);
 
 	void InitRootLayer();
 	void InitCanvas();
-
-	void CheckEvent();
 
 	std::shared_ptr<CToolbar> CreateToolbar();
 	std::shared_ptr<CActionButton> CreateButton(Vec2 const& size, SColor const& color, std::function<void()> const& function, std::string const& texturePath = std::string());
@@ -43,7 +51,16 @@ private:
 	std::shared_ptr<CParentLayer> m_root;
 	std::shared_ptr<CCanvas> m_canvas;
 
-	SEvent m_event;
 	bool m_dataWasChange = false;
+
+	boost::signals2::signal<void(ShapeType, Vec2)> m_onShapeAdd;
+	boost::signals2::signal<void(size_t)> m_onDeleteShape;
+	boost::signals2::signal<void(size_t, Vec2, Vec2)> m_onChangedRect;
+	boost::signals2::signal<void()> m_onRedo;
+	boost::signals2::signal<void()> m_onUndo;
+	boost::signals2::signal<void(const std::string&)> m_onSave;
+	boost::signals2::signal<void(const std::string&)> m_onOpen;
+	boost::signals2::signal<void()> m_onCreate;
+
 };
 

@@ -9,28 +9,32 @@
 
 namespace
 {
+	const std::string  CIRCLE_WORD = "Circle";
+	const std::string  TRIANGLE_WORD = "Triangle";
+	const std::string  RECTANGLE_WORD = "Rectangle";
+
 	std::string GetShapeName(ShapeType type)
 	{
 		switch (type)
 		{
 		case ShapeType::Circle:
-			return "Circle";
+			return CIRCLE_WORD;
 		case ShapeType::Triangle:
-			return "Triangle";
+			return TRIANGLE_WORD;
 		case ShapeType::Rectangle:
-			return "Rectangle";
+			return RECTANGLE_WORD;
 		default:
-			return "Circle";
+			return CIRCLE_WORD;
 		}
 	}
 
 	ShapeType GetShapeType(std::string const& typeStr)
 	{
-		if (typeStr == "Circle")
+		if (typeStr == CIRCLE_WORD)
 		{
 			return ShapeType::Circle;
 		}
-		else if (typeStr == "Triangle")
+		else if (typeStr == TRIANGLE_WORD)
 		{
 			return ShapeType::Triangle;
 		}
@@ -49,19 +53,15 @@ void CFileReader::Save(std::string const & path, std::vector<std::shared_ptr<SMo
 		for (auto &shape : shapes)
 		{
 			boost::property_tree::ptree child;
-			child.add("Type", GetShapeName(shape->m_type));
-			child.add("X", std::to_string(shape->m_position.x));
-			child.add("Y", std::to_string(shape->m_position.y));
-			child.add("Height", std::to_string(shape->m_size.y));
-			child.add("Width", std::to_string(shape->m_size.x));
+			child.add("Type", GetShapeName(shape->GetType()));
+			child.add("X", std::to_string(shape->GetPosition().x));
+			child.add("Y", std::to_string(shape->GetPosition().y));
+			child.add("Height", std::to_string(shape->GetSize().y));
+			child.add("Width", std::to_string(shape->GetSize().x));
 			propertyTree.add_child("Shapes.Shape", child);
 		}
 		std::stringstream stream;
-		boost::property_tree::xml_writer_settings<std::string> settings;
-		settings.indent_char = '\t';
-		settings.indent_count = 1;
-
-		boost::property_tree::write_xml(stream, propertyTree, settings);
+		boost::property_tree::write_xml(stream, propertyTree);
 
 		std::ofstream out(path);
 		std::string str;
@@ -106,8 +106,7 @@ std::vector<std::shared_ptr<SModelShape>> CFileReader::Open(std::string const & 
 		}
 		catch (boost::property_tree::xml_parser_error)
 		{
-			std::cout << "XML parser error!" << std::endl;
-			throw;
+			CDialogManager::ErrorDialog(XML_ERROR_MSG);
 		}
 	}
 	return shapes;

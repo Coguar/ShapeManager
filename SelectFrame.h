@@ -1,6 +1,5 @@
 #pragma once
 #include "DragPoint.h"
-#include "ViewEvent.h"
 
 class CSelectFrame :
 	public CEventListener
@@ -19,10 +18,9 @@ public:
 	void ResetTargget();
 	bool IsActive() const;
 
-	void UpdateFrame();
 	void DrawFrame(sf::RenderTarget * window);
 
-	SEvent GetLastEvent();
+	void DoOnResize(std::function<void()> const& action);
 
 private:
 	void SetPoints();
@@ -32,6 +30,7 @@ private:
 	std::shared_ptr<CShape> m_targetShape;
 	std::vector<std::shared_ptr<CDragPoint>> m_dragPoints;
 
-	SEvent m_event;
+	boost::signals2::signal<void()> m_onResizeShape;
+	boost::signals2::scoped_connection m_connection;
 };
 

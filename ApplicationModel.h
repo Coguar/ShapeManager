@@ -4,14 +4,10 @@
 class CHistory;
 
 class CApplicationModel
-	: public IObserver<DataType>
-	, public CObservable<DataType>
 {
 public:
 	CApplicationModel();
 	~CApplicationModel();
-
-	void Update(DataType const& data) override;
 
 	void AddShape(ShapeType type, Vec2 const& position);
 	void DeleteShape(size_t number);
@@ -25,13 +21,11 @@ public:
 
 	void Clear();
 
-protected:
-	DataType GetChangedData()const override;
+	CDomainModel* GetShapesCollection() const;
 
 private:
 	std::unique_ptr<CHistory> m_history;
 
 	std::unique_ptr<CDomainModel> m_domainModel;
-	DataType m_domainEvents;
 };
 

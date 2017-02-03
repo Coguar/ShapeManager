@@ -3,7 +3,7 @@
 #include "ShapesTypes.h"
 
 class CShape 
-	: public CLayer
+	: public CSolidLayer
 {
 public:
 	CShape(ShapeType type);
@@ -19,6 +19,11 @@ public:
 	bool IsMooved() const;
 	void SetAllowableArea(CBoundingRect const& rect);
 	CBoundingRect const& GetAllowableArea() const;
+
+	void SetBoundingRect(CBoundingRect const& rect) override;
+
+	boost::signals2::scoped_connection DoOnChangeRect(std::function<void()> const& action);
+
 private:
 	void SetInAllowableArea();
 
@@ -27,5 +32,7 @@ private:
 	Vec2 m_offset;
 
 	CBoundingRect m_allowableArea;
+
+	boost::signals2::signal<void()> m_onChangeRect;
 };
 

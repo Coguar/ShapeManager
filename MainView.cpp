@@ -8,6 +8,7 @@
 CMainView::CMainView()
 {
 	InitRootLayer();
+	m_canvas->DoOnShapeRectChanged(boost::bind(&CMainView::ChangeShapeRect, this, _1, _2));
 }
 
 
@@ -25,30 +26,14 @@ std::shared_ptr<CCanvas> const & CMainView::GetCanvas() const
 	return m_canvas;
 }
 
-void CMainView::SetNewShapeList(std::vector<std::shared_ptr<SModelShape>> const & shapes)
+void CMainView::SetNewShapeList(std::vector<std::shared_ptr<SModelShape>> & shapes)
 {
 	m_canvas->SetNewShapesList(shapes);
-}
-
-void CMainView::SetEvent(EventType type)
-{
-	m_event = SEvent(type);
-	if (type == EventType::AddCircle || type == EventType::AddRectangle || type == EventType::AddTriangle)
-	{
-		auto size = m_canvas->GetSize();
-		auto pos = m_canvas->GetPosition();
-		m_event.m_newRect.position = { pos.x + size.x / 2.0, pos.y + size.y / 2.0 };
-	}
 }
 
 void CMainView::SetDocDataState(bool isSaved)
 {
 	m_dataWasChange = !isSaved;
-}
-
-SEvent CMainView::GetChangedData() const
-{
-	return m_event;
 }
 
 
@@ -59,8 +44,7 @@ void CMainView::OpenNewFile()
 		auto path = CDialogManager::GetFileToOpen();
 		if (!path.empty())
 		{
-			m_event = SEvent(EventType::Open);
-			m_event.m_filePath = path;
+			m_onOpen(path);
 		}
 	}
 }
@@ -70,10 +54,7 @@ bool CMainView::SaveCurrentState()
 	auto path = CDialogManager::GetFileToSave();
 	if (!path.empty())
 	{
-		m_event = SEvent(EventType::Save);
-		m_event.m_filePath = path;
-		NotifyObservers();
-		m_dataWasChange = false;
+		m_onSave(path);
 		return true;
 	}
 	return false;
@@ -83,7 +64,7 @@ void CMainView::CreateNewFile()
 {
 	if (SaveChangesDialog())
 	{
-		m_event = SEvent(EventType::Open);
+		m_onCreate();
 	}
 }
 
@@ -105,6 +86,30 @@ bool CMainView::SaveChangesDialog()
 	return false;
 }
 
+void CMainView::ChangeShapeRect(size_t number, CBoundingRect const & rect)
+{
+	m_onChangedRect(number, rect.position, rect.size);
+}
+
+void CMainView::Redo()
+{
+	m_onRedo();
+}
+
+void CMainView::Undo()
+{
+	m_onUndo();
+}
+
+void CMainView::PrepareAddShapeSignal(ShapeType type)
+{
+	auto canvasSize = m_canvas->GetSize();
+	auto canvasPos = m_canvas->GetPosition();
+	Vec2 position = { canvasPos.x + canvasSize.x / 2.0, canvasPos.y + canvasSize.y / 2.0 };
+
+	m_onShapeAdd(type, position);
+}
+
 void CMainView::InitRootLayer()
 {
 	m_root = std::make_shared<CParentLayer>(MAIN_WINDOW_SIZE);
@@ -113,12 +118,12 @@ void CMainView::InitRootLayer()
 	auto toolbar = CreateToolbar();
 	m_root->AddChild(toolbar);
 
-	toolbar->AddChild(CreateButton(DEFAULT_BUTTONN_SIZE, color::WHITE, std::bind(&CMainView::SetEvent, this, EventType::AddCircle), CIRCLE_PATH));
-	toolbar->AddChild(CreateButton(DEFAULT_BUTTONN_SIZE, color::WHITE, std::bind(&CMainView::SetEvent, this, EventType::AddRectangle), RECTANGLE_PATH));
-	toolbar->AddChild(CreateButton(DEFAULT_BUTTONN_SIZE, color::WHITE, std::bind(&CMainView::SetEvent, this, EventType::AddTriangle), TRIANGLE_PATH));
+	toolbar->AddChild(CreateButton(DEFAULT_BUTTONN_SIZE, color::WHITE, std::bind(&CMainView::PrepareAddShapeSignal, this, ShapeType::Circle), CIRCLE_PATH));
+	toolbar->AddChild(CreateButton(DEFAULT_BUTTONN_SIZE, color::WHITE, std::bind(&CMainView::PrepareAddShapeSignal, this, ShapeType::Rectangle), RECTANGLE_PATH));
+	toolbar->AddChild(CreateButton(DEFAULT_BUTTONN_SIZE, color::WHITE, std::bind(&CMainView::PrepareAddShapeSignal, this, ShapeType::Triangle), TRIANGLE_PATH));
 
-	toolbar->AddChild(CreateButton(DEFAULT_BUTTONN_SIZE, color::WHITE, std::bind(&CMainView::SetEvent, this, EventType::Undo), UNDO_PATH));
-	toolbar->AddChild(CreateButton(DEFAULT_BUTTONN_SIZE, color::WHITE, std::bind(&CMainView::SetEvent, this, EventType::Redo), REDO_PATH));
+	toolbar->AddChild(CreateButton(DEFAULT_BUTTONN_SIZE, color::WHITE, std::bind(&CMainView::Undo, this), UNDO_PATH));
+	toolbar->AddChild(CreateButton(DEFAULT_BUTTONN_SIZE, color::WHITE, std::bind(&CMainView::Redo, this), REDO_PATH));
 
 	toolbar->AddChild(CreateButton(DEFAULT_BUTTONN_SIZE, color::WHITE, std::bind(&CMainView::OpenNewFile, this), OPEN_PATH));
 	toolbar->AddChild(CreateButton(DEFAULT_BUTTONN_SIZE, color::WHITE, std::bind(&CMainView::SaveCurrentState, this), SAVE_PATH));
@@ -140,12 +145,16 @@ void CMainView::StartShow()
 	CTextureCache cache;
 
 	sf::ContextSettings settings;
-	settings.antialiasingLevel = 8;
-	sf::RenderWindow window(sf::VideoMode(unsigned int(MAIN_WINDOW_SIZE.x), unsigned int(MAIN_WINDOW_SIZE.y)), "ShapeManager", sf::Style::Close, settings);
+	settings.antialiasingLevel = ANTI_ALIASING_LVL;
+	sf::RenderWindow window(sf::VideoMode(unsigned int(MAIN_WINDOW_SIZE.x), unsigned int(MAIN_WINDOW_SIZE.y)), TITLE, sf::Style::Close, settings);
+	window.setFramerateLimit(FPS);
+
+	sf::Image icon;
+	icon.loadFromFile(ICON_PATH);
+	window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 
 	while (window.isOpen())
 	{
-		m_event = SEvent();
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
@@ -163,25 +172,50 @@ void CMainView::StartShow()
 				break;
 			}
 		}
-		if (m_event.m_type == EventType::NotEvent)
-		{
-			m_event = m_canvas->GetLastEvent();
-		}
-		CheckEvent();
-		m_root->Update();
 		window.clear();
 		m_root->Draw(&window, &cache);
 		window.display();
 	}
 }
 
-void CMainView::CheckEvent()
+void CMainView::DoOnShapeAdded(std::function<void(ShapeType, Vec2)> const & action)
 {
-	if (m_event.m_type != EventType::NotEvent)
-	{
-		NotifyObservers();
-		m_event = SEvent();
-	}
+	m_onShapeAdd.connect(action);
+}
+
+void CMainView::DoOnDeleteShape(std::function<void(size_t)> const & action)
+{
+	m_onDeleteShape.connect(action);
+}
+
+void CMainView::DoOnRedo(std::function<void()> const & action)
+{
+	m_onRedo.connect(action);
+}
+
+void CMainView::DoOnUndo(std::function<void()> const & action)
+{
+	m_onUndo.connect(action);
+}
+
+void CMainView::DoOnSave(std::function<void(const std::string&)> const & action)
+{
+	m_onSave.connect(action);
+}
+
+void CMainView::DoOnOpen(std::function<void(const std::string&)> const & action)
+{
+	m_onOpen.connect(action);
+}
+
+void CMainView::DoOnCreate(std::function<void()> const & action)
+{
+	m_onCreate.connect(action);
+}
+
+void CMainView::DoOnChangeShapeRect(std::function<void(size_t, Vec2, Vec2)> const & action)
+{
+	m_onChangedRect.connect(action);
 }
 
 std::shared_ptr<CToolbar> CMainView::CreateToolbar()
@@ -208,7 +242,7 @@ void CMainView::OnKeyPressed(sf::Event::KeyEvent const & event)
 	switch (event.code)
 	{
 	case sf::Keyboard::Delete:
-		m_event = SEvent(EventType::DeleteShape, m_canvas->GetSelectedShapeNum());
+		m_onDeleteShape(m_canvas->GetSelectedShapeNum());
 		break;
 	default:
 		break;

@@ -153,20 +153,11 @@
     <ClInclude Include="ShapesTypes.h">
       <Filter>Header Files\Model</Filter>
     </ClInclude>
-    <ClInclude Include="ModelObserver.h">
-      <Filter>Header Files\Controller</Filter>
-    </ClInclude>
     <ClInclude Include="Controller.h">
       <Filter>Header Files\Controller</Filter>
     </ClInclude>
-    <ClInclude Include="ViewObserver.h">
-      <Filter>Header Files\Controller</Filter>
-    </ClInclude>
-    <ClInclude Include="ViewEvent.h">
-      <Filter>Header Files\Controller</Filter>
-    </ClInclude>
-    <ClInclude Include="Observer.h">
-      <Filter>Header Files\Controller</Filter>
+    <ClInclude Include="SolidLayer.h">
+      <Filter>Header Files\View\ViewObjects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -254,17 +245,14 @@
     <ClCompile Include="DomainModel.cpp">
       <Filter>Header Files\Model</Filter>
     </ClCompile>
-    <ClCompile Include="ViewObserver.cpp">
-      <Filter>Header Files\Controller</Filter>
-    </ClCompile>
-    <ClCompile Include="ModelObserver.cpp">
-      <Filter>Header Files\Controller</Filter>
-    </ClCompile>
     <ClCompile Include="Controller.cpp">
       <Filter>Header Files\Controller</Filter>
     </ClCompile>
     <ClCompile Include="ShapeModel.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="SolidLayer.cpp">
+      <Filter>Header Files\View\ViewObjects</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
