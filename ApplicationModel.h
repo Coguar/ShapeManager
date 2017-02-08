@@ -21,7 +21,6 @@ public:
 
 	void Clear();
 
-	void SetCanvasSize(Vec2 const& size);
 	Vec2 GetCanvasSize() const;
 
 	void DoOnShapeAdded(std::function<void(std::shared_ptr<CShapePresenter>, size_t)> const& action);

@@ -66,11 +66,6 @@ void CApplicationModel::Clear()
 	m_domainModel->Clear();
 }
 
-void CApplicationModel::SetCanvasSize(Vec2 const & size)
-{
-	m_domainModel->SetSize(size);
-}
-
 Vec2 CApplicationModel::GetCanvasSize() const
 {
 	return m_domainModel->GetSize();

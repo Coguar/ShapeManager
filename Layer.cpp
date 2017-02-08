@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Layer.h"
+#include "TextureCache.h"
 #include "Reseiver.h"
 
 CLayer::CLayer(Vec2 const & size, Vec2 const & position)
@@ -40,4 +41,8 @@ void CLayer::SetSize(Vec2 const & size)
 Vec2 CLayer::GetSize() const
 {
 	return m_rect.size;
+}
+
+void CLayer::Draw(sf::RenderTarget * window, CTextureCache * cache)
+{
 }

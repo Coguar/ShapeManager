@@ -2,6 +2,8 @@
 #include "EventListener.h"
 #include "Rectangle.h"
 
+class CTextureCache;
+
 class CLayer :
 	public CEventListener
 {
@@ -17,6 +19,8 @@ public:
 
 	virtual void SetSize(Vec2 const& size);
 	Vec2 GetSize() const;
+
+	virtual void Draw(sf::RenderTarget * window, CTextureCache * cache);
 
 private:
 	CBoundingRect m_rect;
