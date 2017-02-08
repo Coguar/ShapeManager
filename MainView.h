@@ -1,7 +1,7 @@
 #pragma once
 #include "Toolbar.h"
 #include "ActionButton.h"
-#include "Canvas.h"
+#include "CanvasView.h"
 
 class CMainView 
 {
@@ -10,11 +10,10 @@ public:
 	~CMainView();
 
 	std::shared_ptr<CParentLayer> const& GetRoot() const;
-	std::shared_ptr<CCanvas> const& GetCanvas() const;
-
-	void SetNewShapeList(std::vector<std::shared_ptr<SModelShape>> & shapes);
+	std::shared_ptr<CCanvasView> const& GetCanvas() const;
 
 	void SetDocDataState(bool isSaved);
+	void SetCanvasSize(Vec2 const& size);
 
 	void StartShow();
 
@@ -33,8 +32,6 @@ private:
 	void CreateNewFile();
 	bool SaveChangesDialog();
 
-	void ChangeShapeRect(size_t number, CBoundingRect const& rect);
-
 	void Redo();
 	void Undo();
 
@@ -49,7 +46,7 @@ private:
 	std::shared_ptr<CActionButton> CreateButton(Vec2 const& size, SColor const& color, std::function<void()> const& function, std::string const& texturePath = std::string());
 	
 	std::shared_ptr<CParentLayer> m_root;
-	std::shared_ptr<CCanvas> m_canvas;
+	std::shared_ptr<CCanvasView> m_canvas;
 
 	bool m_dataWasChange = false;
 

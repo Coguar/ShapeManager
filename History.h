@@ -17,10 +17,18 @@ public:
 
 	void Clear() override;
 
+	void DoOnSavedStateChanged(std::function<void(bool)> const& action);
+
+	void RememberCurrentState();
+
 private:
+	void SendDataStateSignal();
 	void ClearOutdatedBranch();
 
 	std::vector<std::shared_ptr<ICommand>> m_doneCommands;
 	size_t m_currentCommandNumber = 0;
+
+	boost::signals2::signal<void(bool)> m_onSavedStateChanged;
+	std::shared_ptr<ICommand> m_lastSavedState;
 };
 

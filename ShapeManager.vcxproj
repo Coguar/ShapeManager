@@ -154,8 +154,10 @@
     <ClInclude Include="ActionButton.h" />
     <ClInclude Include="AddShapeCommand.h" />
     <ClInclude Include="ApplicationModel.h" />
+    <ClInclude Include="CanvasSignaller.h" />
+    <ClInclude Include="ChangeShapeRectCommand.h" />
     <ClInclude Include="MainView.h" />
-    <ClInclude Include="Canvas.h" />
+    <ClInclude Include="CanvasView.h" />
     <ClInclude Include="Circle.h" />
     <ClInclude Include="CommandInterface.h" />
     <ClInclude Include="Constants.h" />
@@ -163,7 +165,7 @@
     <ClInclude Include="Coords.h" />
     <ClInclude Include="color.h" />
     <ClInclude Include="DeleteShapeCommand.h" />
-    <ClInclude Include="DomainModel.h" />
+    <ClInclude Include="Canvas.h" />
     <ClInclude Include="DragPoint.h" />
     <ClInclude Include="ButtonInterface.h" />
     <ClInclude Include="Ellipse.h" />
@@ -177,9 +179,10 @@
     <ClInclude Include="ParentLayer.h" />
     <ClInclude Include="Rectangle.h" />
     <ClInclude Include="Reseiver.h" />
-    <ClInclude Include="ChangeBoundingRectCommand.h" />
     <ClInclude Include="SelectFrame.h" />
+    <ClInclude Include="ShapeCollection.h" />
     <ClInclude Include="ShapeModel.h" />
+    <ClInclude Include="ShapePresenter.h" />
     <ClInclude Include="ShapesTypes.h" />
     <ClInclude Include="Signal.h" />
     <ClInclude Include="SolidLayer.h" />
@@ -195,13 +198,14 @@
     <ClCompile Include="ActionButton.cpp" />
     <ClCompile Include="AddShapeCommand.cpp" />
     <ClCompile Include="ApplicationModel.cpp" />
+    <ClCompile Include="ChangeShapeRectCommand.cpp" />
     <ClCompile Include="MainView.cpp" />
-    <ClCompile Include="Canvas.cpp" />
+    <ClCompile Include="CanvasView.cpp" />
     <ClCompile Include="Circle.cpp" />
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="Coords.cpp" />
     <ClCompile Include="DeleteShapeCommand.cpp" />
-    <ClCompile Include="DomainModel.cpp" />
+    <ClCompile Include="Canvas.cpp" />
     <ClCompile Include="DragPoint.cpp" />
     <ClCompile Include="Ellipse.cpp" />
     <ClCompile Include="EventListener.cpp" />
@@ -213,9 +217,9 @@
     <ClCompile Include="ParentLayer.cpp" />
     <ClCompile Include="Rectangle.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="ChangeBoundingRectCommand.cpp" />
     <ClCompile Include="SelectFrame.cpp" />
     <ClCompile Include="ShapeModel.cpp" />
+    <ClCompile Include="ShapePresenter.cpp" />
     <ClCompile Include="SolidLayer.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

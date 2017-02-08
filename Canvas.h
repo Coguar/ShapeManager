@@ -1,43 +1,40 @@
 #pragma once
-#include "SelectFrame.h"
+#include "ShapeModel.h"
+#include "CanvasSignaller.h"
+#include "ShapeCollection.h"
 
-class SModelShape;
-
-class CCanvas : public CParentLayer
+class CCanvas
+	: public ICanvasSignaller
+	, public IShapeCollection
 {
 public:
 	CCanvas();
 	~CCanvas();
 
-	bool OnEvent(sf::Event const& event) override;
+	void AddShape(std::shared_ptr<SModelShape> const& shape) override;
+	void AddShape(std::shared_ptr<SModelShape> const& shape, size_t position) override;
+	std::shared_ptr<SModelShape> DeleteLastShape() override;
+	std::shared_ptr<SModelShape> DeleteShapeByPosition(size_t position) override;
 
-	std::shared_ptr<CSelectFrame> const& GetFSelectFrame() const;
-	size_t GetSelectedShapeNum() const;
-
-	void AddShape(std::shared_ptr<SModelShape> const& shape, size_t pos);
-	void DeleteShape(size_t pos);
-	void SetNewShapesList(std::vector<std::shared_ptr<SModelShape>> const& shapes);
 	void Clear();
+	void SetNewShapeList(std::vector<std::shared_ptr<SModelShape>> const& shapes);
 
-	void Draw(sf::RenderTarget * window, CTextureCache * cache) override;
+	std::vector<std::shared_ptr<SModelShape>> const& GetData() const;
 
-	void DoOnShapeRectChanged(std::function<void(size_t, const CBoundingRect&)> const& action);
+	void SetSize(Vec2 const& size);
+	Vec2 GetSize() const;
 
-protected:
-	bool OnMousePressed(sf::Event::MouseButtonEvent const & event) override;
+	void DoOnShapeAdd(std::function<void(std::shared_ptr<SModelShape>, size_t )> const& action) override;
+	void DoOnShapeDelete(std::function<void(size_t)> const& action) override;
+	void DoOnShapesClear(std::function<void()> const& action) override;
 
 private:
-	std::shared_ptr<CShape> CreateShape(std::shared_ptr<SModelShape> const& data);
 
-	void ShapeChangeRectEvent(std::shared_ptr<CShape> const& shape, sf::Event const& event);
-	void ChangeShapeRect();
+	boost::signals2::signal<void(std::shared_ptr<SModelShape>, size_t)> m_onShapeAdded;
+	boost::signals2::signal<void(size_t)> m_onShapeDelete;
+	boost::signals2::signal<void()> m_onShapeListClear;
 
-	std::vector<std::shared_ptr<CShape>> m_shapes;
-	std::shared_ptr<CSelectFrame> m_frame;
-
-	CBoundingRect m_oldSelectShapeRect;
-	size_t m_targetShapePosition = 0;
-
-	boost::signals2::signal<void(size_t, const CBoundingRect&)> m_onShapesRectChange;
+	std::vector<std::shared_ptr<SModelShape>> m_shapes;
+	Vec2 m_size;
 };
 

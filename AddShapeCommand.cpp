@@ -1,8 +1,8 @@
 #include "stdafx.h"
 #include "AddShapeCommand.h"
 
-CAddShapeCommand::CAddShapeCommand(std::shared_ptr<SModelShape> const& shape, CDomainModel* model)
-	: CMyCommand(model)
+CAddShapeCommand::CAddShapeCommand(std::shared_ptr<SModelShape> const& shape, CCanvas* model)
+	: CCanvasCommand(model)
 	, m_shape(shape)
 {
 }

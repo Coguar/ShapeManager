@@ -2,10 +2,10 @@
 #include "MyCommand.h"
 
 class CAddShapeCommand :
-	public CMyCommand
+	public CCanvasCommand
 {
 public:
-	CAddShapeCommand(std::shared_ptr<SModelShape> const& shape, CDomainModel* model);
+	CAddShapeCommand(std::shared_ptr<SModelShape> const& shape, CCanvas* model);
 	~CAddShapeCommand();
 
 	void Execute() override;

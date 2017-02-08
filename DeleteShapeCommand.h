@@ -2,10 +2,10 @@
 #include "MyCommand.h"
 
 class CDeleteShapeCommand :
-	public CMyCommand
+	public CCanvasCommand
 {
 public:
-	CDeleteShapeCommand(size_t position, CDomainModel* model);
+	CDeleteShapeCommand(size_t position, CCanvas* model);
 	~CDeleteShapeCommand();
 
 	void Execute() override;

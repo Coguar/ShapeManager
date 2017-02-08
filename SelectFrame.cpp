@@ -42,7 +42,7 @@ void CSelectFrame::SetTarget(std::shared_ptr<CShape> const & shape, size_t num)
 {
 	m_connection.disconnect();
 	m_targetShape = shape;
-	m_connection = m_targetShape->DoOnChangeRect(boost::bind(&CSelectFrame::SetPoints, this));
+	m_connection = m_targetShape->DoOnProgramChangeRect(boost::bind(&CSelectFrame::SetPoints, this));
 	SetPoints();
 }
 
@@ -124,7 +124,9 @@ void CSelectFrame::OnResizeFrame(sf::Event const & event)
 			m_oldFrameSize = m_targetShape->GetBoundingRect();
 			break;
 		case sf::Event::MouseButtonReleased:
-			m_onResizeShape();
+			m_targetShape->OnChangeRect();
+			/*m_targetShape->SetBoundingRect(m_targetShape->GetBoundingRect());
+			m_onResizeShape();*/
 			break;
 		default:
 			break;

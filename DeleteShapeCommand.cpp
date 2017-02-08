@@ -1,8 +1,8 @@
 #include "stdafx.h"
 #include "DeleteShapeCommand.h"
 
-CDeleteShapeCommand::CDeleteShapeCommand(size_t position, CDomainModel* model)
-	: CMyCommand(model)
+CDeleteShapeCommand::CDeleteShapeCommand(size_t position, CCanvas* model)
+	: CCanvasCommand(model)
 	, m_shapePosition(position)
 {
 }

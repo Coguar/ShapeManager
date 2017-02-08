@@ -1,14 +1,14 @@
 #pragma once
 #include "CommandInterface.h"
-#include "DomainModel.h"
+#include "Canvas.h"
 
-class CMyCommand :
+class CCanvasCommand :
 	public ICommand
 {
 public:
-	CMyCommand(CDomainModel* model);
-	~CMyCommand();
+	CCanvasCommand(CCanvas* model);
+	~CCanvasCommand();
 protected:
-	CDomainModel * m_model = nullptr;
+	CCanvas * m_model = nullptr;
 };
 

@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "AbstractShape.h"
+#include "ShapePresenter.h"
 #include "Reseiver.h"
 
 CShape::CShape(ShapeType type)
@@ -67,12 +68,27 @@ CBoundingRect const & CShape::GetAllowableArea() const
 void CShape::SetBoundingRect(CBoundingRect const& rect)
 {
 	CLayer::SetBoundingRect(rect);
-	m_onChangeRect();
+	m_onProgramChangeRect();
+}
+
+boost::signals2::scoped_connection CShape::DoOnProgramChangeRect(std::function<void()> const & action)
+{
+	return m_onProgramChangeRect.connect(action);
 }
 
 boost::signals2::scoped_connection CShape::DoOnChangeRect(std::function<void()> const & action)
 {
 	return m_onChangeRect.connect(action);
+}
+
+void CShape::OnChangeRect()
+{
+	m_onChangeRect();
+}
+
+void CShape::SetPresenter(std::shared_ptr<CShapePresenter> const & presenter)
+{
+	m_presenter = presenter;
 }
 
 void CShape::SetInAllowableArea()

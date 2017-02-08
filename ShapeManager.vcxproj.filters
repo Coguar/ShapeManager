@@ -72,9 +72,6 @@
     <ClInclude Include="AbstractShape.h">
       <Filter>Header Files\View\ViewObjects\ShapeView</Filter>
     </ClInclude>
-    <ClInclude Include="Canvas.h">
-      <Filter>Header Files\View\ViewObjects</Filter>
-    </ClInclude>
     <ClInclude Include="Square.h">
       <Filter>Header Files\View\ViewObjects\ShapeView</Filter>
     </ClInclude>
@@ -120,9 +117,6 @@
     <ClInclude Include="MyCommand.h">
       <Filter>Header Files\History</Filter>
     </ClInclude>
-    <ClInclude Include="ChangeBoundingRectCommand.h">
-      <Filter>Header Files\History</Filter>
-    </ClInclude>
     <ClInclude Include="AddShapeCommand.h">
       <Filter>Header Files\History</Filter>
     </ClInclude>
@@ -144,9 +138,6 @@
     <ClInclude Include="ApplicationModel.h">
       <Filter>Header Files\Model</Filter>
     </ClInclude>
-    <ClInclude Include="DomainModel.h">
-      <Filter>Header Files\Model</Filter>
-    </ClInclude>
     <ClInclude Include="ShapeModel.h">
       <Filter>Header Files\Model</Filter>
     </ClInclude>
@@ -158,6 +149,24 @@
     </ClInclude>
     <ClInclude Include="SolidLayer.h">
       <Filter>Header Files\View\ViewObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapePresenter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapeCollection.h">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="CanvasSignaller.h">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="ChangeShapeRectCommand.h">
+      <Filter>Header Files\History</Filter>
+    </ClInclude>
+    <ClInclude Include="CanvasView.h">
+      <Filter>Header Files\View\ViewObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Canvas.h">
+      <Filter>Header Files\Model</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -194,9 +203,6 @@
     <ClCompile Include="Ellipse.cpp">
       <Filter>Header Files\View</Filter>
     </ClCompile>
-    <ClCompile Include="Canvas.cpp">
-      <Filter>Header Files\View\ViewObjects</Filter>
-    </ClCompile>
     <ClCompile Include="ParentLayer.cpp">
       <Filter>Header Files\View\ViewObjects</Filter>
     </ClCompile>
@@ -216,9 +222,6 @@
       <Filter>Header Files\History</Filter>
     </ClCompile>
     <ClCompile Include="MyCommand.cpp">
-      <Filter>Header Files\History</Filter>
-    </ClCompile>
-    <ClCompile Include="ChangeBoundingRectCommand.cpp">
       <Filter>Header Files\History</Filter>
     </ClCompile>
     <ClCompile Include="AddShapeCommand.cpp">
@@ -242,9 +245,6 @@
     <ClCompile Include="ApplicationModel.cpp">
       <Filter>Header Files\Model</Filter>
     </ClCompile>
-    <ClCompile Include="DomainModel.cpp">
-      <Filter>Header Files\Model</Filter>
-    </ClCompile>
     <ClCompile Include="Controller.cpp">
       <Filter>Header Files\Controller</Filter>
     </ClCompile>
@@ -253,6 +253,18 @@
     </ClCompile>
     <ClCompile Include="SolidLayer.cpp">
       <Filter>Header Files\View\ViewObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="ShapePresenter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ChangeShapeRectCommand.cpp">
+      <Filter>Header Files\History</Filter>
+    </ClCompile>
+    <ClCompile Include="CanvasView.cpp">
+      <Filter>Header Files\View\ViewObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Canvas.cpp">
+      <Filter>Header Files\Model</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

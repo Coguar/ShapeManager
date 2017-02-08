@@ -2,6 +2,8 @@
 #include "ParentLayer.h"
 #include "ShapesTypes.h"
 
+class CShapePresenter;
+
 class CShape 
 	: public CSolidLayer
 {
@@ -22,7 +24,12 @@ public:
 
 	void SetBoundingRect(CBoundingRect const& rect) override;
 
+	boost::signals2::scoped_connection DoOnProgramChangeRect(std::function<void()> const& action);
 	boost::signals2::scoped_connection DoOnChangeRect(std::function<void()> const& action);
+
+	void OnChangeRect();
+
+	void SetPresenter(std::shared_ptr<CShapePresenter> const& presenter);
 
 private:
 	void SetInAllowableArea();
@@ -33,6 +40,9 @@ private:
 
 	CBoundingRect m_allowableArea;
 
+	std::shared_ptr<CShapePresenter> m_presenter;
+
+	boost::signals2::signal<void()> m_onProgramChangeRect;
 	boost::signals2::signal<void()> m_onChangeRect;
 };
 

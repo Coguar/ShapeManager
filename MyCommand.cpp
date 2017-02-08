@@ -2,12 +2,12 @@
 #include "MyCommand.h"
 
 
-CMyCommand::CMyCommand(CDomainModel* model)
+CCanvasCommand::CCanvasCommand(CCanvas* model)
 	: m_model(model)
 {
 }
 
 
-CMyCommand::~CMyCommand()
+CCanvasCommand::~CCanvasCommand()
 {
 }

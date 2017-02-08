@@ -8,7 +8,6 @@
 CMainView::CMainView()
 {
 	InitRootLayer();
-	m_canvas->DoOnShapeRectChanged(boost::bind(&CMainView::ChangeShapeRect, this, _1, _2));
 }
 
 
@@ -21,19 +20,19 @@ std::shared_ptr<CParentLayer> const & CMainView::GetRoot() const
 	return m_root;
 }
 
-std::shared_ptr<CCanvas> const & CMainView::GetCanvas() const
+std::shared_ptr<CCanvasView> const & CMainView::GetCanvas() const
 {
 	return m_canvas;
-}
-
-void CMainView::SetNewShapeList(std::vector<std::shared_ptr<SModelShape>> & shapes)
-{
-	m_canvas->SetNewShapesList(shapes);
 }
 
 void CMainView::SetDocDataState(bool isSaved)
 {
 	m_dataWasChange = !isSaved;
+}
+
+void CMainView::SetCanvasSize(Vec2 const & size)
+{
+	m_canvas->SetSize(size);
 }
 
 
@@ -86,11 +85,6 @@ bool CMainView::SaveChangesDialog()
 	return false;
 }
 
-void CMainView::ChangeShapeRect(size_t number, CBoundingRect const & rect)
-{
-	m_onChangedRect(number, rect.position, rect.size);
-}
-
 void CMainView::Redo()
 {
 	m_onRedo();
@@ -134,7 +128,7 @@ void CMainView::InitRootLayer()
 
 void CMainView::InitCanvas()
 {
-	m_canvas = std::make_shared<CCanvas>();
+	m_canvas = std::make_shared<CCanvasView>();
 	m_canvas->SetPosition(CANVAS_POSITION);
 	m_canvas->SetSize(CANVAS_SIZE);
 	m_canvas->SetColor(color::WHITE);
