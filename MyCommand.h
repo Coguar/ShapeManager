@@ -6,9 +6,9 @@ class CCanvasCommand :
 	public ICommand
 {
 public:
-	CCanvasCommand(CCanvas* model);
+	CCanvasCommand(IShapeCollection* model);
 	~CCanvasCommand();
 protected:
-	CCanvas * m_model = nullptr;
+	IShapeCollection * m_model = nullptr;
 };
 

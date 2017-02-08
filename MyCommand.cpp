@@ -2,7 +2,7 @@
 #include "MyCommand.h"
 
 
-CCanvasCommand::CCanvasCommand(CCanvas* model)
+CCanvasCommand::CCanvasCommand(IShapeCollection* model)
 	: m_model(model)
 {
 }
