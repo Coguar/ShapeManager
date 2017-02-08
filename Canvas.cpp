@@ -60,11 +60,6 @@ std::vector<std::shared_ptr<SModelShape>> const & CCanvas::GetData() const
 	return m_shapes;
 }
 
-void CCanvas::SetSize(Vec2 const & size)
-{
-	m_size = size;
-}
-
 Vec2 CCanvas::GetSize() const
 {
 	return m_size;

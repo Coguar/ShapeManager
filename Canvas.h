@@ -21,7 +21,6 @@ public:
 
 	std::vector<std::shared_ptr<SModelShape>> const& GetData() const;
 
-	void SetSize(Vec2 const& size);
 	Vec2 GetSize() const;
 
 	void DoOnShapeAdd(std::function<void(std::shared_ptr<SModelShape>, size_t )> const& action) override;

@@ -124,9 +124,6 @@ void CSelectFrame::OnResizeFrame(sf::Event const & event)
 			m_oldFrameSize = m_targetShape->GetBoundingRect();
 			break;
 		case sf::Event::MouseButtonReleased:
-			m_targetShape->OnChangeRect();
-			/*m_targetShape->SetBoundingRect(m_targetShape->GetBoundingRect());
-			m_onResizeShape();*/
 			break;
 		default:
 			break;

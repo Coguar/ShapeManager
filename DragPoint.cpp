@@ -42,6 +42,10 @@ bool CDragPoint::OnMouseMoved(sf::Event::MouseMoveEvent const & event)
 	auto oldPosition = GetPosition();
 	CShape::OnMouseMoved(event);
 	auto position = GetPosition();
+
+
+
+
 	if (!InRange(std::abs(position.x - m_xConnection->GetPosition().x), m_minDistance, m_maxDistance) 
 		|| std::abs(oldPosition.x - position.x) >= m_minDistance)
 	{
