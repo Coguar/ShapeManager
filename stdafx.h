@@ -19,6 +19,8 @@
 #include <SFML\Window.hpp>
 #include <SFML\Graphics.hpp>
 
+#include <boost/filesystem.hpp>
+#include <map>
 #include <functional>
 
 #include "Constants.h"

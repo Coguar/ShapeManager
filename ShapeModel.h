@@ -14,7 +14,7 @@ public:
 	Vec2 GetPosition() const;
 	Vec2 GetSize() const;
 
-	void DoOnRectChanged(std::function<void(const CBoundingRect&)> const& action);
+	signal::Connection DoOnRectChanged(std::function<void(const CBoundingRect&)> const& action);
 
 private:
 	boost::signals2::signal<void(const CBoundingRect&)> m_OnRectChange;

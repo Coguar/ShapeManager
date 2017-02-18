@@ -1,10 +1,10 @@
 #include "stdafx.h"
-#include "Controller.h"
+#include "Application.h"
 
 int main()
 {
-	CController controller;
-	controller.Start();
+	CApplication app;
+	app.Start();
 	return 0;
 }
 

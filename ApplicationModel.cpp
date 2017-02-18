@@ -3,8 +3,12 @@
 #include "History.h"
 #include "DeleteShapeCommand.h"
 #include "AddShapeCommand.h"
+#include "ChangeLayerCommand.h"
 #include "FileReader.h"
 #include "ShapePresenter.h"
+#include "Picture.h"
+
+using namespace signal;
 
 CApplicationModel::CApplicationModel()
 {
@@ -24,11 +28,26 @@ void CApplicationModel::AddShape(ShapeType type, Vec2 const& position)
 	m_history->PushCommand(std::make_shared<CAddShapeCommand>(shape, m_domainModel.get()));
 }
 
+void CApplicationModel::AddPicture(Vec2 const & position, std::string const & path)
+{
+	auto picture = std::make_shared<CPicture>(position, INITIALIZATION_SHAPE_SIZE);
+	picture->SetTexturePath(path);
+	m_history->PushCommand(std::make_shared<CAddShapeCommand>(picture, m_domainModel.get()));
+}
+
 void CApplicationModel::DeleteShape(size_t position)
 {
 	if (position != UINT_MAX)
 	{
 		m_history->PushCommand(std::make_shared<CDeleteShapeCommand>(position, m_domainModel.get()));
+	}
+}
+
+void CApplicationModel::MoveShapeLayer(size_t position, bool isToUp)
+{
+	if (position != UINT_MAX)
+	{
+		m_history->PushCommand(std::make_shared<CChangeLayerCommand>(position, isToUp, m_domainModel.get()));
 	}
 }
 
@@ -71,24 +90,29 @@ Vec2 CApplicationModel::GetCanvasSize() const
 	return m_domainModel->GetSize();
 }
 
-void CApplicationModel::DoOnShapeAdded(std::function<void(std::shared_ptr<CShapePresenter>, size_t)> const & action)
+Connection CApplicationModel::DoOnShapeAdded(std::function<void(std::shared_ptr<CShapePresenter>, size_t)> const & action)
 {
-	m_onAddShape.connect(action);
+	return m_onAddShape.connect(action);
 }
 
-void CApplicationModel::DoOnShapeDelete(std::function<void(size_t)> const & action)
+Connection CApplicationModel::DoOnShapeDelete(std::function<void(size_t)> const & action)
 {
-	m_domainModel->DoOnShapeDelete(action);
+	return m_domainModel->DoOnShapeDelete(action);
 }
 
-void CApplicationModel::DoOnShapesClear(std::function<void()> const & action)
+Connection CApplicationModel::DoOnShapesClear(std::function<void()> const & action)
 {
-	m_domainModel->DoOnShapesClear(action);
+	return m_domainModel->DoOnShapesClear(action);
 }
 
-void CApplicationModel::DoOnSavedStateChanged(std::function<void(bool)> const & action)
+Connection CApplicationModel::DoOnSavedStateChanged(std::function<void(bool)> const & action)
 {
-	m_history->DoOnSavedStateChanged(action);
+	return m_history->DoOnSavedStateChanged(action);
+}
+
+signal::Connection CApplicationModel::DoOnShapesLayerMove(std::function<void(size_t, bool)> const & action)
+{
+	return m_domainModel->DoOnShapesLayerMove(action);
 }
 
 void CApplicationModel::ShapeAdded(std::shared_ptr<SModelShape> const & shape, size_t position)

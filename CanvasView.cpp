@@ -92,6 +92,48 @@ void CCanvasView::DeleteShape(size_t pos)
 	}
 }
 
+void CCanvasView::MoveShapeLayer(size_t position, bool isToUp)
+{
+	if(isToUp)
+	{
+		MoveShapeUp(position);
+		
+	}
+	else
+	{
+		MoveShapeDown(position);
+	}
+}
+
+void CCanvasView::MoveShapeUp(size_t position)
+{
+	if (position < m_shapes.size() - 1)
+	{
+		auto tempShape = m_shapes[position + 1];
+		m_shapes[position + 1] = m_shapes[position];
+		m_shapes[position] = tempShape;
+		if (m_targetShapePosition == position)
+		{
+			++m_targetShapePosition;
+		}
+	}
+}
+
+void CCanvasView::MoveShapeDown(size_t position)
+{
+	if (position > 0)
+	{
+		auto tempShape = m_shapes[position - 1];
+		m_shapes[position - 1] = m_shapes[position];
+		m_shapes[position] = tempShape;
+		if (m_targetShapePosition == position)
+		{
+			--m_targetShapePosition;
+		}
+	}
+}
+
+
 void CCanvasView::Clear()
 {
 	m_frame->ResetTargget();

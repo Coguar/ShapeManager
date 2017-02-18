@@ -2,6 +2,8 @@
 #include "Canvas.h"
 #include "FileReader.h"
 
+using namespace signal;
+
 CCanvas::CCanvas()
 	: m_size(CANVAS_SIZE)
 {
@@ -40,6 +42,28 @@ std::shared_ptr<SModelShape> CCanvas::DeleteShapeByPosition(size_t position)
 	return shape;
 }
 
+void CCanvas::MoveShapeUp(size_t position)
+{
+	if (position < m_shapes.size() - 1)
+	{
+		auto tempShape = m_shapes[position + 1];
+		m_shapes[position + 1] = m_shapes[position];
+		m_shapes[position] = tempShape;
+		m_onMoveShapesLayer(position, true);
+	}
+}
+
+void CCanvas::MoveShapeDown(size_t position)
+{
+	if (position > 0)
+	{
+		auto tempShape = m_shapes[position - 1];
+		m_shapes[position - 1] = m_shapes[position];
+		m_shapes[position] = tempShape;
+		m_onMoveShapesLayer(position, false);
+	}
+}
+
 void CCanvas::Clear()
 {
 	m_shapes.clear();
@@ -65,17 +89,22 @@ Vec2 CCanvas::GetSize() const
 	return m_size;
 }
 
-void CCanvas::DoOnShapeAdd(std::function<void(std::shared_ptr<SModelShape>, size_t)> const & action)
+Connection CCanvas::DoOnShapeAdd(std::function<void(std::shared_ptr<SModelShape>, size_t)> const & action)
 {
-	m_onShapeAdded.connect(action);
+	return m_onShapeAdded.connect(action);
 }
 
-void CCanvas::DoOnShapeDelete(std::function<void(size_t)> const & action)
+Connection CCanvas::DoOnShapeDelete(std::function<void(size_t)> const & action)
 {
-	m_onShapeDelete.connect(action);
+	return m_onShapeDelete.connect(action);
 }
 
-void CCanvas::DoOnShapesClear(std::function<void()> const & action)
+Connection CCanvas::DoOnShapesClear(std::function<void()> const & action)
 {
-	m_onShapeListClear.connect(action);
+	return m_onShapeListClear.connect(action);
+}
+
+signal::Connection CCanvas::DoOnShapesLayerMove(std::function<void(size_t, bool)> const & action)
+{
+	return m_onMoveShapesLayer.connect(action);
 }

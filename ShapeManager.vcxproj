@@ -153,9 +153,14 @@
     <ClInclude Include="AbstractShape.h" />
     <ClInclude Include="ActionButton.h" />
     <ClInclude Include="AddShapeCommand.h" />
+    <ClInclude Include="Application.h" />
     <ClInclude Include="ApplicationModel.h" />
     <ClInclude Include="CanvasSignaller.h" />
+    <ClInclude Include="ChangeLayerCommand.h" />
     <ClInclude Include="ChangeShapeRectCommand.h" />
+    <ClInclude Include="CollectionShapesManipulator.h" />
+    <ClInclude Include="ConnectionsStorage.h" />
+    <ClInclude Include="FileManager.h" />
     <ClInclude Include="MainView.h" />
     <ClInclude Include="CanvasView.h" />
     <ClInclude Include="Circle.h" />
@@ -175,8 +180,11 @@
     <ClInclude Include="FileReader.h" />
     <ClInclude Include="History.h" />
     <ClInclude Include="Layer.h" />
+    <ClInclude Include="ModelSignalsConnector.h" />
     <ClInclude Include="MyCommand.h" />
     <ClInclude Include="ParentLayer.h" />
+    <ClInclude Include="Picture.h" />
+    <ClInclude Include="PictureView.h" />
     <ClInclude Include="Rectangle.h" />
     <ClInclude Include="Reseiver.h" />
     <ClInclude Include="SelectFrame.h" />
@@ -197,8 +205,11 @@
     <ClCompile Include="AbstractShape.cpp" />
     <ClCompile Include="ActionButton.cpp" />
     <ClCompile Include="AddShapeCommand.cpp" />
+    <ClCompile Include="Application.cpp" />
     <ClCompile Include="ApplicationModel.cpp" />
+    <ClCompile Include="ChangeLayerCommand.cpp" />
     <ClCompile Include="ChangeShapeRectCommand.cpp" />
+    <ClCompile Include="FileManager.cpp" />
     <ClCompile Include="MainView.cpp" />
     <ClCompile Include="CanvasView.cpp" />
     <ClCompile Include="Circle.cpp" />
@@ -215,6 +226,8 @@
     <ClCompile Include="Layer.cpp" />
     <ClCompile Include="MyCommand.cpp" />
     <ClCompile Include="ParentLayer.cpp" />
+    <ClCompile Include="Picture.cpp" />
+    <ClCompile Include="PictureView.cpp" />
     <ClCompile Include="Rectangle.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SelectFrame.cpp" />

@@ -1,33 +1,39 @@
 #pragma once
 #include "Canvas.h"
+#include "CollectionShapesManipulator.h"
+#include "ModelSignalsConnector.h"
 
 class CHistory;
 class CShapePresenter;
 
 class CApplicationModel
+	: public ICollectionShapesManipulator
+	, public IModelSignalsConnector
 {
 public:
 	CApplicationModel();
 	~CApplicationModel();
 
-	void AddShape(ShapeType type, Vec2 const& position);
-	void DeleteShape(size_t position);
+	void AddShape(ShapeType type, Vec2 const& position) override;
+	void AddPicture(Vec2 const& position, std::string const& path) override;
+	void DeleteShape(size_t position) override;
+	void MoveShapeLayer(size_t position, bool isToUp) override;
 
-	void RedoCommand();
-	void UndoCommand();
+	void RedoCommand() override;
+	void UndoCommand() override;
 
-	void Save(std::string const& path);
-	void Open(std::string const& path);
+	void Save(std::string const& path) override;
+	void Open(std::string const& path) override;
 
-	void Clear();
+	void Clear() override;
 
 	Vec2 GetCanvasSize() const;
 
-	void DoOnShapeAdded(std::function<void(std::shared_ptr<CShapePresenter>, size_t)> const& action);
-	void DoOnShapeDelete(std::function<void(size_t)> const& action);
-	void DoOnShapesClear(std::function<void()> const& action);
-	void DoOnSavedStateChanged(std::function<void(bool)> const& action);
-
+	signal::Connection DoOnShapeAdded(std::function<void(std::shared_ptr<CShapePresenter>, size_t)> const& action) override;
+	signal::Connection DoOnShapeDelete(std::function<void(size_t)> const& action) override;
+	signal::Connection DoOnShapesClear(std::function<void()> const& action) override;
+	signal::Connection DoOnSavedStateChanged(std::function<void(bool)> const& action) override;
+	signal::Connection DoOnShapesLayerMove(std::function<void(size_t, bool)> const& action) override;
 private:
 	void ShapeAdded(std::shared_ptr<SModelShape> const& shape, size_t position);
 

@@ -17,14 +17,16 @@ public:
 
 	void StartShow();
 
-	void DoOnShapeAdded(std::function<void(ShapeType, Vec2)> const& action);
-	void DoOnDeleteShape(std::function<void(size_t)> const& action);
-	void DoOnRedo(std::function<void()> const& action);
-	void DoOnUndo(std::function<void()> const& action);
-	void DoOnSave(std::function<void(const std::string&)> const& action);
-	void DoOnOpen(std::function<void(const std::string&)> const& action);
-	void DoOnCreate(std::function<void()> const& action);
-	void DoOnChangeShapeRect(std::function<void(size_t, Vec2, Vec2)> const& action);
+	signal::Connection DoOnShapeAdded(std::function<void(ShapeType, Vec2)> const& action);
+	signal::Connection DoOnPictureAdded(std::function<void(Vec2, std::string)> const& action);
+	signal::Connection DoOnDeleteShape(std::function<void(size_t)> const& action);
+	signal::Connection DoOnRedo(std::function<void()> const& action);
+	signal::Connection DoOnUndo(std::function<void()> const& action);
+	signal::Connection DoOnSave(std::function<void(const std::string&)> const& action);
+	signal::Connection DoOnOpen(std::function<void(const std::string&)> const& action);
+	signal::Connection DoOnCreate(std::function<void()> const& action);
+	signal::Connection DoOnChangeShapeRect(std::function<void(size_t, Vec2, Vec2)> const& action);
+	signal::Connection DoOnChangeShapeLayer(std::function<void(size_t, bool)> const& action);
 
 private:
 	void OpenNewFile();
@@ -51,7 +53,9 @@ private:
 	bool m_dataWasChange = false;
 
 	boost::signals2::signal<void(ShapeType, Vec2)> m_onShapeAdd;
+	boost::signals2::signal<void(Vec2, std::string)> m_onPictureAdd;
 	boost::signals2::signal<void(size_t)> m_onDeleteShape;
+	boost::signals2::signal<void(size_t, bool)> m_onChangeShapeLayer;
 	boost::signals2::signal<void(size_t, Vec2, Vec2)> m_onChangedRect;
 	boost::signals2::signal<void()> m_onRedo;
 	boost::signals2::signal<void()> m_onUndo;

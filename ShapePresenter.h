@@ -24,6 +24,6 @@ private:
 	CShape * m_shape;
 	std::shared_ptr<SModelShape> m_model;
 
-	boost::signals2::scoped_connection m_connection;
+	std::vector<signal::ScopedConnection> m_connections;
 };
 

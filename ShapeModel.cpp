@@ -29,9 +29,8 @@ Vec2 SModelShape::GetSize() const
 	return m_size;
 }
 
-void SModelShape::DoOnRectChanged(std::function<void(const CBoundingRect&)> const & action)
+signal::Connection SModelShape::DoOnRectChanged(std::function<void(const CBoundingRect&)> const & action)
 {
-	m_OnRectChange.disconnect_all_slots();
-	m_OnRectChange.connect(action);
+	return m_OnRectChange.connect(action);
 }
 

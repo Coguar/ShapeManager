@@ -17,7 +17,7 @@ public:
 
 	void Clear() override;
 
-	void DoOnSavedStateChanged(std::function<void(bool)> const& action);
+	signal::Connection DoOnSavedStateChanged(std::function<void(bool)> const& action);
 
 	void RememberCurrentState();
 

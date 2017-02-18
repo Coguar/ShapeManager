@@ -28,7 +28,7 @@ static const Vec2 CANVAS_SIZE = { 790, 490 };
 static const Vec2 TOOLBAR_POSITION = { 0, 0 };
 static const Vec2 TOOLBAR_SIZE = { 800, 100 };
 
-static const double MAX_SHAPE_SIZE = 200.0;
+static const double MAX_SHAPE_SIZE = 400.0;
 static const double MIN_SHAPE_SIZE = 20.0;
 static const double DEFAULT_TOOLBAR_ELEMENT_OFFSET = 10.0;
 
@@ -43,7 +43,8 @@ static const std::string REDO_PATH = "./res/redo.png";
 static const std::string UNDO_PATH = "./res/undo.png";
 static const std::string OPEN_PATH = "./res/open.png";
 static const std::string SAVE_PATH = "./res/save.png";
-static const std::string NEW_PATH = "./res/new.png";
+static const std::string NEW_PATH = "./res/Create.png";
+static const std::string PICTURE_PATH = "./res/Picture.png";
 
 static const std::string SAVE_MSG = "Current data will be lost! Would you like to save them?";
 static const std::string XML_ERROR_MSG = "XML parser error!";

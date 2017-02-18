@@ -2,7 +2,8 @@
 #include "Circle.h"
 #include "Square.h"
 #include "Triangle.h"
-#include "ShapeModel.h"
+#include "PictureView.h"
+#include "Picture.h"
 #include "History.h"
 #include "ChangeShapeRectCommand.h"
 #include "ShapePresenter.h"
@@ -33,8 +34,8 @@ void CShapePresenter::SetConnects()
 {
 	if (m_shape && m_model)
 	{
-		m_connection = m_shape->DoOnChangeRect(boost::bind(&CShapePresenter::AddCommand, this));
-		m_model->DoOnRectChanged(boost::bind(&CShape::SetBoundingRect, m_shape, _1));
+		m_connections.push_back(m_shape->DoOnChangeRect(boost::bind(&CShapePresenter::AddCommand, this)));
+		m_connections.push_back(m_model->DoOnRectChanged(boost::bind(&CShape::SetBoundingRect, m_shape, _1)));
 	}
 }
 
@@ -53,11 +54,19 @@ void CShapePresenter::InitView(std::shared_ptr<CShape> & shape)
 		case ShapeType::Rectangle:
 			shape = std::make_shared<ÑSquare>();
 			break;
+		case ShapeType::Picture:
+			shape = std::make_shared<CPictureView>();
+			shape->SetTexturePath(static_cast<CPicture*>(m_model.get())->GetTexturePath());
+			shape->SetColor(color::WHITE);
+			break;
 		default:
 			shape = std::make_shared<CCircle>();
 			break;
 		}
-		shape->SetColor(color::SHAPE_COLOR);
+		if (m_model->GetType() != ShapeType::Picture)
+		{
+			shape->SetColor(color::SHAPE_COLOR);
+		}
 		shape->SetPosition(m_model->GetPosition());
 		shape->SetSize(m_model->GetSize());
 	}

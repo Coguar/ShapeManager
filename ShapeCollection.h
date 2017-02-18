@@ -9,5 +9,7 @@ struct IShapeCollection
 	virtual void AddShape(std::shared_ptr<SModelShape> const& shape, size_t position) = 0;
 	virtual std::shared_ptr<SModelShape> DeleteLastShape() = 0;
 	virtual std::shared_ptr<SModelShape> DeleteShapeByPosition(size_t position) = 0;
+	virtual void MoveShapeUp(size_t position) = 0;
+	virtual void MoveShapeDown(size_t position) = 0;
 	virtual ~IShapeCollection() = default;
 };

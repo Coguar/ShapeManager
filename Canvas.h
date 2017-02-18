@@ -15,6 +15,8 @@ public:
 	void AddShape(std::shared_ptr<SModelShape> const& shape, size_t position) override;
 	std::shared_ptr<SModelShape> DeleteLastShape() override;
 	std::shared_ptr<SModelShape> DeleteShapeByPosition(size_t position) override;
+	void MoveShapeUp(size_t position) override;
+	void MoveShapeDown(size_t position) override;
 
 	void Clear();
 	void SetNewShapeList(std::vector<std::shared_ptr<SModelShape>> const& shapes);
@@ -23,16 +25,18 @@ public:
 
 	Vec2 GetSize() const;
 
-	void DoOnShapeAdd(std::function<void(std::shared_ptr<SModelShape>, size_t )> const& action) override;
-	void DoOnShapeDelete(std::function<void(size_t)> const& action) override;
-	void DoOnShapesClear(std::function<void()> const& action) override;
+	signal::Connection DoOnShapeAdd(std::function<void(std::shared_ptr<SModelShape>, size_t )> const& action) override;
+	signal::Connection DoOnShapeDelete(std::function<void(size_t)> const& action) override;
+	signal::Connection DoOnShapesClear(std::function<void()> const& action) override;
+	signal::Connection DoOnShapesLayerMove(std::function<void(size_t, bool)> const& action) override;
+
 
 private:
 
 	boost::signals2::signal<void(std::shared_ptr<SModelShape>, size_t)> m_onShapeAdded;
 	boost::signals2::signal<void(size_t)> m_onShapeDelete;
 	boost::signals2::signal<void()> m_onShapeListClear;
-
+	boost::signals2::signal<void(size_t, bool)> m_onMoveShapesLayer;
 	std::vector<std::shared_ptr<SModelShape>> m_shapes;
 	Vec2 m_size;
 };

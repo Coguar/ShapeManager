@@ -101,7 +101,16 @@ void CMainView::PrepareAddShapeSignal(ShapeType type)
 	auto canvasPos = m_canvas->GetPosition();
 	Vec2 position = { canvasPos.x + canvasSize.x / 2.0, canvasPos.y + canvasSize.y / 2.0 };
 
-	m_onShapeAdd(type, position);
+	if (type == ShapeType::Picture)
+	{
+		auto path = CDialogManager::GetPathToPicture();
+		if(!path.empty())
+			m_onPictureAdd(position, path);
+	}
+	else
+	{
+		m_onShapeAdd(type, position);
+	}
 }
 
 void CMainView::InitRootLayer()
@@ -115,6 +124,8 @@ void CMainView::InitRootLayer()
 	toolbar->AddChild(CreateButton(DEFAULT_BUTTONN_SIZE, color::WHITE, std::bind(&CMainView::PrepareAddShapeSignal, this, ShapeType::Circle), CIRCLE_PATH));
 	toolbar->AddChild(CreateButton(DEFAULT_BUTTONN_SIZE, color::WHITE, std::bind(&CMainView::PrepareAddShapeSignal, this, ShapeType::Rectangle), RECTANGLE_PATH));
 	toolbar->AddChild(CreateButton(DEFAULT_BUTTONN_SIZE, color::WHITE, std::bind(&CMainView::PrepareAddShapeSignal, this, ShapeType::Triangle), TRIANGLE_PATH));
+	toolbar->AddChild(CreateButton(DEFAULT_BUTTONN_SIZE, color::WHITE, std::bind(&CMainView::PrepareAddShapeSignal, this, ShapeType::Picture), PICTURE_PATH));
+
 
 	toolbar->AddChild(CreateButton(DEFAULT_BUTTONN_SIZE, color::WHITE, std::bind(&CMainView::Undo, this), UNDO_PATH));
 	toolbar->AddChild(CreateButton(DEFAULT_BUTTONN_SIZE, color::WHITE, std::bind(&CMainView::Redo, this), REDO_PATH));
@@ -172,44 +183,54 @@ void CMainView::StartShow()
 	}
 }
 
-void CMainView::DoOnShapeAdded(std::function<void(ShapeType, Vec2)> const & action)
+signal::Connection CMainView::DoOnShapeAdded(std::function<void(ShapeType, Vec2)> const & action)
 {
-	m_onShapeAdd.connect(action);
+	return m_onShapeAdd.connect(action);
 }
 
-void CMainView::DoOnDeleteShape(std::function<void(size_t)> const & action)
+signal::Connection CMainView::DoOnPictureAdded(std::function<void(Vec2, std::string)> const & action)
 {
-	m_onDeleteShape.connect(action);
+	return m_onPictureAdd.connect(action);
 }
 
-void CMainView::DoOnRedo(std::function<void()> const & action)
+signal::Connection CMainView::DoOnDeleteShape(std::function<void(size_t)> const & action)
 {
-	m_onRedo.connect(action);
+	return m_onDeleteShape.connect(action);
 }
 
-void CMainView::DoOnUndo(std::function<void()> const & action)
+signal::Connection CMainView::DoOnRedo(std::function<void()> const & action)
 {
-	m_onUndo.connect(action);
+	return m_onRedo.connect(action);
 }
 
-void CMainView::DoOnSave(std::function<void(const std::string&)> const & action)
+signal::Connection CMainView::DoOnUndo(std::function<void()> const & action)
 {
-	m_onSave.connect(action);
+	return m_onUndo.connect(action);
 }
 
-void CMainView::DoOnOpen(std::function<void(const std::string&)> const & action)
+signal::Connection CMainView::DoOnSave(std::function<void(const std::string&)> const & action)
 {
-	m_onOpen.connect(action);
+	return m_onSave.connect(action);
 }
 
-void CMainView::DoOnCreate(std::function<void()> const & action)
+signal::Connection CMainView::DoOnOpen(std::function<void(const std::string&)> const & action)
 {
-	m_onCreate.connect(action);
+	return m_onOpen.connect(action);
 }
 
-void CMainView::DoOnChangeShapeRect(std::function<void(size_t, Vec2, Vec2)> const & action)
+signal::Connection CMainView::DoOnCreate(std::function<void()> const & action)
 {
-	m_onChangedRect.connect(action);
+	return m_onCreate.connect(action);
+}
+
+signal::Connection CMainView::DoOnChangeShapeRect(std::function<void(size_t, Vec2, Vec2)> const & action)
+{
+	return m_onChangedRect.connect(action);
+}
+
+signal::Connection CMainView::DoOnChangeShapeLayer(std::function<void(size_t, bool)> const & action)
+{
+	return m_onChangeShapeLayer.connect(action);
 }
 
 std::shared_ptr<CToolbar> CMainView::CreateToolbar()
@@ -238,6 +259,11 @@ void CMainView::OnKeyPressed(sf::Event::KeyEvent const & event)
 	case sf::Keyboard::Delete:
 		m_onDeleteShape(m_canvas->GetSelectedShapeNum());
 		break;
+	case sf::Keyboard::Up:
+		m_onChangeShapeLayer(m_canvas->GetSelectedShapeNum(), true);
+		break;
+	case sf::Keyboard::Down:
+		m_onChangeShapeLayer(m_canvas->GetSelectedShapeNum(), false);
 	default:
 		break;
 	}

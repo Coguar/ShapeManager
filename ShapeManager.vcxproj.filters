@@ -168,6 +168,30 @@
     <ClInclude Include="Canvas.h">
       <Filter>Header Files\Model</Filter>
     </ClInclude>
+    <ClInclude Include="ConnectionsStorage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Application.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CollectionShapesManipulator.h">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelSignalsConnector.h">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Picture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PictureView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FileManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ChangeLayerCommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -265,6 +289,21 @@
     </ClCompile>
     <ClCompile Include="Canvas.cpp">
       <Filter>Header Files\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Application.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Picture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PictureView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FileManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ChangeLayerCommand.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

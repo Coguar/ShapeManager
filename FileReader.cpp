@@ -1,10 +1,11 @@
 #include "stdafx.h"
-#include "ShapeModel.h"
+#include "Picture.h"
 #include "DialogManager.h"
 #include <sstream>
 #include <fstream>
 #include <boost\property_tree\ptree.hpp>
 #include <boost\property_tree\xml_parser.hpp>
+#include "FileManager.h"
 #include "FileReader.h"
 
 namespace
@@ -12,6 +13,7 @@ namespace
 	const std::string  CIRCLE_WORD = "Circle";
 	const std::string  TRIANGLE_WORD = "Triangle";
 	const std::string  RECTANGLE_WORD = "Rectangle";
+	const std::string  PICTURE_WORD = "Picture";
 
 	std::string GetShapeName(ShapeType type)
 	{
@@ -23,6 +25,8 @@ namespace
 			return TRIANGLE_WORD;
 		case ShapeType::Rectangle:
 			return RECTANGLE_WORD;
+		case ShapeType::Picture:
+			return PICTURE_WORD;
 		default:
 			return CIRCLE_WORD;
 		}
@@ -38,10 +42,15 @@ namespace
 		{
 			return ShapeType::Triangle;
 		}
-		else
+		else if (typeStr == RECTANGLE_WORD)
 		{
 			return ShapeType::Rectangle;
 		}
+		else if (typeStr == PICTURE_WORD)
+		{
+			return ShapeType::Picture;
+		}
+		return ShapeType::Rectangle;
 	}
 }
 
@@ -58,6 +67,14 @@ void CFileReader::Save(std::string const & path, std::vector<std::shared_ptr<SMo
 			child.add("Y", std::to_string(shape->GetPosition().y));
 			child.add("Height", std::to_string(shape->GetSize().y));
 			child.add("Width", std::to_string(shape->GetSize().x));
+			if (shape->GetType() == ShapeType::Picture)
+			{
+				child.add("Texture", CFileManager::CopyFile(static_cast<CPicture*>(shape.get())->GetTexturePath(), path));
+			}
+			else
+			{
+				child.add("Texture", "");
+			}
 			propertyTree.add_child("Shapes.Shape", child);
 		}
 		std::stringstream stream;
@@ -98,8 +115,17 @@ std::vector<std::shared_ptr<SModelShape>> CFileReader::Open(std::string const & 
 					double y = shape.second.get<double>("Y");
 					double height = shape.second.get<double>("Height");
 					double width = shape.second.get<double>("Width");
-
-					shapes.push_back(std::make_shared<SModelShape>(GetShapeType(type), Vec2(x, y), Vec2(width, height)));
+					
+					if (type == PICTURE_WORD)
+					{
+						auto s = std::make_shared<CPicture>(Vec2(x, y), Vec2(width, height));
+						s->SetTexturePath(shape.second.get<std::string>("Texture"));
+						shapes.push_back(s);
+					}
+					else
+					{
+						shapes.push_back(std::make_shared<SModelShape>(GetShapeType(type), Vec2(x, y), Vec2(width, height)));
+					}
 				}
 			}
 			stream.close();

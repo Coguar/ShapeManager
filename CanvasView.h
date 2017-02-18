@@ -16,6 +16,7 @@ public:
 
 	void AddShape(std::shared_ptr<CShapePresenter> const& shape, size_t pos);
 	void DeleteShape(size_t pos);
+	void MoveShapeLayer(size_t position, bool isToUp);
 	void Clear();
 
 	void Draw(sf::RenderTarget * window, CTextureCache * cache) override;
@@ -27,6 +28,9 @@ private:
 	std::shared_ptr<CShape> CreateShape(std::shared_ptr<CShapePresenter> const& data);
 
 	void ShapeChangeRectEvent(std::shared_ptr<CShape> const& shape, sf::Event const& event);
+
+	void MoveShapeUp(size_t position);
+	void MoveShapeDown(size_t position);
 
 	std::vector<std::shared_ptr<CShape>> m_shapes;
 	std::shared_ptr<CSelectFrame> m_frame;

@@ -45,10 +45,11 @@ void CHistory::Clear()
 	SendDataStateSignal();
 }
 
-void CHistory::DoOnSavedStateChanged(std::function<void(bool)> const & action)
+signal::Connection CHistory::DoOnSavedStateChanged(std::function<void(bool)> const & action)
 {
-	m_onSavedStateChanged.connect(action);
+	return m_onSavedStateChanged.connect(action);
 }
+
 
 void CHistory::RememberCurrentState()
 {
