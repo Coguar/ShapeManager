@@ -35,6 +35,19 @@ std::string CFileManager::AddFile(boost::filesystem::path const & file)
 	return newPath.string();
 }
 
+std::string CFileManager::GetTempFolderPath() const
+{
+	return m_tempFolderPath.string();
+}
+
+void CFileManager::RecreateTempFolder()
+{
+	remove_all(m_tempFolderPath);
+	m_tempFolderPath = unique_path("TEMP%%%%");
+	if (!exists(m_tempFolderPath))
+		create_directory(m_tempFolderPath);
+}
+
 void CFileManager::RemoveFile(boost::filesystem::path const & path)
 {
 	if (exists(path))
@@ -62,6 +75,18 @@ std::string CFileManager::CopyFile(boost::filesystem::path const & file, boost::
 	{
 		boost::filesystem::copy_file(file, pathToCopy.wstring() + boost::filesystem::path("/").wstring() + file.filename().wstring(), copy_option::overwrite_if_exists);
 		return MakeRelative(mainFolder ,pathToCopy.string() + boost::filesystem::path("/").string() + file.filename().string()).string();
+	}
+	return std::string();
+}
+
+std::string CFileManager::CopyFileWithRandomName(boost::filesystem::path const & file, boost::filesystem::path const & toDir)
+{
+	if (is_directory(boost::filesystem::symlink_status(toDir)))
+	{
+		auto ext = file.extension();
+		path newPath = toDir.wstring() + unique_path("/F%%%%%%%%").wstring() + ext.wstring();
+		boost::filesystem::copy_file(file, newPath, copy_option::overwrite_if_exists);
+		return newPath.string();
 	}
 	return std::string();
 }

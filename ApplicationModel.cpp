@@ -14,7 +14,6 @@ CApplicationModel::CApplicationModel()
 {
 	m_history = std::make_unique<CHistory>();
 	m_domainModel = std::make_unique<CCanvas>();
-	m_domainModel->DoOnShapeAdd(boost::bind(&CApplicationModel::ShapeAdded, this, _1, _2));
 }
 
 
@@ -65,6 +64,11 @@ void CApplicationModel::ClearHistory()
 	m_history->Clear();
 }
 
+CHistory * CApplicationModel::GetHistory() const
+{
+	return m_history.get();
+}
+
 void CApplicationModel::Save(std::string const & path)
 {
 	if (!path.empty())
@@ -74,12 +78,12 @@ void CApplicationModel::Save(std::string const & path)
 	}
 }
 
-void CApplicationModel::Open(std::string const & path)
+void CApplicationModel::Open(std::string const & path, std::string const& tempResFolder)
 {
 	if (!path.empty())
 	{
 		Clear();
-		m_domainModel->SetNewShapeList(CFileReader::Open(path));
+		m_domainModel->SetNewShapeList(CFileReader::Open(path, tempResFolder));
 	}
 }
 
@@ -93,9 +97,9 @@ Vec2 CApplicationModel::GetCanvasSize() const
 	return m_domainModel->GetSize();
 }
 
-Connection CApplicationModel::DoOnShapeAdded(std::function<void(std::shared_ptr<CShapePresenter>, size_t)> const & action)
+Connection CApplicationModel::DoOnShapeAdded(std::function<void(std::shared_ptr<SModelShape>, size_t)> const & action)
 {
-	return m_onAddShape.connect(action);
+	return m_domainModel->DoOnShapeAdd(action);
 }
 
 Connection CApplicationModel::DoOnShapeDelete(std::function<void(size_t)> const & action)
@@ -118,10 +122,7 @@ signal::Connection CApplicationModel::DoOnShapesLayerMove(std::function<void(siz
 	return m_domainModel->DoOnShapesLayerMove(action);
 }
 
-void CApplicationModel::ShapeAdded(std::shared_ptr<SModelShape> const & shape, size_t position)
+signal::Connection CApplicationModel::DoOnResourceBecomingUnusable(std::function<void(std::string)> const & action)
 {
-	auto presenter = std::make_shared<CShapePresenter>(shape);
-	presenter->SetHistory(m_history.get());
-
-	m_onAddShape(presenter, position);
+	return m_domainModel->DoOnResourceBecomingUnusable(action);
 }

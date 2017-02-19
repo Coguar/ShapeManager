@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include "Picture.h"
 #include "Canvas.h"
 #include "FileReader.h"
 
@@ -66,6 +67,13 @@ void CCanvas::MoveShapeDown(size_t position)
 
 void CCanvas::Clear()
 {
+	for (auto &shape : m_shapes)
+	{
+		if (shape->GetType() == ShapeType::Picture)
+		{
+			m_resHasBecomeUnusable(dynamic_cast<CPicture*>(shape.get())->GetTexturePath());
+		}
+	}
 	m_shapes.clear();
 	m_onShapeListClear();
 }
@@ -107,4 +115,9 @@ Connection CCanvas::DoOnShapesClear(std::function<void()> const & action)
 signal::Connection CCanvas::DoOnShapesLayerMove(std::function<void(size_t, bool)> const & action)
 {
 	return m_onMoveShapesLayer.connect(action);
+}
+
+signal::Connection CCanvas::DoOnResourceBecomingUnusable(std::function<void(std::string)> const & action)
+{
+	return m_resHasBecomeUnusable.connect(action);
 }

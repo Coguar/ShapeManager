@@ -22,6 +22,7 @@ void CController::SetModelManipulator(ICollectionShapesManipulator * collectionS
 void CController::SetHistoryManipulator(IHistoryManipulator * hystorymanipulator)
 {
 	m_hystorymanipulator = hystorymanipulator;
+	m_shapePreesenterCreator = CShapePresenterCreator(m_hystorymanipulator->GetHistory());
 	SetConnections();
 }
 
@@ -35,6 +36,11 @@ void CController::SetView(std::shared_ptr<CMainView> const & view)
 {
 	m_view = view;
 	SetConnections();
+}
+
+void CController::CreateShapePresenter(std::shared_ptr<SModelShape> const & model, size_t position)
+{
+	m_onShapeAdded(m_shapePreesenterCreator.CreatePresenter(model), position);
 }
 
 void CController::Start()
@@ -54,7 +60,7 @@ void CController::ConnectSignalsForDocument()
 {
 	if (m_view && m_documentManipulator)
 	{
-		m_connections += m_view->DoOnOpen(boost::bind(&IDocumentManipulator::Open, m_documentManipulator, _1));
+		m_connections += m_view->DoOnOpen(boost::bind(&IDocumentManipulator::Open, m_documentManipulator, _1, m_manager->GetTempFolderPath()));
 		m_connections += m_view->DoOnSave(boost::bind(&IDocumentManipulator::Save, m_documentManipulator, _1));
 	}
 }
@@ -65,11 +71,13 @@ void CController::ConnectSignalsForView()
 	{
 		auto canvas = m_view->GetCanvas();
 
-		m_connections += m_collectionShapeManipulator->DoOnShapeAdded(boost::bind(&CCanvasView::AddShape, canvas.get(), _1, _2));
+		m_connections += m_collectionShapeManipulator->DoOnShapeAdded(boost::bind(&CController::CreateShapePresenter, this, _1, _2));
+		m_connections += m_onShapeAdded.connect(boost::bind(&CCanvasView::AddShape, canvas.get(), _1, _2));
 		m_connections += m_collectionShapeManipulator->DoOnShapeDelete(boost::bind(&CCanvasView::DeleteShape, canvas.get(), _1));
 		m_connections += m_collectionShapeManipulator->DoOnShapesClear(boost::bind(&CCanvasView::Clear, canvas.get()));
 		m_connections += m_collectionShapeManipulator->DoOnSavedStateChanged(boost::bind(&CMainView::SetDocDataState, m_view.get(), _1));
 		m_connections += m_collectionShapeManipulator->DoOnShapesLayerMove(boost::bind(&CCanvasView::MoveShapeLayer, canvas.get(), _1, _2));
+		m_connections += m_collectionShapeManipulator->DoOnResourceBecomingUnusable(&CFileManager::RemoveFile);
 	}
 }
 

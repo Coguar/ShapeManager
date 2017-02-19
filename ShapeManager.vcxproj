@@ -192,6 +192,7 @@
     <ClInclude Include="ShapeCollection.h" />
     <ClInclude Include="ShapeModel.h" />
     <ClInclude Include="ShapePresenter.h" />
+    <ClInclude Include="ShapePresenterCreator.h" />
     <ClInclude Include="ShapesTypes.h" />
     <ClInclude Include="Signal.h" />
     <ClInclude Include="SolidLayer.h" />
@@ -234,6 +235,7 @@
     <ClCompile Include="SelectFrame.cpp" />
     <ClCompile Include="ShapeModel.cpp" />
     <ClCompile Include="ShapePresenter.cpp" />
+    <ClCompile Include="ShapePresenterCreator.cpp" />
     <ClCompile Include="SolidLayer.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

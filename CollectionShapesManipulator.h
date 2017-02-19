@@ -3,7 +3,7 @@
 #include <memory>
 #include "Signal.h"
 
-class CShapePresenter;
+class SModelShape;
 enum class ShapeType;
 struct Vec2;
 
@@ -14,11 +14,12 @@ struct ICollectionShapesManipulator
 	virtual void DeleteShape(size_t position) = 0;
 	virtual void MoveShapeLayer(size_t position, bool isToUp) = 0;
 
-	virtual signal::Connection DoOnShapeAdded(std::function<void(std::shared_ptr<CShapePresenter>, size_t)> const& action) = 0;
+	virtual signal::Connection DoOnShapeAdded(std::function<void(std::shared_ptr<SModelShape>, size_t)> const& action) = 0;
 	virtual signal::Connection DoOnShapeDelete(std::function<void(size_t)> const& action) = 0;
 	virtual signal::Connection DoOnShapesClear(std::function<void()> const& action) = 0;
 	virtual signal::Connection DoOnSavedStateChanged(std::function<void(bool)> const& action) = 0;
 	virtual signal::Connection DoOnShapesLayerMove(std::function<void(size_t, bool)> const& action) = 0;
+	virtual signal::Connection DoOnResourceBecomingUnusable(std::function<void(std::string)> const & action) = 0;
 
 	virtual void Clear() = 0;
 

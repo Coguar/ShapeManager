@@ -29,7 +29,7 @@ public:
 	signal::Connection DoOnShapeDelete(std::function<void(size_t)> const& action) override;
 	signal::Connection DoOnShapesClear(std::function<void()> const& action) override;
 	signal::Connection DoOnShapesLayerMove(std::function<void(size_t, bool)> const& action) override;
-
+	signal::Connection DoOnResourceBecomingUnusable(std::function<void(std::string)> const& action) override;
 
 private:
 
@@ -37,6 +37,7 @@ private:
 	boost::signals2::signal<void(size_t)> m_onShapeDelete;
 	boost::signals2::signal<void()> m_onShapeListClear;
 	boost::signals2::signal<void(size_t, bool)> m_onMoveShapesLayer;
+	boost::signals2::signal<void(std::string)> m_resHasBecomeUnusable;
 	std::vector<std::shared_ptr<SModelShape>> m_shapes;
 	Vec2 m_size;
 };

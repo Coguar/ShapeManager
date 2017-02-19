@@ -96,7 +96,7 @@ void CFileReader::Save(std::string const & path, std::vector<std::shared_ptr<SMo
 	}
 }
 
-std::vector<std::shared_ptr<SModelShape>> CFileReader::Open(std::string const & path)
+std::vector<std::shared_ptr<SModelShape>> CFileReader::Open(std::string const & path, std::string const& tempFolderPath)
 {
 	std::vector<std::shared_ptr<SModelShape>> shapes;
 	if (!path.empty())
@@ -118,7 +118,12 @@ std::vector<std::shared_ptr<SModelShape>> CFileReader::Open(std::string const & 
 					
 					if (type == PICTURE_WORD)
 					{
-						auto s = std::make_shared<CPicture>(Vec2(x, y), Vec2(width, height), boost::filesystem::path(path).remove_filename().string()+ std::string("/") + shape.second.get<std::string>("Texture"));
+						auto newPath = boost::filesystem::path(path).remove_filename().string() + std::string("/") + shape.second.get<std::string>("Texture");
+						if (tempFolderPath != "")
+						{
+							newPath = CFileManager::CopyFileWithRandomName(newPath, tempFolderPath);
+						}
+						auto s = std::make_shared<CPicture>(Vec2(x, y), Vec2(width, height), newPath);
 						shapes.push_back(s);
 					}
 					else

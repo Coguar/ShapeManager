@@ -25,26 +25,24 @@ public:
 
 	Vec2 GetCanvasSize() const;
 
-	signal::Connection DoOnShapeAdded(std::function<void(std::shared_ptr<CShapePresenter>, size_t)> const& action) override;
+	signal::Connection DoOnShapeAdded(std::function<void(std::shared_ptr<SModelShape>, size_t)> const& action) override;
 	signal::Connection DoOnShapeDelete(std::function<void(size_t)> const& action) override;
 	signal::Connection DoOnShapesClear(std::function<void()> const& action) override;
 	signal::Connection DoOnSavedStateChanged(std::function<void(bool)> const& action) override;
 	signal::Connection DoOnShapesLayerMove(std::function<void(size_t, bool)> const& action) override;
+	signal::Connection DoOnResourceBecomingUnusable(std::function<void(std::string)> const & action) override;
 
 	void Save(std::string const& path) override;
-	void Open(std::string const& path) override;
+	void Open(std::string const& path, std::string const& tempResFolder = std::string()) override;
 
 	void RedoCommand() override;
 	void UndoCommand() override;
 	void ClearHistory() override;
+	CHistory* GetHistory() const override;
 
 private:
-	void ShapeAdded(std::shared_ptr<SModelShape> const& shape, size_t position);
-
 	std::unique_ptr<CHistory> m_history;
 
 	std::unique_ptr<CCanvas> m_domainModel;
-
-	boost::signals2::signal<void(std::shared_ptr<CShapePresenter>, size_t)> m_onAddShape;
 };
 

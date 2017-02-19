@@ -39,6 +39,10 @@ void CHistory::Undo()
 
 void CHistory::Clear()
 {
+	for (auto &command : m_doneCommands)
+	{
+		command->Destroy();
+	}
 	m_currentCommandNumber = 0;
 	m_doneCommands.clear();
 	RememberCurrentState();
