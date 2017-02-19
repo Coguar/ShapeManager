@@ -11,3 +11,7 @@ CCanvasCommand::CCanvasCommand(IShapeCollection* model)
 CCanvasCommand::~CCanvasCommand()
 {
 }
+
+void CCanvasCommand::Destroy()
+{
+}

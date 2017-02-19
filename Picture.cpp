@@ -6,19 +6,15 @@ CPicture::CPicture()
 {
 }
 
-CPicture::CPicture(Vec2 const & position, Vec2 const & size)
+CPicture::CPicture(Vec2 const & position, Vec2 const & size, std::string const& path)
 	: SModelShape(ShapeType::Picture, position, size)
+	, m_path(path)
 {
 }
 
 
 CPicture::~CPicture()
 {
-}
-
-void CPicture::SetTexturePath(std::string const & path)
-{
-	m_path = path;
 }
 
 std::string CPicture::GetTexturePath() const

@@ -11,7 +11,8 @@ CApplication::CApplication()
 	m_appModel = std::make_shared<CApplicationModel>();
 	m_view = std::make_shared<CMainView>();
 	m_controller->SetModelManipulator(m_appModel.get());
-	m_controller->SetSignalsConnector(m_appModel.get());
+	m_controller->SetHistoryManipulator(m_appModel.get());
+	m_controller->SetDocumentManipulator(m_appModel.get());
 	m_controller->SetView(m_view);
 }
 

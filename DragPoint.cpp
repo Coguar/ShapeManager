@@ -43,19 +43,12 @@ bool CDragPoint::OnMouseMoved(sf::Event::MouseMoveEvent const & event)
 	CShape::OnMouseMoved(event);
 	auto position = GetPosition();
 
+	int dir = oldPosition.x > m_xConnection->GetPosition().x ? 1 : -1;
+	position.x = m_xConnection->GetPosition().x + (dir * std::min(std::max(m_minDistance, (position.x - m_xConnection->GetPosition().x) * dir), m_maxDistance));
+	
+	dir = oldPosition.y > m_yConnection->GetPosition().y ? 1 : -1;
+	position.y = m_yConnection->GetPosition().y + (dir * std::min(std::max(m_minDistance, (position.y - m_yConnection->GetPosition().y) * dir), m_maxDistance));
 
-
-
-	if (!InRange(std::abs(position.x - m_xConnection->GetPosition().x), m_minDistance, m_maxDistance) 
-		|| std::abs(oldPosition.x - position.x) >= m_minDistance)
-	{
-		position.x = oldPosition.x;
-	}
-	if (!InRange(std::abs(position.y - m_yConnection->GetPosition().y), m_minDistance, m_maxDistance)
-		|| std::abs(oldPosition.y - position.y) >= m_minDistance)
-	{
-		position.y = oldPosition.y;
-	}
 	SetPosition(position);
 	UpdateConnectedPoints();
 	return oldPosition.x != position.x || oldPosition.y != position.y;

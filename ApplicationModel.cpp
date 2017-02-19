@@ -30,8 +30,7 @@ void CApplicationModel::AddShape(ShapeType type, Vec2 const& position)
 
 void CApplicationModel::AddPicture(Vec2 const & position, std::string const & path)
 {
-	auto picture = std::make_shared<CPicture>(position, INITIALIZATION_SHAPE_SIZE);
-	picture->SetTexturePath(path);
+	auto picture = std::make_shared<CPicture>(position, INITIALIZATION_SHAPE_SIZE, path);
 	m_history->PushCommand(std::make_shared<CAddShapeCommand>(picture, m_domainModel.get()));
 }
 
@@ -61,6 +60,11 @@ void CApplicationModel::UndoCommand()
 	m_history->Undo();
 }
 
+void CApplicationModel::ClearHistory()
+{
+	m_history->Clear();
+}
+
 void CApplicationModel::Save(std::string const & path)
 {
 	if (!path.empty())
@@ -81,7 +85,6 @@ void CApplicationModel::Open(std::string const & path)
 
 void CApplicationModel::Clear()
 {
-	m_history->Clear();
 	m_domainModel->Clear();
 }
 

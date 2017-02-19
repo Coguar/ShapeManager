@@ -12,7 +12,7 @@ public:
 
 	void Execute() override;
 	void Unexecute() override;
-
+	void Destroy() override;
 private:
 	CBoundingRect m_oldRect;
 	CBoundingRect m_newRect;

@@ -8,6 +8,8 @@ class CCanvasCommand :
 public:
 	CCanvasCommand(IShapeCollection* model);
 	~CCanvasCommand();
+	void Destroy() override;
+
 protected:
 	IShapeCollection * m_model = nullptr;
 };

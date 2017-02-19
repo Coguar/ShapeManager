@@ -22,3 +22,7 @@ void CChangeShapeRectCommand::Unexecute()
 {
 	m_model->SetRect(m_oldRect.position, m_oldRect.size);
 }
+
+void CChangeShapeRectCommand::Destroy()
+{
+}

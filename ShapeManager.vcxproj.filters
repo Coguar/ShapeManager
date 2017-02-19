@@ -177,9 +177,6 @@
     <ClInclude Include="CollectionShapesManipulator.h">
       <Filter>Header Files\Model</Filter>
     </ClInclude>
-    <ClInclude Include="ModelSignalsConnector.h">
-      <Filter>Header Files\Model</Filter>
-    </ClInclude>
     <ClInclude Include="Picture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -191,6 +188,12 @@
     </ClInclude>
     <ClInclude Include="ChangeLayerCommand.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DocumentManipulator.h">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="HistoryManipulator.h">
+      <Filter>Header Files\Model</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -78,5 +78,9 @@ void CHistory::SendDataStateSignal()
 
 void CHistory::ClearOutdatedBranch()
 {
+	for (size_t i = m_currentCommandNumber; i < m_doneCommands.size(); ++i)
+	{
+		m_doneCommands[i]->Destroy();
+	}
 	m_doneCommands.erase(m_doneCommands.begin() + m_currentCommandNumber, m_doneCommands.end());
 }

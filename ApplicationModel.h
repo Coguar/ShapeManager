@@ -1,14 +1,17 @@
 #pragma once
 #include "Canvas.h"
 #include "CollectionShapesManipulator.h"
-#include "ModelSignalsConnector.h"
+#include "DocumentManipulator.h"
+#include "HistoryManipulator.h"
+
 
 class CHistory;
 class CShapePresenter;
 
 class CApplicationModel
 	: public ICollectionShapesManipulator
-	, public IModelSignalsConnector
+	, public IDocumentManipulator
+	, public IHistoryManipulator
 {
 public:
 	CApplicationModel();
@@ -18,13 +21,6 @@ public:
 	void AddPicture(Vec2 const& position, std::string const& path) override;
 	void DeleteShape(size_t position) override;
 	void MoveShapeLayer(size_t position, bool isToUp) override;
-
-	void RedoCommand() override;
-	void UndoCommand() override;
-
-	void Save(std::string const& path) override;
-	void Open(std::string const& path) override;
-
 	void Clear() override;
 
 	Vec2 GetCanvasSize() const;
@@ -34,6 +30,14 @@ public:
 	signal::Connection DoOnShapesClear(std::function<void()> const& action) override;
 	signal::Connection DoOnSavedStateChanged(std::function<void(bool)> const& action) override;
 	signal::Connection DoOnShapesLayerMove(std::function<void(size_t, bool)> const& action) override;
+
+	void Save(std::string const& path) override;
+	void Open(std::string const& path) override;
+
+	void RedoCommand() override;
+	void UndoCommand() override;
+	void ClearHistory() override;
+
 private:
 	void ShapeAdded(std::shared_ptr<SModelShape> const& shape, size_t position);
 

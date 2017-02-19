@@ -18,14 +18,9 @@ CFileManager::~CFileManager()
 
 std::string CFileManager::AddFile(boost::filesystem::path const & file)
 {
-	if (m_loadedFiles.find(file.string()) != m_loadedFiles.end())
-	{
-		return m_loadedFiles.find(file.string())->second;
-	}
 	auto ext = file.extension();
 	path newPath = m_tempFolderPath.wstring() + unique_path("/F%%%%%%%%").wstring() + ext.wstring();
 	boost::filesystem::copy_file(file, newPath, copy_option::overwrite_if_exists);
-	m_loadedFiles.insert({file.string(), newPath.string()});
 	return newPath.string();
 }
 
@@ -34,13 +29,6 @@ void CFileManager::RemoveFile(boost::filesystem::path const & path)
 	if (exists(path))
 	{
 		remove(path);
-		for (auto &it : m_loadedFiles)
-		{
-			if (it.second == path)
-			{
-				m_loadedFiles.erase(it.first);
-			}
-		}
 	}
 }
 

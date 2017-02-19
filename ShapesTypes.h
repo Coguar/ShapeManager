@@ -1,6 +1,6 @@
 #pragma once
 
-const enum class ShapeType
+enum class ShapeType
 {
 	Circle = 0,
 	Triangle,

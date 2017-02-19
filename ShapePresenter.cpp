@@ -56,7 +56,7 @@ void CShapePresenter::InitView(std::shared_ptr<CShape> & shape)
 			break;
 		case ShapeType::Picture:
 			shape = std::make_shared<CPictureView>();
-			shape->SetTexturePath(static_cast<CPicture*>(m_model.get())->GetTexturePath());
+			shape->SetTexturePath(dynamic_cast<CPicture*>(m_model.get())->GetTexturePath());
 			shape->SetColor(color::WHITE);
 			break;
 		default:

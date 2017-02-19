@@ -7,6 +7,7 @@ class SModelShape
 public:
 	SModelShape() = default;
 	SModelShape(ShapeType type, Vec2 const& position = Vec2(), Vec2 const& size = Vec2());
+	virtual ~SModelShape() = default;
 
 	void SetRect(Vec2 const& pos, Vec2 const& size);
 

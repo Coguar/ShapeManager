@@ -160,7 +160,9 @@
     <ClInclude Include="ChangeShapeRectCommand.h" />
     <ClInclude Include="CollectionShapesManipulator.h" />
     <ClInclude Include="ConnectionsStorage.h" />
+    <ClInclude Include="DocumentManipulator.h" />
     <ClInclude Include="FileManager.h" />
+    <ClInclude Include="HistoryManipulator.h" />
     <ClInclude Include="MainView.h" />
     <ClInclude Include="CanvasView.h" />
     <ClInclude Include="Circle.h" />
@@ -180,7 +182,6 @@
     <ClInclude Include="FileReader.h" />
     <ClInclude Include="History.h" />
     <ClInclude Include="Layer.h" />
-    <ClInclude Include="ModelSignalsConnector.h" />
     <ClInclude Include="MyCommand.h" />
     <ClInclude Include="ParentLayer.h" />
     <ClInclude Include="Picture.h" />

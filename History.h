@@ -2,7 +2,6 @@
 #include "Reseiver.h"
 #include "CommandInterface.h"
 
-
 class CHistory :
 	public IHistory
 {
