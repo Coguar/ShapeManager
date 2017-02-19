@@ -118,7 +118,7 @@ std::vector<std::shared_ptr<SModelShape>> CFileReader::Open(std::string const & 
 					
 					if (type == PICTURE_WORD)
 					{
-						auto s = std::make_shared<CPicture>(Vec2(x, y), Vec2(width, height), shape.second.get<std::string>("Texture"));
+						auto s = std::make_shared<CPicture>(Vec2(x, y), Vec2(width, height), boost::filesystem::path(path).remove_filename().string()+ std::string("/") + shape.second.get<std::string>("Texture"));
 						shapes.push_back(s);
 					}
 					else

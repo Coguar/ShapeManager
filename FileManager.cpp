@@ -1,7 +1,18 @@
 #include "stdafx.h"
 #include "FileManager.h"
 
+template < >
+boost::filesystem::path& boost::filesystem::path::append< typename boost::filesystem::path::iterator >(typename boost::filesystem::path::iterator begin, typename boost::filesystem::path::iterator end, const codecvt_type& /*cvt*/)
+{
+	for (; begin != end; ++begin)
+		*this /= *begin;
+	return *this;
+}
+
 using namespace boost::filesystem;
+
+namespace fs = boost::filesystem;
+using fs::path;
 
 CFileManager::CFileManager()
 	: m_tempFolderPath(unique_path("TEMP%%%%"))
@@ -39,6 +50,7 @@ std::string CFileManager::CopyFile(boost::filesystem::path const & file, boost::
 	{
 		pathToCopy.remove_filename();	
 	}
+	auto mainFolder = pathToCopy;
 	auto folderName = toDir.filename().replace_extension();
 	pathToCopy.append(boost::filesystem::path("/").wstring());
 	pathToCopy.append(folderName.wstring());
@@ -49,7 +61,30 @@ std::string CFileManager::CopyFile(boost::filesystem::path const & file, boost::
 	if (exists(file))
 	{
 		boost::filesystem::copy_file(file, pathToCopy.wstring() + boost::filesystem::path("/").wstring() + file.filename().wstring(), copy_option::overwrite_if_exists);
-		return pathToCopy.string() + boost::filesystem::path("/").string() + file.filename().string();
+		return MakeRelative(mainFolder ,pathToCopy.string() + boost::filesystem::path("/").string() + file.filename().string()).string();
 	}
 	return std::string();
+}
+
+boost::filesystem::path CFileManager::MakeRelative(boost::filesystem::path a_From, boost::filesystem::path a_To)
+{
+	a_From = absolute(a_From);
+	a_To = absolute(a_To);
+	path ret;
+	auto itrFrom(a_From.begin());
+	auto itrTo(a_To.begin());
+	// Find common base
+	for (path::const_iterator toEnd(a_To.end()), fromEnd(a_From.end()); itrFrom != fromEnd && itrTo != toEnd && *itrFrom == *itrTo; ++itrFrom, ++itrTo);
+	// Navigate backwards in directory to reach previously found base
+	for (path::const_iterator fromEnd(a_From.end()); itrFrom != fromEnd; ++itrFrom) //-V683
+	{
+		if ((*itrFrom) != ".")
+			ret /= "..";
+	}
+	// Now navigate down the directory branch
+	for (auto itrAppend = itrTo; itrAppend != a_To.end(); ++itrAppend)
+	{
+		ret /= *itrAppend;
+	}
+	return ret;
 }
