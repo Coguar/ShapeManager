@@ -23,8 +23,8 @@ void CHistory::Redo()
 {
 	if (!m_doneCommands.empty())
 	{
-		m_doneCommands[m_currentCommandNumber]->Execute();
 		IncreaseCommandNumber();
+		m_doneCommands[m_currentCommandNumber]->Execute();
 		SendDataStateSignal();
 	}
 }
