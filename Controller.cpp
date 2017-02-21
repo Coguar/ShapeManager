@@ -2,6 +2,7 @@
 #include "MainView.h"
 #include "ApplicationModel.h"
 #include "Controller.h"
+#include <vld.h>
 
 CController::CController()
 {

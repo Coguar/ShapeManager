@@ -7,6 +7,7 @@
 #include "History.h"
 #include "ChangeShapeRectCommand.h"
 #include "ShapePresenter.h"
+#include <vld.h>
 
 
 CShapePresenter::CShapePresenter(std::shared_ptr<SModelShape> const& model)
