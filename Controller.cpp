@@ -49,6 +49,11 @@ void CController::Start()
 	m_view->StartShow();
 }
 
+void CController::OpenFile(std::string const & filePath)
+{
+	m_documentManipulator->Open(filePath, m_manager->GetTempFolderPath());
+}
+
 void CController::SetConnections()
 {
 	ConnectSignalsForDocument();

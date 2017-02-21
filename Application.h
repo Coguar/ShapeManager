@@ -10,7 +10,7 @@ public:
 	CApplication();
 	~CApplication();
 
-	void Start();
+	void Start(std::string const& filePath = std::string());
 
 private:
 	std::shared_ptr<CController> m_controller;

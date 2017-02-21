@@ -20,8 +20,8 @@ CDragPoint::~CDragPoint()
 
 void CDragPoint::SetConnectedPoint(std::shared_ptr<CDragPoint> const & xPoint, std::shared_ptr<CDragPoint> const & yPoint)
 {
-	m_xConnection = xPoint;
-	m_yConnection = yPoint;
+	m_xConnection = xPoint.get();
+	m_yConnection = yPoint.get();
 }
 
 void CDragPoint::SetMinMaxDistanceBetweenPoints(double min, double max)
@@ -43,24 +43,25 @@ bool CDragPoint::OnMouseMoved(sf::Event::MouseMoveEvent const & event)
 	CShape::OnMouseMoved(event);
 	auto position = GetPosition();
 
-	int dir = oldPosition.x > m_xConnection->GetPosition().x ? 1 : -1;
-	position.x = m_xConnection->GetPosition().x + (dir * std::min(std::max(m_minDistance, (position.x - m_xConnection->GetPosition().x) * dir), m_maxDistance));
-	
-	dir = oldPosition.y > m_yConnection->GetPosition().y ? 1 : -1;
-	position.y = m_yConnection->GetPosition().y + (dir * std::min(std::max(m_minDistance, (position.y - m_yConnection->GetPosition().y) * dir), m_maxDistance));
+	if (m_xConnection && m_yConnection)
+	{
+		int dir = oldPosition.x > m_xConnection->GetPosition().x ? 1 : -1;
+		position.x = m_xConnection->GetPosition().x + (dir * std::min(std::max(m_minDistance, (position.x - m_xConnection->GetPosition().x) * dir), m_maxDistance));
 
-	SetPosition(position);
-	UpdateConnectedPoints();
+		dir = oldPosition.y > m_yConnection->GetPosition().y ? 1 : -1;
+		position.y = m_yConnection->GetPosition().y + (dir * std::min(std::max(m_minDistance, (position.y - m_yConnection->GetPosition().y) * dir), m_maxDistance));
+
+		SetPosition(position);
+		UpdateConnectedPoints();
+	}
 	return oldPosition.x != position.x || oldPosition.y != position.y;
 }
 
 void CDragPoint::UpdateConnectedPoints()
 {
 	auto position = GetPosition();
-	auto sharedY = m_yConnection;
-	sharedY->SetPosition({position.x, sharedY->GetPosition().y});
-	auto sharedX = m_xConnection;
-	sharedX->SetPosition({ sharedX->GetPosition().x, position.y });
+	m_yConnection->SetPosition({position.x, m_yConnection->GetPosition().y});
+	m_xConnection->SetPosition({ m_xConnection->GetPosition().x, position.y });
 }
 
 bool CDragPoint::IsPointIntoShape(Vec2 const & point) const

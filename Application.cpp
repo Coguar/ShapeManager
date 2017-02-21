@@ -21,7 +21,11 @@ CApplication::~CApplication()
 {
 }
 
-void CApplication::Start()
+void CApplication::Start(std::string const& filePath)
 {
+	if (!filePath.empty())
+	{
+		m_controller->OpenFile(filePath);
+	}
 	m_controller->Start();
 }

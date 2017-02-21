@@ -21,6 +21,7 @@ public:
 	void SetView(std::shared_ptr<CMainView> const& view);
 
 	void Start();
+	void OpenFile(std::string const& filePath);
 private:
 	void SetConnections();
 

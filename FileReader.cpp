@@ -119,12 +119,15 @@ std::vector<std::shared_ptr<SModelShape>> CFileReader::Open(std::string const & 
 					if (type == PICTURE_WORD)
 					{
 						auto newPath = boost::filesystem::path(path).remove_filename().string() + std::string("/") + shape.second.get<std::string>("Texture");
-						if (tempFolderPath != "")
+						if (boost::filesystem::exists(newPath))
 						{
-							newPath = CFileManager::CopyFileWithRandomName(newPath, tempFolderPath);
+							if (tempFolderPath != "")
+							{
+								newPath = CFileManager::CopyFileWithRandomName(newPath, tempFolderPath);
+							}
+							auto s = std::make_shared<CPicture>(newPath, Vec2(x, y), Vec2(width, height));
+							shapes.push_back(s);
 						}
-						auto s = std::make_shared<CPicture>(Vec2(x, y), Vec2(width, height), newPath);
-						shapes.push_back(s);
 					}
 					else
 					{

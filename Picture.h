@@ -5,7 +5,7 @@ class CPicture :
 {
 public:
 	CPicture();
-	CPicture(Vec2 const& position = Vec2(), Vec2 const& size = Vec2(), std::string const& path = std::string());
+	CPicture(std::string const& path, Vec2 const& position = Vec2(), Vec2 const& size = Vec2());
 	~CPicture();
 
 	std::string GetTexturePath() const;

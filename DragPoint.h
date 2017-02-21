@@ -20,8 +20,8 @@ public:
 private:
 	void UpdateConnectedPoints();
 
-	std::shared_ptr<CDragPoint> m_yConnection;
-	std::shared_ptr<CDragPoint> m_xConnection;
+	CDragPoint * m_yConnection;
+	CDragPoint * m_xConnection;
 
 	double m_maxDistance = MAX_SHAPE_SIZE;
 	double m_minDistance = MIN_SHAPE_SIZE;

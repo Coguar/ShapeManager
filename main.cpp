@@ -2,13 +2,15 @@
 #include "Application.h"
 #include <vld.h>
 
-int main()
+int main(int argc, char* argv[])
 {
-	return 0;
 	CApplication app;
-	return 0;
-
-	app.Start();
+	std::string filePath = "";
+	if (argc > 1)
+	{
+		filePath = argv[1];
+	}
+	app.Start(filePath);
 	return 0;
 }
 

@@ -150,9 +150,6 @@
     <ClInclude Include="SolidLayer.h">
       <Filter>Header Files\View\ViewObjects</Filter>
     </ClInclude>
-    <ClInclude Include="ShapePresenter.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ShapeCollection.h">
       <Filter>Header Files\Model</Filter>
     </ClInclude>
@@ -168,26 +165,11 @@
     <ClInclude Include="Canvas.h">
       <Filter>Header Files\Model</Filter>
     </ClInclude>
-    <ClInclude Include="ConnectionsStorage.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Application.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CollectionShapesManipulator.h">
       <Filter>Header Files\Model</Filter>
-    </ClInclude>
-    <ClInclude Include="Picture.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PictureView.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FileManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ChangeLayerCommand.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DocumentManipulator.h">
       <Filter>Header Files\Model</Filter>
@@ -195,8 +177,26 @@
     <ClInclude Include="HistoryManipulator.h">
       <Filter>Header Files\Model</Filter>
     </ClInclude>
+    <ClInclude Include="FileManager.h">
+      <Filter>Header Files\WorkWithFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="ChangeLayerCommand.h">
+      <Filter>Header Files\History</Filter>
+    </ClInclude>
+    <ClInclude Include="Picture.h">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapePresenter.h">
+      <Filter>Header Files\View\ViewObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="PictureView.h">
+      <Filter>Header Files\View\ViewObjects\ShapeView</Filter>
+    </ClInclude>
     <ClInclude Include="ShapePresenterCreator.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="ConnectionsStorage.h">
+      <Filter>Header Files\Controller</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -284,9 +284,6 @@
     <ClCompile Include="SolidLayer.cpp">
       <Filter>Header Files\View\ViewObjects</Filter>
     </ClCompile>
-    <ClCompile Include="ShapePresenter.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ChangeShapeRectCommand.cpp">
       <Filter>Header Files\History</Filter>
     </ClCompile>
@@ -299,20 +296,23 @@
     <ClCompile Include="Application.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Picture.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PictureView.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="FileManager.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files\WorkWithFiles</Filter>
     </ClCompile>
     <ClCompile Include="ChangeLayerCommand.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files\History</Filter>
+    </ClCompile>
+    <ClCompile Include="Picture.cpp">
+      <Filter>Header Files\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="ShapePresenter.cpp">
+      <Filter>Header Files\View\ViewObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="PictureView.cpp">
+      <Filter>Header Files\View\ViewObjects\ShapeView</Filter>
     </ClCompile>
     <ClCompile Include="ShapePresenterCreator.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files\Controller</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -29,7 +29,7 @@ void CApplicationModel::AddShape(ShapeType type, Vec2 const& position)
 
 void CApplicationModel::AddPicture(Vec2 const & position, std::string const & path)
 {
-	auto picture = std::make_shared<CPicture>(position, INITIALIZATION_SHAPE_SIZE, path);
+	auto picture = std::make_shared<CPicture>(path, position, INITIALIZATION_SHAPE_SIZE);
 	m_history->PushCommand(std::make_shared<CAddShapeCommand>(picture, m_domainModel.get()));
 }
 
