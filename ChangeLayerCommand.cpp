@@ -14,24 +14,32 @@ CChangeLayerCommand::~CChangeLayerCommand()
 
 void CChangeLayerCommand::Execute()
 {
-	if (m_isToUp)
+	if (!m_isDone)
 	{
-		m_model->MoveShapeUp(m_position);
-	}
-	else
-	{
-		m_model->MoveShapeDown(m_position);
+		if (m_isToUp)
+		{
+			m_model->MoveShapeUp(m_position);
+		}
+		else
+		{
+			m_model->MoveShapeDown(m_position);
+		}
+		SetDoneState(true);
 	}
 }
 
 void CChangeLayerCommand::Unexecute()
 {
-	if (m_isToUp)
+	if (m_isDone)
 	{
-		m_model->MoveShapeUp(m_position);
-	}
-	else
-	{
-		m_model->MoveShapeDown(m_position);
+		if (m_isToUp)
+		{
+			m_model->MoveShapeUp(m_position);
+		}
+		else
+		{
+			m_model->MoveShapeDown(m_position);
+		}
+		SetDoneState(false);
 	}
 }

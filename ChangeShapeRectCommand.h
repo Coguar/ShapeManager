@@ -1,10 +1,10 @@
 #pragma once
-#include "CommandInterface.h"
+#include "AbstractCommand.h"
 
 class SModelShape;
 
 class CChangeShapeRectCommand :
-	public ICommand
+	public CAbstractCommand
 {
 public:
 	CChangeShapeRectCommand(CBoundingRect const& newRect, CBoundingRect const& oldRect, std::shared_ptr<SModelShape> const& shapeModel);

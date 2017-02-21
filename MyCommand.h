@@ -1,9 +1,9 @@
 #pragma once
-#include "CommandInterface.h"
+#include "AbstractCommand.h"
 #include "Canvas.h"
 
 class CCanvasCommand :
-	public ICommand
+	public CAbstractCommand
 {
 public:
 	CCanvasCommand(IShapeCollection* model);

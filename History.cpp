@@ -15,24 +15,26 @@ void CHistory::PushCommand(std::shared_ptr<ICommand> const & command)
 	command->Execute();
 	ClearOutdatedBranch();
 	m_doneCommands.push_back(command);
-	++m_currentCommandNumber;
+	IncreaseCommandNumber();
 	SendDataStateSignal();
 }
 
 void CHistory::Redo()
 {
-	if (m_doneCommands.size() != 0 && m_currentCommandNumber < m_doneCommands.size())
+	if (!m_doneCommands.empty())
 	{
-		m_doneCommands[m_currentCommandNumber++]->Execute();
+		m_doneCommands[m_currentCommandNumber]->Execute();
+		IncreaseCommandNumber();
 		SendDataStateSignal();
 	}
 }
 
 void CHistory::Undo()
 {
-	if (m_currentCommandNumber > 0)
+	if (!m_doneCommands.empty())
 	{
-		m_doneCommands[--m_currentCommandNumber]->Unexecute();
+		m_doneCommands[m_currentCommandNumber]->Unexecute();
+		DecreaseCommandNumber();
 		SendDataStateSignal();
 	}
 }
@@ -57,9 +59,9 @@ signal::Connection CHistory::DoOnSavedStateChanged(std::function<void(bool)> con
 
 void CHistory::RememberCurrentState()
 {
-	if (!m_doneCommands.empty())
+	if (!m_doneCommands.empty() && m_doneCommands[m_currentCommandNumber]->IsDone())
 	{
-		m_lastSavedState = m_doneCommands[m_currentCommandNumber - 1];
+			m_lastSavedState = m_doneCommands[m_currentCommandNumber];
 	}
 	else
 	{
@@ -70,7 +72,7 @@ void CHistory::RememberCurrentState()
 
 void CHistory::SendDataStateSignal()
 {
-	if (m_doneCommands.empty() || m_lastSavedState == m_doneCommands[m_currentCommandNumber - 1])
+	if (m_doneCommands.empty() || m_lastSavedState == m_doneCommands[m_currentCommandNumber])
 	{
 		m_onSavedStateChanged(true);
 	}
@@ -82,9 +84,21 @@ void CHistory::SendDataStateSignal()
 
 void CHistory::ClearOutdatedBranch()
 {
-	for (size_t i = m_currentCommandNumber; i < m_doneCommands.size(); ++i)
+	if (m_doneCommands.empty())
+		return;
+	for (size_t i = m_currentCommandNumber + 1; i < m_doneCommands.size(); ++i)
 	{
 		m_doneCommands[i]->Destroy();
 	}
-	m_doneCommands.erase(m_doneCommands.begin() + m_currentCommandNumber, m_doneCommands.end());
+	m_doneCommands.erase(m_doneCommands.begin() + m_currentCommandNumber + 1, m_doneCommands.end());
+}
+
+void CHistory::DecreaseCommandNumber()
+{
+	m_currentCommandNumber = m_currentCommandNumber == 0 ? 0 : m_currentCommandNumber - 1;
+}
+
+void CHistory::IncreaseCommandNumber()
+{
+	m_currentCommandNumber = m_currentCommandNumber == m_doneCommands.size() - 1 ? m_currentCommandNumber : m_currentCommandNumber + 1;
 }

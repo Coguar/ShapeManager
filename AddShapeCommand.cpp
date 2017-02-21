@@ -16,17 +16,19 @@ CAddShapeCommand::~CAddShapeCommand()
 
 void CAddShapeCommand::Execute()
 {
-	if (m_model != nullptr && m_shape != nullptr)
+	if (!m_isDone && m_model != nullptr && m_shape != nullptr)
 	{
 		m_model->AddShape(m_shape);
+		SetDoneState(true);
 	}
 }
 
 void CAddShapeCommand::Unexecute()
 {
-	if (m_model != nullptr && m_shape != nullptr)
+	if (m_isDone && m_model != nullptr && m_shape != nullptr)
 	{
 		m_model->DeleteLastShape();
+		SetDoneState(false);
 	}
 }
 

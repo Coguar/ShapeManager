@@ -24,6 +24,9 @@ private:
 	void SendDataStateSignal();
 	void ClearOutdatedBranch();
 
+	void DecreaseCommandNumber();
+	void IncreaseCommandNumber();
+
 	std::vector<std::shared_ptr<ICommand>> m_doneCommands;
 	size_t m_currentCommandNumber = 0;
 

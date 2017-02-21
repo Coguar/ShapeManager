@@ -23,7 +23,7 @@ void CSolidLayer::Draw(sf::RenderTarget * window, CTextureCache * cache)
 		layersRect.setPosition(float(position.x), float(position.y));
 		if (IsTextured() && cache != nullptr)
 		{
-			// layersRect.setTexture(cache->GetTexture(m_texturePath).get());
+			layersRect.setTexture(cache->GetTexture(m_texturePath).get());
 		}
 		layersRect.setFillColor(sf::Color(sf::Uint8(m_color.r), sf::Uint8(m_color.g), sf::Uint8(m_color.b), sf::Uint8(m_color.a)));
 

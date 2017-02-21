@@ -150,6 +150,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AbstractCommand.h" />
     <ClInclude Include="AbstractShape.h" />
     <ClInclude Include="ActionButton.h" />
     <ClInclude Include="AddShapeCommand.h" />
@@ -204,6 +205,7 @@
     <ClInclude Include="Square.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AbstractCommand.cpp" />
     <ClCompile Include="AbstractShape.cpp" />
     <ClCompile Include="ActionButton.cpp" />
     <ClCompile Include="AddShapeCommand.cpp" />
