@@ -9,7 +9,7 @@ public:
 	CHistory();
 	~CHistory();
 
-	void PushCommand(std::shared_ptr<ICommand> const& command);
+	void PushCommand(std::shared_ptr<ICommand> const& command) override;
 
 	void Redo() override;
 	void Undo() override;
