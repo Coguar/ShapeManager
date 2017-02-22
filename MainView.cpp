@@ -238,7 +238,7 @@ std::shared_ptr<CToolbar> CMainView::CreateToolbar()
 	auto toolbar = std::make_shared<CToolbar>();
 	toolbar->SetPosition(TOOLBAR_POSITION);
 	toolbar->SetSize(TOOLBAR_SIZE);
-	toolbar->SetColor(color::YELLOW);
+	toolbar->SetColor(color::TOOLBAR_COLOR);
 	return toolbar;
 }
 

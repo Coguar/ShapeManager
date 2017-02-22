@@ -10,11 +10,13 @@ namespace color
 	static const SColor GREEN = SColor(0, 255, 0, 255);
 	static const SColor BLUE = SColor(0, 0, 255, 255);
 	static const SColor WHITE = SColor(255, 255, 255, 255);
+	static const SColor BEIDGE = SColor(255, 254, 182, 255);
 	static const SColor LITE_GRAY = SColor(200, 200, 200, 255);
 	static const SColor BLACK;
 
 	static const SColor SHAPE_COLOR = PURPLE;
 	static const SColor DRAG_POINT_COLOR = SColor(255, 0, 0, 128);
+	static const SColor TOOLBAR_COLOR = BEIDGE;
 }
 static const Vec2 MAIN_WINDOW_SIZE = { 800, 600 };
 
