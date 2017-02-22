@@ -1,6 +1,6 @@
 #pragma once
 
-class CHistory;
+/*class CHistory;
 class CShapePresenter;
 class SModelShape;
 
@@ -17,3 +17,4 @@ private:
 	CHistory * m_history = nullptr;
 };
 
+*/

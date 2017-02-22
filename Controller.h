@@ -2,12 +2,12 @@
 
 #include "ConnectionsStorage.h"
 #include "FileManager.h"
-#include "ShapePresentercreator.h"
 
 struct ICollectionShapesManipulator;
 struct IDocumentManipulator;
 struct IHistoryManipulator;
 class CMainView;
+class CShapePresenter;
 
 class CController
 {
@@ -34,8 +34,6 @@ private:
 	void AddPicture(Vec2 const & position, std::string const & path);
 	void CreateShapePresenter(std::shared_ptr<SModelShape> const& model, size_t position);
 
-	void OpenNewDocument(std::string const& path);
-
 	ICollectionShapesManipulator * m_collectionShapeManipulator = nullptr;
 	IHistoryManipulator * m_hystorymanipulator = nullptr;
 	IDocumentManipulator * m_documentManipulator = nullptr;
@@ -44,7 +42,6 @@ private:
 	ScopedConnectionsStorage m_connections;
 	std::unique_ptr<CFileManager> m_manager;
 
-	CShapePresenterCreator m_shapePreesenterCreator;
 
 	signal::Signal<void(std::shared_ptr<CShapePresenter>, size_t)> m_onShapeAdded;
 };

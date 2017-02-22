@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "ShapeModel.h"
+/*#include "ShapeModel.h"
 #include "History.h"
 #include "ShapePresenter.h"
 #include "ShapePresenterCreator.h"
@@ -20,3 +20,4 @@ std::shared_ptr<CShapePresenter> CShapePresenterCreator::CreatePresenter(std::sh
 	presenter->SetHistory(m_history);
 	return presenter;
 }
+*/

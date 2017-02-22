@@ -64,7 +64,7 @@ void CApplicationModel::ClearHistory()
 	m_history->Clear();
 }
 
-CHistory * CApplicationModel::GetHistory() const
+IHistory * CApplicationModel::GetHistory() const
 {
 	return m_history.get();
 }

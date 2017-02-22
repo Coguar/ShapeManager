@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "MainView.h"
 #include "ApplicationModel.h"
+#include "ShapePresenter.h"
 #include "Controller.h"
 #include <vld.h>
 
@@ -23,7 +24,6 @@ void CController::SetModelManipulator(ICollectionShapesManipulator * collectionS
 void CController::SetHistoryManipulator(IHistoryManipulator * hystorymanipulator)
 {
 	m_hystorymanipulator = hystorymanipulator;
-	m_shapePreesenterCreator = CShapePresenterCreator(m_hystorymanipulator->GetHistory());
 	SetConnections();
 }
 
@@ -41,13 +41,8 @@ void CController::SetView(std::shared_ptr<CMainView> const & view)
 
 void CController::CreateShapePresenter(std::shared_ptr<SModelShape> const & model, size_t position)
 {
-	m_onShapeAdded(m_shapePreesenterCreator.CreatePresenter(model), position);
-}
 
-void CController::OpenNewDocument(std::string const & path)
-{
-	
-
+	m_onShapeAdded(std::make_shared<CShapePresenter>(model, m_hystorymanipulator->GetHistory()), position);
 }
 
 void CController::Start()

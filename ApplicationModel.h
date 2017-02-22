@@ -38,7 +38,7 @@ public:
 	void RedoCommand() override;
 	void UndoCommand() override;
 	void ClearHistory() override;
-	CHistory* GetHistory() const override;
+	IHistory* GetHistory() const override;
 
 private:
 	std::unique_ptr<CHistory> m_history;

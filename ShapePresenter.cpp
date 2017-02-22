@@ -10,18 +10,14 @@
 #include <vld.h>
 
 
-CShapePresenter::CShapePresenter(std::shared_ptr<SModelShape> const& model)
+CShapePresenter::CShapePresenter(std::shared_ptr<SModelShape> const& model, IHistory * history)
 	: m_model(model)
+	, m_history(history)
 {
 }
 
 CShapePresenter::~CShapePresenter()
 {
-}
-
-void CShapePresenter::SetHistory(CHistory * history)
-{
-	m_history = history;
 }
 
 void CShapePresenter::SetShapeView(std::shared_ptr<CShape> & shape)
