@@ -44,6 +44,12 @@ void CController::CreateShapePresenter(std::shared_ptr<SModelShape> const & mode
 	m_onShapeAdded(m_shapePreesenterCreator.CreatePresenter(model), position);
 }
 
+void CController::OpenNewDocument(std::string const & path)
+{
+	
+
+}
+
 void CController::Start()
 {
 	m_view->StartShow();
@@ -51,7 +57,14 @@ void CController::Start()
 
 void CController::OpenFile(std::string const & filePath)
 {
+	m_manager->RecreateTempFolder();
 	m_documentManipulator->Open(filePath, m_manager->GetTempFolderPath());
+}
+
+void CController::CreateFile()
+{
+	m_manager->RecreateTempFolder();
+	m_collectionShapeManipulator->Clear();
 }
 
 void CController::SetConnections()
@@ -66,7 +79,8 @@ void CController::ConnectSignalsForDocument()
 {
 	if (m_view && m_documentManipulator)
 	{
-		m_connections += m_view->DoOnOpen(boost::bind(&IDocumentManipulator::Open, m_documentManipulator, _1, m_manager->GetTempFolderPath()));
+		//m_connections += m_view->DoOnOpen(boost::bind(&IDocumentManipulator::Open, m_documentManipulator, _1, m_manager->GetTempFolderPath()));
+		m_connections += m_view->DoOnOpen(boost::bind(&CController::OpenFile, this, _1));
 		m_connections += m_view->DoOnSave(boost::bind(&IDocumentManipulator::Save, m_documentManipulator, _1));
 	}
 }
@@ -104,7 +118,7 @@ void CController::ConnectSignalsForShapeCollection()
 		m_connections += m_view->DoOnShapeAdded(boost::bind(&ICollectionShapesManipulator::AddShape, m_collectionShapeManipulator, _1, _2));
 		m_connections += m_view->DoOnPictureAdded(boost::bind(&CController::AddPicture, this, _1, _2));
 		m_connections += m_view->DoOnDeleteShape(boost::bind(&ICollectionShapesManipulator::DeleteShape, m_collectionShapeManipulator, _1));
-		m_connections += m_view->DoOnCreate(boost::bind(&ICollectionShapesManipulator::Clear, m_collectionShapeManipulator));
+		m_connections += m_view->DoOnCreate(boost::bind(&CController::CreateFile, this));
 		m_connections += m_view->DoOnChangeShapeLayer(boost::bind(&ICollectionShapesManipulator::MoveShapeLayer, m_collectionShapeManipulator, _1, _2));
 	}
 }

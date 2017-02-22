@@ -45,6 +45,7 @@ static const std::string OPEN_PATH = "./res/open.png";
 static const std::string SAVE_PATH = "./res/save.png";
 static const std::string NEW_PATH = "./res/Create.png";
 static const std::string PICTURE_PATH = "./res/Picture.png";
+static const std::string DEFAULT_TEXTURE = "./res/nophoto.png";
 
 static const std::string SAVE_MSG = "Current data will be lost! Would you like to save them?";
 static const std::string XML_ERROR_MSG = "XML parser error!";

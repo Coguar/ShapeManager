@@ -86,9 +86,12 @@ void CHistory::ClearOutdatedBranch()
 {
 	if (m_doneCommands.empty())
 		return;
-	for (size_t i = m_currentCommandNumber + 1; i < m_doneCommands.size(); ++i)
+	for (size_t i = m_currentCommandNumber; i < m_doneCommands.size(); ++i)
 	{
-		m_doneCommands[i]->Destroy();
+		if (!m_doneCommands[i]->IsDone())
+		{
+			m_doneCommands[i]->Destroy();
+		}
 	}
 	m_doneCommands.erase(m_doneCommands.begin() + m_currentCommandNumber + 1, m_doneCommands.end());
 }

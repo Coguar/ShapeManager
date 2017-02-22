@@ -4,6 +4,8 @@
 
 CTextureCache::CTextureCache()
 {
+	m_defaultTexture = std::make_shared<sf::Texture>();
+	m_defaultTexture->loadFromFile(DEFAULT_TEXTURE);
 }
 
 
@@ -19,9 +21,17 @@ std::shared_ptr<sf::Texture> const & CTextureCache::GetTexture(std::string const
 	}
 	else
 	{
-		auto texture = std::make_shared<sf::Texture>();
-		texture->loadFromFile(path);
-		m_cache.insert({ path, texture });
-		return m_cache.find(path)->second;
+		if (!boost::filesystem::exists(boost::filesystem::path(path)) || !boost::filesystem::is_regular_file(path))
+		{
+			m_cache.insert({ path, m_defaultTexture });
+			return m_defaultTexture;
+		}
+		else
+		{
+			auto texture = std::make_shared<sf::Texture>();
+			texture->loadFromFile(path);
+			m_cache.insert({ path, texture });
+			return m_cache.find(path)->second;
+		}
 	}
 }

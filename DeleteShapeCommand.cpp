@@ -1,6 +1,4 @@
 #include "stdafx.h"
-#include "Picture.h"
-#include "FileManager.h"
 #include "DeleteShapeCommand.h"
 
 CDeleteShapeCommand::CDeleteShapeCommand(size_t position, CCanvas* model)
@@ -28,13 +26,5 @@ void CDeleteShapeCommand::Unexecute()
 	{
 		m_model->AddShape(m_shape, m_shapePosition);
 		SetDoneState(false);
-	}
-}
-
-void CDeleteShapeCommand::Destroy()
-{
-	if (m_shape->GetType() == ShapeType::Picture)
-	{
-		CFileManager::RemoveFile(dynamic_cast<CPicture*>(m_shape.get())->GetTexturePath());
 	}
 }

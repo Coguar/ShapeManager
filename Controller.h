@@ -22,6 +22,7 @@ public:
 
 	void Start();
 	void OpenFile(std::string const& filePath);
+	void CreateFile();
 private:
 	void SetConnections();
 
@@ -32,6 +33,8 @@ private:
 
 	void AddPicture(Vec2 const & position, std::string const & path);
 	void CreateShapePresenter(std::shared_ptr<SModelShape> const& model, size_t position);
+
+	void OpenNewDocument(std::string const& path);
 
 	ICollectionShapesManipulator * m_collectionShapeManipulator = nullptr;
 	IHistoryManipulator * m_hystorymanipulator = nullptr;

@@ -8,5 +8,6 @@ public:
 
 private:
 	std::map<std::string, std::shared_ptr<sf::Texture>> m_cache;
+	std::shared_ptr<sf::Texture> m_defaultTexture;
 };
 
